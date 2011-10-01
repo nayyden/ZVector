@@ -1,0 +1,5 @@
+bin/
+qdraw-build-desktop/
+qdraw-objects/
+src/Makefile
+src/qdraw.pro.user
