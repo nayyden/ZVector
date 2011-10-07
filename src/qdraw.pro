@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
+QT       += core gui opengl
 TARGET = qdraw
 TEMPLATE = app
 
@@ -19,8 +18,28 @@ UI_DIR=../qdraw-objects
 
 
 SOURCES += main.cpp\
-          qdrawmainwindow.cpp
+          qdrawmainwindow.cpp \
+    glcanvas.cpp \
+    Quad.cpp
 
-HEADERS  += include/qdrawmainwindow.h
+HEADERS  += include/qdrawmainwindow.h \
+            include/glcanvas.h \
+    include/Shape.hpp \
+    include/Quad.hpp
 
 FORMS    += qdrawmainwindow.ui
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

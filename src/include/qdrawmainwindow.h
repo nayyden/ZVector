@@ -2,7 +2,7 @@
 #define QDRAWMAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "glcanvas.h"
 namespace Ui {
     class QDrawMainWindow;
 }
@@ -10,6 +10,8 @@ namespace Ui {
 class QDrawMainWindow : public QMainWindow
 {
     Q_OBJECT
+private:
+
 
 public:
     explicit QDrawMainWindow(QWidget *parent = 0);
