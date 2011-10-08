@@ -1,0 +1,20 @@
+ #####  #   #                   #
+     #  #   #                   #
+    #   #   #                   #
+    #    # #    ####    ####   ####    ####   # ##
+   #     # #   #    #  #    #   #     #    #   #
+  #      # #   ######  #        #     #    #   #
+  #       #    #       #        #     #    #   #
+ #        #    #    #  #    #   #  #  #    #   #
+ #####    #     ####    ####     ##    ####    #
+
+
+ZVector( university project ) - small vector drawing program using Qt for the GUI and OpenGL for drawing
+To compile, first obtain the source with git clone, then:
+    Linux:
+        in the src directory execute:
+            $~ qmake
+            $~ make
+        another way is to open the project in QtCreator
+    Windows:
+        Not tested yet but should be painless as far as Qt is installed.

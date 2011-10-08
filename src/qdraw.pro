@@ -29,6 +29,12 @@ HEADERS  += include/qdrawmainwindow.h \
 
 FORMS    += qdrawmainwindow.ui
 
+OTHER_FILES += \
+    README
+
+
+
+
 
 
 
