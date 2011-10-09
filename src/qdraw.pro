@@ -20,17 +20,46 @@ UI_DIR=../qdraw-objects
 SOURCES += main.cpp\
           qdrawmainwindow.cpp \
     glcanvas.cpp \
-    Quad.cpp
+    Quad.cpp \
+    ToolFactory.cpp
 
 HEADERS  += include/qdrawmainwindow.h \
             include/glcanvas.h \
     include/Shape.hpp \
-    include/Quad.hpp
+    include/Quad.hpp \
+    include/Tools/SelectTool.hpp \
+    include/Tools/ResizeTool.hpp \
+    include/Tools/Tool.hpp \
+    include/Tools/ToolFactory.hpp \
+    include/Tools/Tools.hpp
 
 FORMS    += qdrawmainwindow.ui
 
 OTHER_FILES += \
     README
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

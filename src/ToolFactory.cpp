@@ -20,23 +20,10 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef QUAD_HPP
-#define QUAD_HPP
 
-#include "Shape.hpp"
+#include "include/Tools/ToolFactory.hpp"
 
-class Quad : public Shape
-{
-public:
-    Quad( double origin_x, double origin_y );
 
-    void draw();
-    void resize(double x, double y);
-    bool contains( QVector2D point );
+ToolFactory* ToolFactory::m_pInstance = 0;
 
-private:
-    double m_vertices[8];
 
-};
-
-#endif // QUAD_HPP

@@ -25,8 +25,12 @@
 
 #include <QGLWidget>
 #include <QMouseEvent>
-#include "Shape.hpp"
 #include <QLinkedList>
+
+#include "Shape.hpp"
+
+#include "Tools/Tool.hpp"
+#include "Tools/ToolFactory.hpp"
 
 enum QDRAW_TOOL{
     QDRAW_TOOL_CREATE,
@@ -36,7 +40,6 @@ enum QDRAW_TOOL{
 
 class GLCanvas : public QGLWidget
 {
-
     Q_OBJECT
 public:
     explicit GLCanvas(QWidget *parent = 0);
@@ -76,7 +79,9 @@ private:
     QLinkedList<Shape*> m_shapes;
     Shape* m_current;
     QVector2D m_mousePos;
-    QDRAW_TOOL m_currentTool;
+
+    Tool* m_currentTool;
+    ToolFactory* m_toolFactory;
 };
 
 

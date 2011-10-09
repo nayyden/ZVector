@@ -20,23 +20,22 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef QUAD_HPP
-#define QUAD_HPP
+#ifndef RESIZETOOL_HPP
+#define RESIZETOOL_HPP
+
+#include <QMouseEvent>
 
 #include "Shape.hpp"
+#include "Tool.hpp"
 
-class Quad : public Shape
+class ResizeTool
 {
 public:
-    Quad( double origin_x, double origin_y );
+    ResizeTool();
 
-    void draw();
-    void resize(double x, double y);
-    bool contains( QVector2D point );
-
-private:
-    double m_vertices[8];
-
+    void handleMousePressEvent(QMouseEvent *event, Shape *shape);
+    void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape);
+    void handleMouseMoveEvent(QMouseEvent *event, Shape *shape);
 };
 
-#endif // QUAD_HPP
+#endif // RESIZETOOL_HPP

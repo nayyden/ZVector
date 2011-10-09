@@ -20,23 +20,40 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef QUAD_HPP
-#define QUAD_HPP
+#ifndef TOOLFACTORY_HPP
+#define TOOLFACTORY_HPP
 
-#include "Shape.hpp"
+// include all tools
+#include "Tools.hpp"
 
-class Quad : public Shape
-{
+class ToolFactory{
 public:
-    Quad( double origin_x, double origin_y );
+   static ToolFactory* getSingletonPtr()
+   {
+      if (!m_pInstance)
+         m_pInstance = new ToolFactory;
 
-    void draw();
-    void resize(double x, double y);
-    bool contains( QVector2D point );
+      return m_pInstance;
+   }
+   // Methods to obtain tool
+   inline Tool* createSelectTool()
+   {
+       if( !m_pSelect )
+           m_pSelect = new SelectTool();
+       return m_pSelect;
+   }
 
 private:
-    double m_vertices[8];
+   ToolFactory(){
+       m_pSelect = NULL;
+   }
+   virtual ~ToolFactory(){}
 
+   static ToolFactory* m_pInstance;
+
+   SelectTool* m_pSelect;
+   ResizeTool* m_pResize;
 };
 
-#endif // QUAD_HPP
+
+#endif // TOOLFACTORY_HPP

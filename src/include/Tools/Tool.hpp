@@ -20,23 +20,20 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef QUAD_HPP
-#define QUAD_HPP
+#ifndef BASETOOL_HPP
+#define BASETOOL_HPP
 
+#include <QMouseEvent>
 #include "Shape.hpp"
 
-class Quad : public Shape
+class Tool
 {
 public:
-    Quad( double origin_x, double origin_y );
-
-    void draw();
-    void resize(double x, double y);
-    bool contains( QVector2D point );
-
-private:
-    double m_vertices[8];
-
+    Tool() {}
+    virtual ~Tool(){}
+    virtual void handleMousePressEvent( QMouseEvent *event, Shape* shape ) = 0;
+    virtual void handleMouseReleaseEvent( QMouseEvent *event, Shape* shape  ) = 0;
+    virtual void handleMouseMoveEvent( QMouseEvent *event, Shape* shape  ) = 0;
 };
 
-#endif // QUAD_HPP
+#endif // BASETOOL_HPP

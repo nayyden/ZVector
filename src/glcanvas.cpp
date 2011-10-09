@@ -29,6 +29,8 @@ using namespace std;
 
 GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 {
+    m_toolFactory = ToolFactory::getSingletonPtr();
+    m_currentTool = m_toolFactory->createSelectTool();
 }
 
 void GLCanvas::initializeGL()
@@ -84,7 +86,6 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)
 {
-
     grabMouse();
     m_mousePos.setX( event->x() );
     m_mousePos.setY( event->y() );
