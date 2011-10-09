@@ -36,7 +36,7 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 void GLCanvas::initializeGL()
 {
     glClearColor(1, 1, 1, 1);
-    glDrawBuffer(GL_FRONT );
+    glDrawBuffer(GL_FRONT | GL_LEFT);
 }
 
 void GLCanvas::paintGL()

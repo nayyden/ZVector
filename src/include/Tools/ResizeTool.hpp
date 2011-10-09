@@ -31,7 +31,7 @@
 class ResizeTool
 {
 public:
-    ResizeTool();
+    ResizeTool() {}
 
     void handleMousePressEvent(QMouseEvent *event, Shape *shape);
     void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape);

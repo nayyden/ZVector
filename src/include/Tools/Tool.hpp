@@ -29,8 +29,6 @@
 class Tool
 {
 public:
-    Tool() {}
-    virtual ~Tool(){}
     virtual void handleMousePressEvent( QMouseEvent *event, Shape* shape ) = 0;
     virtual void handleMouseReleaseEvent( QMouseEvent *event, Shape* shape  ) = 0;
     virtual void handleMouseMoveEvent( QMouseEvent *event, Shape* shape  ) = 0;
