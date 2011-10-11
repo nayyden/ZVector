@@ -21,7 +21,8 @@ SOURCES += main.cpp\
           qdrawmainwindow.cpp \
     glcanvas.cpp \
     Quad.cpp \
-    ToolFactory.cpp
+    ToolFactory.cpp \
+    GLDebugBufferWidget.cpp
 
 HEADERS  += include/qdrawmainwindow.h \
             include/glcanvas.h \
@@ -31,12 +32,15 @@ HEADERS  += include/qdrawmainwindow.h \
     include/Tools/ResizeTool.hpp \
     include/Tools/Tool.hpp \
     include/Tools/ToolFactory.hpp \
-    include/Tools/Tools.hpp
+    include/Tools/Tools.hpp \
+    include/GLDebugBufferWidget.h
 
 FORMS    += qdrawmainwindow.ui
 
 OTHER_FILES += \
     README
+
+
 
 
 

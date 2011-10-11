@@ -36,12 +36,12 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 void GLCanvas::initializeGL()
 {
     glClearColor(1, 1, 1, 1);
-    glDrawBuffer(GL_FRONT | GL_LEFT);
 }
 
 void GLCanvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    glDrawBuffer(GL_FRONT | GL_BACK);
     QLinkedList<Shape*>::iterator it = m_shapes.begin();
     while( it !=  m_shapes.end() )
     {
@@ -58,6 +58,7 @@ void GLCanvas::resizeGL(int w, int h)
     glOrtho(0, w, h, 0, -1, 1); // Match qt coord origin
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
 }
 
 void GLCanvas::keyPressEvent(QKeyEvent *e)
@@ -82,6 +83,9 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
         paintGL();
         updateGL();
     }
+    glReadBuffer(GL_RIGHT);
+    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
+    emit sendFrameBuffer(fetchedBuffer);
 }
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)

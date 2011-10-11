@@ -54,6 +54,7 @@ public:
     }
 
 signals:
+    void sendFrameBuffer(QImage buffer);
 
 protected:
     void initializeGL();

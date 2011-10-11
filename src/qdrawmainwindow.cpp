@@ -23,12 +23,17 @@
 #include "include/qdrawmainwindow.h"
 #include "ui_qdrawmainwindow.h"
 #include "glcanvas.h"
+#include "include/GLDebugBufferWidget.h"
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QDrawMainWindow)
 {
     ui->setupUi(this);
+    GLDebugBufferWidget *debug = new GLDebugBufferWidget(this);
+    connect(ui->canvas, SIGNAL(sendFrameBuffer(QImage)), debug, SLOT(drawBuffer(QImage)));
+
+    ui->mdiArea->addSubWindow(debug);
 }
 
 QDrawMainWindow::~QDrawMainWindow()
