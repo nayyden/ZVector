@@ -29,19 +29,10 @@
 #include <QGLShaderProgram>
 #include <QString>
 
-#include "Shape.hpp"
 #include "Group.hpp"
-
-#include "Tools/Tool.hpp"
 #include "Tools/ToolFactory.hpp"
 
 class Group;
-
-enum QDRAW_TOOL{
-    QDRAW_TOOL_CREATE,
-    QDRAW_TOOL_TRANSLATE,
-    QDRAW_TOOL_RESIZE
-};
 
 class GLCanvas : public QGLWidget
 {
@@ -73,13 +64,6 @@ public slots:
     void chageTool( Tool* tool ) { m_currentTool = tool; }
 
 private:
-    struct point
-    {
-        double x;
-        double y;
-    };
-
-    QList<point> vertexList;
     QVector2D m_mousePos;
 
     Group* m_group;
@@ -88,7 +72,6 @@ private:
     ToolFactory* m_toolFactory;
     QGLShaderProgram* m_program;
 
-    friend class Tool;
 };
 
 #endif // GLCANVAS_H

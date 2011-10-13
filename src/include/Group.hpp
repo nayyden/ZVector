@@ -20,13 +20,13 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef GROUP_HPP
-#define GROUP_HPP
-
 #include <QLinkedList>
 
 #include "Shape.hpp"
 #include <glcanvas.h>
+
+#ifndef GROUP_HPP
+#define GROUP_HPP
 
 class GLCanvas;
 
@@ -54,7 +54,10 @@ public:
             tmp = tmp->m_parent;
         return tmp;
     }
-
+    inline GLCanvas* getCanvas()
+    {
+        return getMaster()->m_canvas;
+    }
 private:
     GLCanvas* m_canvas;
     Group* m_parent;
