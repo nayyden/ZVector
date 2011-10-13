@@ -25,11 +25,14 @@
 #include "glcanvas.h"
 #include "include/GLDebugBufferWidget.h"
 
+#include <QMdiSubWindow>
+
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QDrawMainWindow)
 {
     ui->setupUi(this);
+
     GLDebugBufferWidget *debug = new GLDebugBufferWidget(this);
     connect(ui->canvas, SIGNAL(sendFrameBuffer(QImage)), debug, SLOT(drawBuffer(QImage)));
 
@@ -40,3 +43,10 @@ QDrawMainWindow::~QDrawMainWindow()
 {
     delete ui;
 }
+
+void QDrawMainWindow::redrawSelectBuffer()
+{
+    GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+    activeCanvas->redrawSelectionBufer();
+}
+

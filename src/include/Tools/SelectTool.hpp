@@ -31,9 +31,10 @@
 class SelectTool : public Tool
 {
 public:
-    SelectTool() {}
+    void handleMousePressEvent(QMouseEvent *event, Shape *shape)
+    {
 
-    void handleMousePressEvent(QMouseEvent *event, Shape *shape) {}
+    }
     void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape) {}
     void handleMouseMoveEvent(QMouseEvent *event, Shape *shape) {}
 };

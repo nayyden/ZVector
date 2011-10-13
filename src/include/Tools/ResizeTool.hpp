@@ -28,14 +28,12 @@
 #include "Shape.hpp"
 #include "Tool.hpp"
 
-class ResizeTool
+class ResizeTool: public Tool
 {
 public:
-    ResizeTool() {}
-
-    void handleMousePressEvent(QMouseEvent *event, Shape *shape);
-    void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape);
-    void handleMouseMoveEvent(QMouseEvent *event, Shape *shape);
+    void handleMousePressEvent(QMouseEvent *event, Shape *shape) {}
+    void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape) {}
+    void handleMouseMoveEvent(QMouseEvent *event, Shape *shape) {}
 };
 
 #endif // RESIZETOOL_HPP

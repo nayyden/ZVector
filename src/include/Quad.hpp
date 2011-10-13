@@ -32,7 +32,6 @@ public:
 
     void draw();
     void resize(double x, double y);
-    bool contains( QVector2D point );
 
 private:
     double m_vertices[8];

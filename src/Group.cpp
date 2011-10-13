@@ -20,10 +20,34 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
+#include "include/Group.hpp"
 
-#include "include/Tools/ToolFactory.hpp"
+void Group::deleteShapes()
+{
+    while( !m_shapes.empty() )
+    {
+        delete m_shapes.back();
+        m_shapes.pop_back();
+    }
+}
+
+void Group::deleteSubGroups()
+{
+    while( !m_childs.empty() )
+    {
+        delete m_childs.back();
+        m_childs.pop_back();
+    }
+}
 
 
-ToolFactory* ToolFactory::m_pInstance = 0;
+void Group::addShape(Shape * shape)
+{
+    m_shapes.push_back(shape);
+}
 
-
+Group * Group::addShapeToNewSubgroup(Shape *shape)
+{
+    m_childs.push_back(new Group(this));
+    m_childs.back()->addShape(shape);
+}

@@ -16,13 +16,14 @@ OBJECTS_DIR=../qdraw-objects
 MOC_DIR =../qdraw-objects
 UI_DIR=../qdraw-objects
 
+#DEFINES += GL_GLEXT_PROTOTYPES
 
 SOURCES += main.cpp\
           qdrawmainwindow.cpp \
     glcanvas.cpp \
     Quad.cpp \
-    ToolFactory.cpp \
-    GLDebugBufferWidget.cpp
+    GLDebugBufferWidget.cpp \
+    Group.cpp
 
 HEADERS  += include/qdrawmainwindow.h \
             include/glcanvas.h \
@@ -33,12 +34,33 @@ HEADERS  += include/qdrawmainwindow.h \
     include/Tools/Tool.hpp \
     include/Tools/ToolFactory.hpp \
     include/Tools/Tools.hpp \
-    include/GLDebugBufferWidget.h
+    include/GLDebugBufferWidget.h \
+    include/Group.hpp
 
 FORMS    += qdrawmainwindow.ui
 
 OTHER_FILES += \
-    README
+    README \
+    data/main.frag.glsl \
+    data/main.vert.glsl \
+    ../README
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

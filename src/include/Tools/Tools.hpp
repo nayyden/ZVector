@@ -23,6 +23,7 @@
 #ifndef TOOLS_HPP
 #define TOOLS_HPP
 
+// List all Tool headers here
 #include "Tool.hpp"
 #include "SelectTool.hpp"
 #include "ResizeTool.hpp"

@@ -53,11 +53,6 @@ void Quad::draw()
     glPopMatrix();
 }
 
-bool Quad::contains( QVector2D point )
-{
-
-}
-
 void Quad::resize(double x, double y)
 {
     m_vertices[3] += y;

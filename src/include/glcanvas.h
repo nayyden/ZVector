@@ -26,11 +26,16 @@
 #include <QGLWidget>
 #include <QMouseEvent>
 #include <QLinkedList>
+#include <QGLShaderProgram>
+#include <QString>
 
 #include "Shape.hpp"
+#include "Group.hpp"
 
 #include "Tools/Tool.hpp"
 #include "Tools/ToolFactory.hpp"
+
+class Group;
 
 enum QDRAW_TOOL{
     QDRAW_TOOL_CREATE,
@@ -45,13 +50,10 @@ public:
     explicit GLCanvas(QWidget *parent = 0);
     virtual ~GLCanvas()
     {
-        QLinkedList<Shape*>::iterator it = m_shapes.begin();
-        while( it !=  m_shapes.end() )
-        {
-            delete *it;
-            it++;
-        }
+        delete m_group->getMaster();
+        delete m_program;
     }
+    void redrawSelectionBufer();
 
 signals:
     void sendFrameBuffer(QImage buffer);
@@ -61,13 +63,14 @@ protected:
     void resizeGL(int w, int h);
     void paintGL();
 
-    void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *e);
 
+    void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event );
     void mouseMoveEvent(QMouseEvent * event );
 
 public slots:
+    void chageTool( Tool* tool ) { m_currentTool = tool; }
 
 private:
     struct point
@@ -77,14 +80,15 @@ private:
     };
 
     QList<point> vertexList;
-    QLinkedList<Shape*> m_shapes;
-    Shape* m_current;
     QVector2D m_mousePos;
+
+    Group* m_group;
 
     Tool* m_currentTool;
     ToolFactory* m_toolFactory;
+    QGLShaderProgram* m_program;
+
+    friend class Tool;
 };
-
-
 
 #endif // GLCANVAS_H

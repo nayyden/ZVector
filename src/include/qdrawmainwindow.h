@@ -39,6 +39,9 @@ public:
     explicit QDrawMainWindow(QWidget *parent = 0);
     ~QDrawMainWindow();
 
+private slots:
+    void redrawSelectBuffer();
+
 private:
     Ui::QDrawMainWindow *ui;
 };

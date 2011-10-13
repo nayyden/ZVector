@@ -20,51 +20,50 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef TOOLFACTORY_HPP
-#define TOOLFACTORY_HPP
+#ifndef GROUP_HPP
+#define GROUP_HPP
 
-// include all tools
-#include "Tools.hpp"
+#include <QLinkedList>
 
-class ToolFactory{
+#include "Shape.hpp"
+#include <glcanvas.h>
+
+class GLCanvas;
+
+class Group: public Shape
+{
 public:
-   static ToolFactory* getSingletonPtr()
-   {
-      if (!m_pInstance)
-         m_pInstance = new ToolFactory;
+    Group( Group* parent, GLCanvas* canvas = 0):
+        m_parent(parent), m_canvas(canvas) {}
+    virtual ~Group()
+    {
+        deleteShapes();
+        deleteSubGroups();
+    }
 
-      return m_pInstance;
-   }
-   // Methods to obtain tool
-   inline Tool* getSelectTool()
-   {
-       return m_pSelect;
-   }
+    void addShape( Shape* shape);
+    Group* addShapeToNewSubgroup( Shape* shape);
 
-   inline Tool* getResizeTool()
-   {
-       if( !m_pResize )
-           m_pResize = new ResizeTool();
-       return m_pResize;
-   }
+    virtual void draw(){}
+    virtual void resize( double x, double y ) {}
+
+    inline Group* getMaster()
+    {
+        Group* tmp = this;
+        while (tmp->m_parent)
+            tmp = tmp->m_parent;
+        return tmp;
+    }
 
 private:
-   ToolFactory(){
-       m_pSelect = new SelectTool();
-       m_pResize = NULL;
-   }
+    GLCanvas* m_canvas;
+    Group* m_parent;
+    QLinkedList<Group*> m_childs;
+    QLinkedList<Shape*> m_shapes;
 
-   virtual ~ToolFactory(){
-       if(m_pSelect)
-           delete m_pSelect;
-       if(m_pResize)
-           delete m_pResize;
-   }
+    void deleteShapes();
+    void deleteSubGroups();
 
-   static ToolFactory* m_pInstance;
-
-   SelectTool* m_pSelect;
-   ResizeTool* m_pResize;
 };
 
-#endif // TOOLFACTORY_HPP
+#endif // GROUP_HPP

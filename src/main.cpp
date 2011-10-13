@@ -23,6 +23,8 @@
 #include <QtGui/QApplication>
 #include "include/qdrawmainwindow.h"
 
+ToolFactory* ToolFactory::m_pInstance = 0;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

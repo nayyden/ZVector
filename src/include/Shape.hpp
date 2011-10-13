@@ -29,7 +29,7 @@ class Shape
 {
 public:
     virtual void draw() = 0;
-    virtual bool contains( QVector2D point ) = 0;
+    //virtual bool contains( QVector2D point ) = 0;
     virtual void resize( double x, double y ) = 0;
 
     virtual void translate( double x, double y )
