@@ -31,35 +31,34 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 {
     m_toolFactory = ToolFactory::getSingletonPtr();
     m_currentTool = m_toolFactory->getSelectTool();
-    m_group = new Group(NULL, this);
+    m_groupManager = new GroupManager();
 }
 
 void GLCanvas::initializeGL()
 {
 
     glClearColor(1, 1, 1, 1);
-    glDrawBuffer( GL_BACK );
+  //  glDrawBuffer( GL_BACK );
 
-    m_program = new QGLShaderProgram();
-    m_program->addShaderFromSourceFile(QGLShader::Vertex, "../src/data/main.vert.glsl");
+//    m_program = new QGLShaderProgram();
+/*    m_program->addShaderFromSourceFile(QGLShader::Vertex, "../src/data/main.vert.glsl");
     m_program->addShaderFromSourceFile(QGLShader::Fragment, "../src/data/main.frag.glsl");
     m_program->link();
     m_program->bind();
-    m_program->setUniformValue("color", QVector4D(0.1,0.2,0.5,1.0));
+    m_program->setUniformValue("color", QVector4D(0.1,0.2,0.5,1.0));*/
 }
 
 void GLCanvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    m_group->getMaster()->draw();
+    m_groupManager->draw();
 }
 
 void GLCanvas::redrawSelectionBufer()
 {
     glDrawBuffer( GL_AUX0 );
-    m_program->setUniformValue("color", QVector4D(0.5, 0.8, 0.2, 1.0));
+    //m_program->setUniformValue("color", QVector4D(0.5, 0.8, 0.2, 1.0));
     glClear(GL_COLOR_BUFFER_BIT);
-    m_group->getMaster()->draw();
     glDrawBuffer( GL_BACK );
 }
 
@@ -81,7 +80,7 @@ void GLCanvas::keyPressEvent(QKeyEvent *e)
 
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    m_currentTool->handleMouseReleaseEvent( event, m_group );
+    m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
     //releaseMouse();
 
 }
@@ -104,11 +103,12 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
     QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
     emit sendFrameBuffer(fetchedBuffer);
 */
-    m_currentTool->handleMouseMoveEvent( event, m_group );
+    m_currentTool->handleMouseMoveEvent( event, m_groupManager );
 }
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)
 {
+    setAutoBufferSwap(false);
     //grabMouse();
 /*
     m_mousePos.setX( event->x() );
@@ -117,8 +117,13 @@ void GLCanvas::mousePressEvent(QMouseEvent *event)
     m_currentShape = new Quad(event->x(), event->y());
     m_shapes.push_back(m_currentShape);
 */
-    m_currentTool->handleMousePressEvent( event, m_group );
+    m_currentTool->handleMousePressEvent( event, m_groupManager );
 
+    glReadBuffer( GL_BACK );
+    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
+    emit sendFrameBuffer(fetchedBuffer);
+
+    setAutoBufferSwap(true);
     paintGL();
     updateGL();
 }

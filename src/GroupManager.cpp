@@ -20,12 +20,12 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef TOOLS_HPP
-#define TOOLS_HPP
+#include "include/GroupManager.hpp"
+#include <assert.h>
 
-// List all Tool headers here
-#include "Tool.hpp"
-#include "SelectTool.hpp"
-#include "ResizeTool.hpp"
-
-#endif // TOOLS_HPP
+GroupManager::GroupManager()
+{
+    m_groups.append(new Group());
+    assert(m_groups.size()!=0);
+    m_currentGroup = 0;
+}

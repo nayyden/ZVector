@@ -28,7 +28,8 @@
 class Shape
 {
 public:
-    virtual void draw() = 0;
+    Shape(){ color[0] = color[1] = color[2] = 0.3; }
+    virtual void draw( bool skipColor = false ) = 0;
     //virtual bool contains( QVector2D point ) = 0;
     virtual void resize( double x, double y ) = 0;
 
@@ -47,6 +48,7 @@ public:
 
 protected:
     QMatrix4x4 m_mat;
+    double color[3];
 };
 
 #endif // SHAPE_HPP

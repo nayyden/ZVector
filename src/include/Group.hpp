@@ -20,52 +20,39 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include <QLinkedList>
-
-#include "Shape.hpp"
-#include <glcanvas.h>
-
 #ifndef GROUP_HPP
 #define GROUP_HPP
 
-class GLCanvas;
+#include <QLinkedList>
+#include "Shape.hpp"
 
 class Group: public Shape
 {
 public:
-    Group( Group* parent, GLCanvas* canvas = 0):
-        m_parent(parent), m_canvas(canvas) {}
     virtual ~Group()
     {
         deleteShapes();
-        deleteSubGroups();
     }
 
     void addShape( Shape* shape);
-    Group* addShapeToNewSubgroup( Shape* shape);
 
-    virtual void draw(){}
     virtual void resize( double x, double y ) {}
 
-    inline Group* getMaster()
+    inline void draw(bool skipColor = false)
     {
-        Group* tmp = this;
-        while (tmp->m_parent)
-            tmp = tmp->m_parent;
-        return tmp;
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+            (*sit)->draw(skipColor);
+            sit++;
+        }
     }
-    inline GLCanvas* getCanvas()
-    {
-        return getMaster()->m_canvas;
-    }
+
+
 private:
-    GLCanvas* m_canvas;
-    Group* m_parent;
-    QLinkedList<Group*> m_childs;
     QLinkedList<Shape*> m_shapes;
 
     void deleteShapes();
-    void deleteSubGroups();
 
 };
 

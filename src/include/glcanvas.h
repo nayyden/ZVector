@@ -29,10 +29,8 @@
 #include <QGLShaderProgram>
 #include <QString>
 
-#include "Group.hpp"
+#include "GroupManager.hpp"
 #include "Tools/ToolFactory.hpp"
-
-class Group;
 
 class GLCanvas : public QGLWidget
 {
@@ -41,8 +39,8 @@ public:
     explicit GLCanvas(QWidget *parent = 0);
     virtual ~GLCanvas()
     {
-        delete m_group->getMaster();
-        delete m_program;
+     //   delete m_program;
+        delete m_groupManager;
     }
     void redrawSelectionBufer();
 
@@ -61,12 +59,12 @@ protected:
     void mouseMoveEvent(QMouseEvent * event );
 
 public slots:
-    void chageTool( Tool* tool ) { m_currentTool = tool; }
+    void changeTool( Tool* tool ) { m_currentTool = tool; }
 
 private:
     QVector2D m_mousePos;
 
-    Group* m_group;
+    GroupManager* m_groupManager;
 
     Tool* m_currentTool;
     ToolFactory* m_toolFactory;

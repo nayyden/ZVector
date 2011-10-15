@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     glcanvas.cpp \
     Quad.cpp \
     GLDebugBufferWidget.cpp \
-    Group.cpp
+    Group.cpp \
+    GroupManager.cpp
 
 HEADERS  += include/qdrawmainwindow.h \
             include/glcanvas.h \
@@ -33,9 +34,11 @@ HEADERS  += include/qdrawmainwindow.h \
     include/Tools/ResizeTool.hpp \
     include/Tools/Tool.hpp \
     include/Tools/ToolFactory.hpp \
-    include/Tools/Tools.hpp \
     include/GLDebugBufferWidget.h \
-    include/Group.hpp
+    include/Group.hpp \
+    include/Tools/CreateTool.hpp \
+    include/GroupManager.hpp \
+    include/Tools/CreateQuadTool.hpp
 
 FORMS    += qdrawmainwindow.ui
 
@@ -44,6 +47,21 @@ OTHER_FILES += \
     data/main.frag.glsl \
     data/main.vert.glsl \
     ../README
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

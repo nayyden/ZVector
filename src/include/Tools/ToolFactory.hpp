@@ -24,7 +24,11 @@
 #define TOOLFACTORY_HPP
 
 // include all tools
-#include "Tools.hpp"
+#include "Tool.hpp"
+#include "SelectTool.hpp"
+#include "ResizeTool.hpp"
+#include "CreateTool.hpp"
+
 
 class ToolFactory{
 public:
@@ -48,10 +52,18 @@ public:
        return m_pResize;
    }
 
+   inline Tool* getCreateTool()
+   {
+       if( !m_pCreate )
+           m_pCreate = new CreateTool();
+       return m_pCreate;
+   }
+
 private:
    ToolFactory(){
        m_pSelect = new SelectTool();
        m_pResize = NULL;
+       m_pCreate = NULL;
    }
 
    virtual ~ToolFactory(){
@@ -59,12 +71,15 @@ private:
            delete m_pSelect;
        if(m_pResize)
            delete m_pResize;
+       if(m_pCreate)
+           delete m_pCreate;
    }
 
    static ToolFactory* m_pInstance;
 
    SelectTool* m_pSelect;
    ResizeTool* m_pResize;
+   CreateTool* m_pCreate;
 };
 
 #endif // TOOLFACTORY_HPP

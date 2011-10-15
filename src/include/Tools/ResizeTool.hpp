@@ -25,15 +25,16 @@
 
 #include <QMouseEvent>
 
-#include "Shape.hpp"
 #include "Tool.hpp"
+#include "GroupManager.hpp"
 
 class ResizeTool: public Tool
 {
+
 public:
-    void handleMousePressEvent(QMouseEvent *event, Shape *shape) {}
-    void handleMouseReleaseEvent(QMouseEvent *event, Shape *shape) {}
-    void handleMouseMoveEvent(QMouseEvent *event, Shape *shape) {}
+    void handleMousePressEvent(QMouseEvent *event, GroupManager *group) {}
+    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
+    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
 };
 
 #endif // RESIZETOOL_HPP

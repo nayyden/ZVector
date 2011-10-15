@@ -24,14 +24,23 @@
 #define BASETOOL_HPP
 
 #include <QMouseEvent>
-#include "Shape.hpp"
+#include "GroupManager.hpp"
 
-class Tool
+class Tool : public QObject
 {
+    Q_OBJECT
+
 public:
-    virtual void handleMousePressEvent( QMouseEvent *event, Shape* shape ) = 0;
-    virtual void handleMouseReleaseEvent( QMouseEvent *event, Shape* shape  ) = 0;
-    virtual void handleMouseMoveEvent( QMouseEvent *event, Shape* shape  ) = 0;
+    explicit Tool(QObject *parent = 0): QObject(parent) {}
+    virtual void handleMousePressEvent( QMouseEvent *event, GroupManager* group ) = 0;
+    virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
+    virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;
+
+signals:
+    void redrawSelectionBuffer();
+
+public slots:
+
 };
 
 #endif // BASETOOL_HPP

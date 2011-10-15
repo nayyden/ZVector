@@ -25,6 +25,7 @@
 
 #include <QMainWindow>
 #include "glcanvas.h"
+
 namespace Ui {
     class QDrawMainWindow;
 }
@@ -32,8 +33,6 @@ namespace Ui {
 class QDrawMainWindow : public QMainWindow
 {
     Q_OBJECT
-private:
-
 
 public:
     explicit QDrawMainWindow(QWidget *parent = 0);
@@ -42,8 +41,17 @@ public:
 private slots:
     void redrawSelectBuffer();
 
+    void on_actionSelect_triggered();
+
+    void on_actionCreate_triggered();
+
+    void on_actionNew_triggered();
+
 private:
     Ui::QDrawMainWindow *ui;
+
+signals:
+    void changeTool (Tool*);
 };
 
 #endif // QDRAWMAINWINDOW_H

@@ -38,13 +38,14 @@ Quad::Quad( double origin_x, double origin_y )
     m_vertices[7] = 0;
 }
 
-void Quad::draw()
+void Quad::draw(bool skipColor)
 {
     glPushMatrix();
     glMultMatrixd(m_mat.constData());
     glBegin(GL_QUADS);
     glLineWidth(2.0);
-    glColor3d(0, 0, 0);
+    if(!skipColor)
+        glColor3dv(color);
     for(int i = 0; i < 8; i+=2) {
         glVertex2dv(m_vertices + i);
     }

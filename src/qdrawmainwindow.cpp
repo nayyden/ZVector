@@ -50,3 +50,25 @@ void QDrawMainWindow::redrawSelectBuffer()
     activeCanvas->redrawSelectionBufer();
 }
 
+void QDrawMainWindow::on_actionSelect_triggered()
+{
+//    GLCanvas* c = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
+//    emit changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
+}
+
+void QDrawMainWindow::on_actionCreate_triggered()
+{
+//    GLCanvas* c = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+//    c->chageTool(ToolFactory::getSingletonPtr()->getCreateTool());
+    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
+//    emit changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
+}
+
+void QDrawMainWindow::on_actionNew_triggered()
+{
+    GLCanvas* canvas = new GLCanvas(this);
+    connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
+
+    ui->mdiArea->addSubWindow(canvas);
+}
