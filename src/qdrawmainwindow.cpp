@@ -22,10 +22,6 @@
 
 #include "include/qdrawmainwindow.h"
 #include "ui_qdrawmainwindow.h"
-#include "glcanvas.h"
-#include "include/GLDebugBufferWidget.h"
-
-#include <QMdiSubWindow>
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,10 +29,9 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    GLDebugBufferWidget *debug = new GLDebugBufferWidget(this);
-    connect(ui->canvas, SIGNAL(sendFrameBuffer(QImage)), debug, SLOT(drawBuffer(QImage)));
+    m_debug = new GLDebugBufferWidget(this);
 
-    ui->mdiArea->addSubWindow(debug);
+    ui->mdiArea->addSubWindow(m_debug);
 }
 
 QDrawMainWindow::~QDrawMainWindow()
@@ -53,22 +48,26 @@ void QDrawMainWindow::redrawSelectBuffer()
 void QDrawMainWindow::on_actionSelect_triggered()
 {
 //    GLCanvas* c = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
-    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
-//    emit changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
+//    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
+    emit changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
 }
 
 void QDrawMainWindow::on_actionCreate_triggered()
 {
 //    GLCanvas* c = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
 //    c->chageTool(ToolFactory::getSingletonPtr()->getCreateTool());
-    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
-//    emit changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
+//    ui->canvas->changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
+    emit changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
 }
 
 void QDrawMainWindow::on_actionNew_triggered()
 {
     GLCanvas* canvas = new GLCanvas(this);
     connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
+    connect(canvas, SIGNAL(sendFrameBuffer(QImage)), m_debug, SLOT(drawBuffer(QImage)));
 
     ui->mdiArea->addSubWindow(canvas);
+
+    canvas->setWindowTitle("New Drawing*");
+    canvas->show();
 }

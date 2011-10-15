@@ -24,7 +24,10 @@
 #define QDRAWMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMdiSubWindow>
+
 #include "glcanvas.h"
+#include "include/GLDebugBufferWidget.h"
 
 namespace Ui {
     class QDrawMainWindow;
@@ -49,6 +52,7 @@ private slots:
 
 private:
     Ui::QDrawMainWindow *ui;
+    GLDebugBufferWidget *m_debug;
 
 signals:
     void changeTool (Tool*);
