@@ -36,6 +36,13 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 
 QDrawMainWindow::~QDrawMainWindow()
 {
+    QList<QMdiSubWindow*> wins = ui->mdiArea->subWindowList();
+    QList<QMdiSubWindow*>::iterator it = wins.begin();
+    while(it != wins.end())
+    {
+        delete *it;
+        it++;
+    }
     delete ui;
 }
 
