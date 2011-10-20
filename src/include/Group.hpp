@@ -42,15 +42,16 @@ public:
 
     inline void draw(bool skipColor = false)
     {
+        glPushMatrix();
+        glMultMatrixd(m_mat.constData());
         QLinkedList<Shape*>::iterator sit = m_shapes.begin();
         while( sit != m_shapes.end())
         {
             (*sit)->draw(skipColor);
             sit++;
         }
+        glPopMatrix();
     }
-
-    void translate(double x, double y);
 
 private:
     QLinkedList<Shape*> m_shapes;
