@@ -39,6 +39,9 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
+    <addaction name="actionSelect"/>
+    <addaction name="actionCreate"/>
+    <addaction name="actionMove"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -80,6 +83,7 @@
    </attribute>
    <addaction name="actionSelect"/>
    <addaction name="actionCreate"/>
+   <addaction name="actionMove"/>
   </widget>
   <action name="actionSelect">
    <property name="text">
@@ -127,6 +131,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionMove">
+   <property name="text">
+    <string>Move</string>
+   </property>
+   <property name="shortcut">
+    <string>M</string>
    </property>
   </action>
  </widget>

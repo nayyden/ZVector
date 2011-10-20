@@ -24,6 +24,8 @@
 #define GROUP_HPP
 
 #include <QLinkedList>
+#include <GL/gl.h>
+
 #include "Shape.hpp"
 
 class Group: public Shape
@@ -48,6 +50,7 @@ public:
         }
     }
 
+    void translate(double x, double y);
 
 private:
     QLinkedList<Shape*> m_shapes;

@@ -28,7 +28,7 @@
 #include "SelectTool.hpp"
 #include "ResizeTool.hpp"
 #include "CreateTool.hpp"
-
+#include "TranslateTool.hpp"
 
 class ToolFactory{
 public:
@@ -59,11 +59,19 @@ public:
        return m_pCreate;
    }
 
+   inline Tool* getTranslateTool()
+   {
+       if( !m_pTranslate )
+           m_pTranslate = new TranslateTool();
+       return m_pTranslate;
+   }
+
 private:
    ToolFactory(){
        m_pSelect = new SelectTool();
        m_pResize = NULL;
        m_pCreate = NULL;
+       m_pTranslate = NULL;
    }
 
    virtual ~ToolFactory(){
@@ -73,6 +81,8 @@ private:
            delete m_pResize;
        if(m_pCreate)
            delete m_pCreate;
+       if(m_pTranslate)
+           delete m_pTranslate;
    }
 
    static ToolFactory* m_pInstance;
@@ -80,6 +90,7 @@ private:
    SelectTool* m_pSelect;
    ResizeTool* m_pResize;
    CreateTool* m_pCreate;
+   TranslateTool* m_pTranslate;
 };
 
 #endif // TOOLFACTORY_HPP

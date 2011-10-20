@@ -20,29 +20,23 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/Group.hpp"
+#ifndef CREATETOOL_HPP
+#define CREATETOOL_HPP
 
-void Group::deleteShapes()
+#include "Tool.hpp"
+#include "Quad.hpp"
+
+class CreateTool : public Tool
 {
-    while( !m_shapes.empty() )
+   public:
+    void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
     {
-        delete m_shapes.back();
-        m_shapes.pop_back();
+        Quad* quad = new Quad(event->x(), event->y());
+        quad->resize(100, 200);
+        group->addShapeToNewGroup( quad );
     }
-}
+    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
+    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
+};
 
-void Group::addShape(Shape * shape)
-{
-    m_shapes.push_back(shape);
-}
-
-void Group::translate(double x, double y)
-{
-    QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-    while( sit != m_shapes.end())
-    {
-        (*sit)->translate(x,y);
-        sit++;
-    }
-}
-
+#endif // CREATETOOL_HPP

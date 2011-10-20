@@ -94,8 +94,6 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
         m_currentShape->resize( dx, dy );
         m_mousePos.setX( event->x() );
         m_mousePos.setY( event->y() );
-        paintGL();
-        updateGL();
     }
 
     glReadBuffer( GL_AUX0 );
@@ -104,6 +102,8 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
     emit sendFrameBuffer(fetchedBuffer);
 */
     m_currentTool->handleMouseMoveEvent( event, m_groupManager );
+    paintGL();
+    updateGL();
 }
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)

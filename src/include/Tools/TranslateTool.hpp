@@ -20,29 +20,38 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/Group.hpp"
+#ifndef TRANSLATETOOL_HPP
+#define TRANSLATETOOL_HPP
 
-void Group::deleteShapes()
+#include <QMouseEvent>
+
+#include "Tool.hpp"
+#include "GroupManager.hpp"
+
+class TranslateTool: public Tool
 {
-    while( !m_shapes.empty() )
+
+public:
+    void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
     {
-        delete m_shapes.back();
-        m_shapes.pop_back();
+        m_diff.x = event->x();
+        m_diff.y = event->y();
     }
-}
 
-void Group::addShape(Shape * shape)
-{
-    m_shapes.push_back(shape);
-}
-
-void Group::translate(double x, double y)
-{
-    QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-    while( sit != m_shapes.end())
+    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
     {
-        (*sit)->translate(x,y);
-        sit++;
+        m_diff.x = 0;
+        m_diff.y = 0;
     }
-}
 
+    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+    {
+        double dx = event->x() - m_diff.x;
+        double dy = event->y() - m_diff.y;
+        group->getCurrentGroup()->translate( dx, dy );
+        m_diff.x = event->x();
+        m_diff.y = event->y();
+    }
+};
+
+#endif // TRANSLATETOOL_HPP

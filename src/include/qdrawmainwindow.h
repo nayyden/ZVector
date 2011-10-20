@@ -50,6 +50,8 @@ private slots:
 
     void on_actionNew_triggered();
 
+    void on_actionMove_triggered();
+
 private:
     Ui::QDrawMainWindow *ui;
     GLDebugBufferWidget *m_debug;

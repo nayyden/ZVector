@@ -44,8 +44,10 @@ public:
         unsigned char pixels[4];
         glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
 
-        int e = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
-        std::cout << e << '\n';
+        int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
+        std::cout << index << '\n';
+
+        group->setCurrentGroup(index);
     }
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
     void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}

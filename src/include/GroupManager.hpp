@@ -42,20 +42,29 @@ public:
             it++;
         }
     }
+
     void setCurrentGroup( unsigned int index )
     {
         m_currentGroup = index;
     }
+
+    Group* getCurrentGroup()
+    {
+        return m_groups[m_currentGroup];
+    }
+
     void addShapeToCurrentGroup( Shape* shape )
     {
         m_groups[m_currentGroup]->addShape(shape);
     }
+
     void addShapeToNewGroup( Shape* shape )
     {
         m_groups.push_back(new Group);
-        m_currentGroup++;
-        m_groups[m_currentGroup]->addShape(shape);
+        m_currentGroup = m_groups.size() - 1;
+        m_groups.back()->addShape(shape);
     }
+
     inline void draw()
     {
         QList<Group*>::iterator it = m_groups.begin();
@@ -65,11 +74,12 @@ public:
             it++;
         }
     }
+
     inline void drawToSelectionBuffer()
     {
         //glDrawBuffer( GL_LEFT );
         glClear(GL_COLOR_BUFFER_BIT);
-        for( unsigned long int i = 0; i<m_groups.size(); i++)
+        for( int i = 0; i<m_groups.size(); i++)
         {
             int blue = (unsigned char)i;
             int green = (unsigned char)(i >> 8);

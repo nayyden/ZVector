@@ -41,6 +41,9 @@ signals:
 
 public slots:
 
+protected:
+    // Used to keep mouse pos difference between hadleMouse* calls
+    struct { float x,y; } m_diff;
 };
 
 #endif // BASETOOL_HPP

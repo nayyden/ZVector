@@ -38,7 +38,8 @@ HEADERS  += include/qdrawmainwindow.h \
     include/Group.hpp \
     include/Tools/CreateTool.hpp \
     include/GroupManager.hpp \
-    include/Tools/CreateQuadTool.hpp
+    include/Tools/CreateQuadTool.hpp \
+    include/Tools/TranslateTool.hpp
 
 FORMS    += qdrawmainwindow.ui
 
@@ -47,6 +48,11 @@ OTHER_FILES += \
     data/main.frag.glsl \
     data/main.vert.glsl \
     ../README
+
+RESOURCES += \
+    icons.qrc
+
+
 
 
 
