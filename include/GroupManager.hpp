@@ -45,7 +45,10 @@ public:
 
     void setCurrentGroup( unsigned int index )
     {
-        m_currentGroup = index;
+        if(index > m_groups.size())
+            m_currentGroup = 0;
+        else
+            m_currentGroup = index;
     }
 
     Group* getCurrentGroup()

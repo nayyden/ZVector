@@ -36,16 +36,12 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 
 void GLCanvas::initializeGL()
 {
+    glClearColor(1.f, 1.f, 1.f, 1.f);
 
-    glClearColor(1, 1, 1, 1);
-  //  glDrawBuffer( GL_BACK );
+    int i[1];i[0] = 0;
+    glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_COMPONENTS,i);
 
-//    m_program = new QGLShaderProgram();
-/*    m_program->addShaderFromSourceFile(QGLShader::Vertex, "../src/data/main.vert.glsl");
-    m_program->addShaderFromSourceFile(QGLShader::Fragment, "../src/data/main.frag.glsl");
-    m_program->link();
-    m_program->bind();
-    m_program->setUniformValue("color", QVector4D(0.1,0.2,0.5,1.0));*/
+    printf("Max fp uniform components: %d\n", *i);
 }
 
 void GLCanvas::paintGL()
@@ -57,7 +53,6 @@ void GLCanvas::paintGL()
 void GLCanvas::redrawSelectionBufer()
 {
     glDrawBuffer( GL_AUX0 );
-    //m_program->setUniformValue("color", QVector4D(0.5, 0.8, 0.2, 1.0));
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawBuffer( GL_BACK );
 }

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="cursor">data/icons/cursor.png</file>
+        <file alias="ellipse">data/icons/ellipse.png</file>
+        <file alias="move">data/icons/move.png</file>
+        <file alias="rect">data/icons/rect.png</file>
+    </qresource>
+</RCC>

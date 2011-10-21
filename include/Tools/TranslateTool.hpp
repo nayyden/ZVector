@@ -34,6 +34,19 @@ class TranslateTool: public Tool
 public:
     void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
     {
+        group->drawToSelectionBuffer();
+
+        glReadBuffer( GL_BACK);
+        GLint viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        unsigned char pixels[4];
+        glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
+
+        int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
+        std::cout << index << '\n';
+
+        group->setCurrentGroup(index);
+
         m_diff.x = event->x();
         m_diff.y = event->y();
     }

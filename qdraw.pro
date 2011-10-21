@@ -18,16 +18,18 @@ UI_DIR=../qdraw-objects
 
 #DEFINES += GL_GLEXT_PROTOTYPES
 
-SOURCES += main.cpp\
-          qdrawmainwindow.cpp \
-    glcanvas.cpp \
-    Quad.cpp \
-    GLDebugBufferWidget.cpp \
-    Group.cpp \
-    GroupManager.cpp
+SOURCES += \
+    src/main.cpp\
+    src/qdrawmainwindow.cpp \
+    src/glcanvas.cpp \
+    src/Quad.cpp \
+    src/GLDebugBufferWidget.cpp \
+    src/Group.cpp \
+    src/GroupManager.cpp
 
-HEADERS  += include/qdrawmainwindow.h \
-            include/glcanvas.h \
+HEADERS  += \
+    include/qdrawmainwindow.h \
+    include/glcanvas.h \
     include/Shape.hpp \
     include/Quad.hpp \
     include/Tools/SelectTool.hpp \
@@ -41,16 +43,13 @@ HEADERS  += include/qdrawmainwindow.h \
     include/Tools/CreateQuadTool.hpp \
     include/Tools/TranslateTool.hpp
 
-FORMS    += qdrawmainwindow.ui
+FORMS    += src/qdrawmainwindow.ui
 
-OTHER_FILES += \
-    README \
-    data/main.frag.glsl \
-    data/main.vert.glsl \
-    ../README
+RESOURCES += icons.qrc
 
-RESOURCES += \
-    icons.qrc
+
+
+
 
 
 
