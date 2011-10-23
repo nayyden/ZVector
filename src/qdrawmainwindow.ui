@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>953</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -84,6 +84,7 @@
    <addaction name="actionSelect"/>
    <addaction name="actionMove"/>
    <addaction name="actionCreate"/>
+   <addaction name="actionDraw_Ellipse"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="maximumSize">
@@ -200,6 +201,22 @@
    </property>
    <property name="shortcut">
     <string>M</string>
+   </property>
+  </action>
+  <action name="actionDraw_Ellipse">
+   <property name="icon">
+    <iconset>
+     <selectedon>:/ellipse</selectedon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Draw Ellipse</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Ellipse</string>
+   </property>
+   <property name="shortcut">
+    <string>E</string>
    </property>
   </action>
  </widget>

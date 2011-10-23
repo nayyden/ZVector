@@ -37,11 +37,6 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 void GLCanvas::initializeGL()
 {
     glClearColor(1.f, 1.f, 1.f, 1.f);
-
-    int i[1];i[0] = 0;
-    glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_COMPONENTS,i);
-
-    printf("Max fp uniform components: %d\n", *i);
 }
 
 void GLCanvas::paintGL()
@@ -76,26 +71,10 @@ void GLCanvas::keyPressEvent(QKeyEvent *e)
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)
 {
     m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
-    //releaseMouse();
-
 }
 
 void GLCanvas::mouseMoveEvent(QMouseEvent *event)
 {
-/*
-    if( m_currentShape ) {
-        double dx = event->x() - m_mousePos.x();
-        double dy = event->y() - m_mousePos.y();
-        m_currentShape->resize( dx, dy );
-        m_mousePos.setX( event->x() );
-        m_mousePos.setY( event->y() );
-    }
-
-    glReadBuffer( GL_AUX0 );
-    glFinish();
-    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
-    emit sendFrameBuffer(fetchedBuffer);
-*/
     m_currentTool->handleMouseMoveEvent( event, m_groupManager );
     paintGL();
     updateGL();
@@ -104,19 +83,12 @@ void GLCanvas::mouseMoveEvent(QMouseEvent *event)
 void GLCanvas::mousePressEvent(QMouseEvent *event)
 {
     setAutoBufferSwap(false);
-    //grabMouse();
-/*
-    m_mousePos.setX( event->x() );
-    m_mousePos.setY( event->y() );
 
-    m_currentShape = new Quad(event->x(), event->y());
-    m_shapes.push_back(m_currentShape);
-*/
     m_currentTool->handleMousePressEvent( event, m_groupManager );
 
-    glReadBuffer( GL_BACK );
-    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
-    emit sendFrameBuffer(fetchedBuffer);
+//    glReadBuffer( GL_BACK );
+//    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
+//    emit sendFrameBuffer(fetchedBuffer);
 
     setAutoBufferSwap(true);
     paintGL();

@@ -29,6 +29,7 @@
 #include "ResizeTool.hpp"
 #include "CreateTool.hpp"
 #include "TranslateTool.hpp"
+#include "CreateEllipseTool.hpp"
 
 class ToolFactory{
 public:
@@ -66,15 +67,25 @@ public:
        return m_pTranslate;
    }
 
+   inline Tool* getCreateEllipseTool()
+   {
+       if(!m_pCreateEllipse)
+           m_pCreateEllipse = new CreateEllipseTool();
+       return m_pCreateEllipse;
+   }
+
 private:
-   ToolFactory(){
+   ToolFactory()
+   {
        m_pSelect = new SelectTool();
        m_pResize = NULL;
        m_pCreate = NULL;
+       m_pCreateEllipse = NULL;
        m_pTranslate = NULL;
    }
 
-   virtual ~ToolFactory(){
+   virtual ~ToolFactory()
+   {
        if(m_pSelect)
            delete m_pSelect;
        if(m_pResize)
@@ -90,6 +101,7 @@ private:
    SelectTool* m_pSelect;
    ResizeTool* m_pResize;
    CreateTool* m_pCreate;
+   CreateEllipseTool* m_pCreateEllipse;
    TranslateTool* m_pTranslate;
 };
 

@@ -26,7 +26,8 @@ SOURCES += \
     src/GLDebugBufferWidget.cpp \
     src/Group.cpp \
     src/GroupManager.cpp \
-    src/qtcolortriangle.cpp
+    src/qtcolortriangle.cpp\
+    src/AutoShape.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -43,91 +44,10 @@ HEADERS  += \
     include/GroupManager.hpp \
     include/Tools/CreateQuadTool.hpp \
     include/Tools/TranslateTool.hpp \
-    include/qtcolortriangle.h
+    include/qtcolortriangle.h\
+    include/AutoShape.hpp \
+    include/Tools/CreateEllipseTool.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

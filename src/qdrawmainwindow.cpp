@@ -85,3 +85,8 @@ void QDrawMainWindow::on_actionNew_triggered()
     canvas->show();
 }
 
+
+void QDrawMainWindow::on_actionDraw_Ellipse_triggered()
+{
+    emit(changeTool(ToolFactory::getSingletonPtr()->getCreateEllipseTool()));
+}
