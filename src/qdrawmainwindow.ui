@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>953</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -79,18 +79,19 @@
     <enum>LeftToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="actionSelect"/>
    <addaction name="actionMove"/>
    <addaction name="actionCreate"/>
+   <addaction name="actionDraw_Ellipse"/>
   </widget>
   <action name="actionSelect">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset resource="../icons.qrc">
      <normaloff>:/cursor</normaloff>:/cursor</iconset>
    </property>
    <property name="text">
@@ -105,7 +106,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset resource="../icons.qrc">
      <normaloff>:/rect</normaloff>:/rect</iconset>
    </property>
    <property name="text">
@@ -152,7 +153,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset resource="../icons.qrc">
      <normaloff>:/move</normaloff>:/move</iconset>
    </property>
    <property name="text">
@@ -162,10 +163,26 @@
     <string>M</string>
    </property>
   </action>
+  <action name="actionDraw_Ellipse">
+   <property name="icon">
+    <iconset>
+     <selectedon>:/ellipse</selectedon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Draw Ellipse</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Ellipse</string>
+   </property>
+   <property name="shortcut">
+    <string>E</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="icons.qrc"/>
+  <include location="../icons.qrc"/>
  </resources>
  <connections>
   <connection>

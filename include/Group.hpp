@@ -38,7 +38,16 @@ public:
 
     void addShape( Shape* shape);
 
-    virtual void resize( double x, double y ) {}
+    virtual void resize( double x, double y )
+    {
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+            (*sit)->resize(x, y);
+            sit++;
+        }
+
+    }
 
     inline void draw(bool skipColor = false)
     {

@@ -25,6 +25,7 @@
 
 #include "Tool.hpp"
 #include "Quad.hpp"
+#include "AutoShape.hpp"
 
 class CreateTool : public Tool
 {
@@ -35,8 +36,16 @@ class CreateTool : public Tool
         quad->resize(100, 200);
         group->addShapeToNewGroup( quad );
     }
-    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
-    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
+
+    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
+    {
+
+    }
+
+    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+    {
+
+    }
 };
 
 #endif // CREATETOOL_HPP

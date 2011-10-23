@@ -31,7 +31,7 @@ class Tool : public QObject
     Q_OBJECT
 
 public:
-    explicit Tool(QObject *parent = 0): QObject(parent) {}
+    explicit Tool(QObject *parent = 0): QObject(parent) { m_diff.x = 0.0, m_diff.y = 0.0; }
     virtual void handleMousePressEvent( QMouseEvent *event, GroupManager* group ) = 0;
     virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
     virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;

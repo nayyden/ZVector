@@ -42,6 +42,7 @@ public:
     ~QDrawMainWindow();
 
 private slots:
+    void on_actionDraw_Ellipse_triggered();
     void redrawSelectBuffer();
 
     void on_actionSelect_triggered();
