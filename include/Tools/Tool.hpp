@@ -38,6 +38,7 @@ public:
 
 signals:
     void redrawSelectionBuffer();
+    void refreshColorPane(QColor);
 
 public slots:
 

@@ -48,6 +48,7 @@ public:
         std::cout << index << '\n';
 
         group->setCurrentGroup(index);
+        emit refreshColorPane(group->getCurrentGroup()->getColor());
     }
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
     void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}

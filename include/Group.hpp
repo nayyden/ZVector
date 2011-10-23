@@ -53,6 +53,27 @@ public:
         glPopMatrix();
     }
 
+    virtual void setColor(const QColor& color)
+    {
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+            (*sit)->setColor(color);
+            sit++;
+        }
+    }
+
+    QColor getColor()
+    {
+        if(!m_shapes.empty())
+            return m_shapes.front()->getColor();
+        else
+        {
+            QColor c(0,0,0);
+            return c;
+        }
+    }
+
 private:
     QLinkedList<Shape*> m_shapes;
 

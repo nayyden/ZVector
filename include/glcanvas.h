@@ -28,6 +28,7 @@
 #include <QLinkedList>
 #include <QGLShaderProgram>
 #include <QString>
+#include <QColor>
 
 #include "GroupManager.hpp"
 #include "Tools/ToolFactory.hpp"
@@ -60,6 +61,12 @@ protected:
 
 public slots:
     void changeTool( Tool* tool ) { m_currentTool = tool; }
+    void setCurrentGroupColor(QColor color)
+    {
+        m_groupManager->getCurrentGroup()->setColor(color);
+        updateGL();
+        paintGL();
+    }
 
 private:
     QVector2D m_mousePos;

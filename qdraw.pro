@@ -25,7 +25,8 @@ SOURCES += \
     src/Quad.cpp \
     src/GLDebugBufferWidget.cpp \
     src/Group.cpp \
-    src/GroupManager.cpp
+    src/GroupManager.cpp \
+    src/qtcolortriangle.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -41,11 +42,14 @@ HEADERS  += \
     include/Tools/CreateTool.hpp \
     include/GroupManager.hpp \
     include/Tools/CreateQuadTool.hpp \
-    include/Tools/TranslateTool.hpp
+    include/Tools/TranslateTool.hpp \
+    include/qtcolortriangle.h
 
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
+
+
 
 
 

@@ -25,10 +25,11 @@
 
 #include <QVector2D>
 #include <QMatrix4x4>
+#include <QColor>
 class Shape
 {
 public:
-    Shape(){ color[0] = color[1] = color[2] = 0.3; }
+    Shape(){ m_color[0] = m_color[1] = m_color[2] = 0.3; }
     virtual void draw( bool skipColor = false ) = 0;
     //virtual bool contains( QVector2D point ) = 0;
     virtual void resize( double x, double y ) = 0;
@@ -45,10 +46,33 @@ public:
 
     }
 
+    virtual void setColor(double r, double g, double b)
+    {
+        m_color[0] = r;
+        m_color[1] = g;
+        m_color[2] = b;
+    }
+
+    virtual void setColor(const QColor& color)
+    {
+        m_color[0] = color.redF();
+        m_color[1] = color.greenF();
+        m_color[2] = color.blueF();
+    }
+
+    virtual QColor getColor()
+    {
+        QColor c(
+                    m_color[0]*255,
+                    m_color[1]*255,
+                    m_color[2]*255
+                    );
+        return c;
+    }
 
 protected:
     QMatrix4x4 m_mat;
-    double color[3];
+    double m_color[3];
 };
 
 #endif // SHAPE_HPP

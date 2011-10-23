@@ -22,6 +22,7 @@
 
 #include "include/qdrawmainwindow.h"
 #include "ui_qdrawmainwindow.h"
+#include "qtcolortriangle.h"
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -32,6 +33,7 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
     m_debug = new GLDebugBufferWidget(this);
 
     ui->mdiArea->addSubWindow(m_debug);
+
 }
 
 QDrawMainWindow::~QDrawMainWindow()
@@ -72,6 +74,10 @@ void QDrawMainWindow::on_actionNew_triggered()
     GLCanvas* canvas = new GLCanvas(this);
     connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
     connect(canvas, SIGNAL(sendFrameBuffer(QImage)), m_debug, SLOT(drawBuffer(QImage)));
+
+    // Color <-> Shape connection
+    connect(ui->colorTriangle, SIGNAL(colorChanged(QColor)), canvas, SLOT(setCurrentGroupColor(QColor)));
+    connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
 
     ui->mdiArea->addSubWindow(canvas);
 
