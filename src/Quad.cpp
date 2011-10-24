@@ -45,7 +45,7 @@ void Quad::draw(bool skipColor)
     glBegin(GL_QUADS);
     glLineWidth(2.0);
     if(!skipColor)
-        glColor3dv(m_color);
+        glColor3dv(m_fillColor);
     for(int i = 0; i < 8; i+=2) {
         glVertex2dv(m_vertices + i);
     }

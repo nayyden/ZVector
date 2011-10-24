@@ -62,20 +62,20 @@ public:
         glPopMatrix();
     }
 
-    virtual void setColor(const QColor& color)
+    virtual void setFillColor(const QColor& color)
     {
         QLinkedList<Shape*>::iterator sit = m_shapes.begin();
         while( sit != m_shapes.end())
         {
-            (*sit)->setColor(color);
+	    (*sit)->setFillColor(color);
             sit++;
         }
     }
 
-    QColor getColor()
+    QColor getFillColor()
     {
         if(!m_shapes.empty())
-            return m_shapes.front()->getColor();
+            return m_shapes.front()->getFillColor();
         else
         {
             QColor c(0,0,0);

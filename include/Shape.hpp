@@ -26,53 +26,47 @@
 #include <QVector2D>
 #include <QMatrix4x4>
 #include <QColor>
+#include <QList>
+#include <QLinkedList>
+
 class Shape
 {
 public:
-    Shape(){ m_color[0] = m_color[1] = m_color[2] = 0.3; }
+	Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(6.f)
+	{
+		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
+	}
+
     virtual void draw( bool skipColor = false ) = 0;
-    //virtual bool contains( QVector2D point ) = 0;
     virtual void resize( double x, double y ) = 0;
 
-    virtual void translate( double x, double y )
-    {
-        double* m = m_mat.data();
-        m[12] += x;
-        m[13] += y;
-    }
+    virtual void translate( double x, double y );
+    virtual void rotate( double angle );
+    virtual void setFillColor(double r, double g, double b);
+    virtual void setFillColor(const QColor& color);
+    virtual QColor getFillColor();
 
-    virtual void rotate( double angle )
-    {
-
-    }
-
-    virtual void setColor(double r, double g, double b)
-    {
-        m_color[0] = r;
-        m_color[1] = g;
-        m_color[2] = b;
-    }
-
-    virtual void setColor(const QColor& color)
-    {
-        m_color[0] = color.redF();
-        m_color[1] = color.greenF();
-        m_color[2] = color.blueF();
-    }
-
-    virtual QColor getColor()
-    {
-        QColor c(
-                    m_color[0]*255,
-                    m_color[1]*255,
-                    m_color[2]*255
-                    );
-        return c;
-    }
+	virtual void setContourColor(double r, double g, double b);
+	virtual void setContourColor(const QColor& color);
+	virtual QColor getContourColor();
 
 protected:
+    QList<QVector2D> m_vertices;
+    QList<QVector2D> m_normals;
     QMatrix4x4 m_mat;
-    double m_color[3];
+
+    double m_fillColor[3];
+    double m_contourColor[3];
+
+    float m_contourWidth;
+
+    bool m_bDrawCountour;
+    bool m_bDrawFill;
+
+    /*
+      use only when neccessary, ie the number vertices has changed
+      */
+    void recalculateNormals();
 };
 
 #endif // SHAPE_HPP

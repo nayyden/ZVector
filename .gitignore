@@ -4,3 +4,4 @@ qdraw-objects/
 src/Makefile
 src/qdraw.pro.user
 build/
+qdraw.pro.user

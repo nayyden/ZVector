@@ -27,7 +27,8 @@ SOURCES += \
     src/Group.cpp \
     src/GroupManager.cpp \
     src/qtcolortriangle.cpp\
-    src/AutoShape.cpp
+    src/AutoShape.cpp \
+    src/Shape.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -51,3 +52,4 @@ HEADERS  += \
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
+

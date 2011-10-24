@@ -63,7 +63,7 @@ public slots:
     void changeTool( Tool* tool ) { m_currentTool = tool; }
     void setCurrentGroupColor(QColor color)
     {
-        m_groupManager->getCurrentGroup()->setColor(color);
+        m_groupManager->getCurrentGroup()->setFillColor(color);
         updateGL();
         paintGL();
     }
