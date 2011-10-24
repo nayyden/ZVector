@@ -9,7 +9,7 @@ public:
     void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
     {
         AutoShape *autoShape = new AutoShape(event->x(), event->y());
-        group->addShapeToNewGroup(autoShape);
+        group->addNewShape(autoShape);
     }
 
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
@@ -30,7 +30,7 @@ public:
             dy = event->y() - m_diff.y;
         }
 
-        group->getCurrentGroup()->resize( dx, dy );
+        group->getCurrentShape()->resize( dx, dy );
         m_diff.x = event->x();
         m_diff.y = event->y();
     }

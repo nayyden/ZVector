@@ -21,11 +21,10 @@
  */
 
 #include "include/GroupManager.hpp"
-#include <assert.h>
+#include "Group.hpp"
 
 GroupManager::GroupManager()
 {
-    m_groups.append(new Group());
-    assert(m_groups.size()!=0);
-    m_currentGroup = 0;
+    m_shapes.append(new Group());
+    m_currentShape = 0;
 }

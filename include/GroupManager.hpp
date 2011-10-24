@@ -24,9 +24,8 @@
 #define GROUPMANAGER_HPP
 
 #include <GL/gl.h>
-#include <Group.hpp>
+#include "Shape.hpp"
 
-#include <iostream>
 
 class GroupManager
 {
@@ -34,8 +33,8 @@ public:
     GroupManager();
     virtual ~GroupManager()
     {
-        QList<Group*>::iterator it = m_groups.begin();
-        while( it != m_groups.end())
+        QList<Shape*>::iterator it = m_shapes.begin();
+        while( it != m_shapes.end())
         {
             if(*it)
                 delete *it;
@@ -43,35 +42,30 @@ public:
         }
     }
 
-    void setCurrentGroup( unsigned int index )
+    void setCurrentShape( unsigned int index )
     {
-        if(index > m_groups.size())
-            m_currentGroup = 0;
+        if(index > m_shapes.size())
+            m_currentShape = 0;
         else
-            m_currentGroup = index;
+            m_currentShape = index;
     }
 
-    Group* getCurrentGroup()
+    Shape* getCurrentShape()
     {
-        return m_groups[m_currentGroup];
+        return m_shapes[m_currentShape];
     }
 
-    void addShapeToCurrentGroup( Shape* shape )
-    {
-        m_groups[m_currentGroup]->addShape(shape);
-    }
 
-    void addShapeToNewGroup( Shape* shape )
+    void addNewShape( Shape* shape )
     {
-        m_groups.push_back(new Group);
-        m_currentGroup = m_groups.size() - 1;
-        m_groups.back()->addShape(shape);
+        m_shapes.push_back(shape);
+        m_currentShape = m_shapes.size() - 1;
     }
 
     inline void draw()
     {
-        QList<Group*>::iterator it = m_groups.begin();
-        while( it != m_groups.end())
+        QList<Shape*>::iterator it = m_shapes.begin();
+        while( it != m_shapes.end())
         {
             (*it)->draw();
             it++;
@@ -80,9 +74,8 @@ public:
 
     inline void drawToSelectionBuffer()
     {
-        //glDrawBuffer( GL_LEFT );
         glClear(GL_COLOR_BUFFER_BIT);
-        for( int i = 0; i<m_groups.size(); i++)
+        for( int i = 0; i<m_shapes.size(); i++)
         {
             int blue = (unsigned char)i;
             int green = (unsigned char)(i >> 8);
@@ -90,14 +83,13 @@ public:
 
             glColor3f(red/255.f, green/255.f, blue/255.f);
 
-            m_groups[i]->draw(true);
+            m_shapes[i]->draw(true);
         }
-        //glDrawBuffer(GL_BACK);
     }
 
 private:
-    QList<Group*> m_groups;
-    unsigned int m_currentGroup;
+    QList<Shape*> m_shapes;
+    unsigned int m_currentShape;
 };
 
 #endif // GROUPMANAGER_HPP

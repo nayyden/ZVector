@@ -47,8 +47,8 @@ public:
         int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
         std::cout << index << '\n';
 
-        group->setCurrentGroup(index);
-        emit refreshColorPane(group->getCurrentGroup()->getColor());
+        group->setCurrentShape(index);
+        emit refreshColorPane(group->getCurrentShape()->getColor());
     }
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
     void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}

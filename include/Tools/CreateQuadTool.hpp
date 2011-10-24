@@ -32,7 +32,7 @@ class CreateQuadool : public Tool
     void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
     {
         Quad* quad = new Quad(event->x(), event->y());
-        group->addShapeToNewGroup( quad );
+        group->addNewShape( quad );
     }
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
     void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
