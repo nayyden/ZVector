@@ -8,7 +8,7 @@ QT       += core gui opengl
 TARGET = qdraw
 TEMPLATE = app
 
-DESTDIR = ../bin
+DESTDIR = bin
 
 INCLUDEPATH += include
 

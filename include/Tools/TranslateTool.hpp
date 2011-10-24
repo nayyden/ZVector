@@ -49,7 +49,7 @@ public:
     {
         double dx = event->x() - m_diff.x;
         double dy = event->y() - m_diff.y;
-        group->getCurrentGroup()->translate( dx, dy );
+        group->getCurrentShape()->translate( dx, dy );
         m_diff.x = event->x();
         m_diff.y = event->y();
     }

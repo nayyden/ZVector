@@ -34,7 +34,7 @@ class CreateTool : public Tool
     {
         Quad* quad = new Quad(event->x(), event->y());
         quad->resize(100, 200);
-        group->addShapeToNewGroup( quad );
+        group->addNewShape( quad );
     }
 
     void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
