@@ -42,7 +42,7 @@ public:
         }
     }
 
-    void setCurrentShape( unsigned int index )
+    void setCurrentShape( int index )
     {
         if(index > m_shapes.size())
             m_currentShape = 0;
@@ -89,7 +89,7 @@ public:
 
 private:
     QList<Shape*> m_shapes;
-    unsigned int m_currentShape;
+    int m_currentShape;
 };
 
 #endif // GROUPMANAGER_HPP

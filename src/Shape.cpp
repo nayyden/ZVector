@@ -29,7 +29,7 @@ void Shape::translate( double x, double y )
     m[13] += y;
 }
 
-void Shape::rotate( double angle )
+void Shape::rotate( double /* angle */ )
 {
 
 }

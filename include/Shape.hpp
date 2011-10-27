@@ -58,10 +58,10 @@ protected:
     double m_fillColor[3];
     double m_contourColor[3];
 
-    float m_contourWidth;
-
     bool m_bDrawCountour;
     bool m_bDrawFill;
+    float m_contourWidth;
+
 
     /*
       use only when neccessary, ie the number vertices has changed

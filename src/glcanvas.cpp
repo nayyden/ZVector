@@ -63,9 +63,8 @@ void GLCanvas::resizeGL(int w, int h)
 
 }
 
-void GLCanvas::keyPressEvent(QKeyEvent *e)
+void GLCanvas::keyPressEvent(QKeyEvent*)
 {
-
 }
 
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)

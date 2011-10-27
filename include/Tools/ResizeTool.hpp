@@ -32,9 +32,9 @@ class ResizeTool: public Tool
 {
 
 public:
-    void handleMousePressEvent(QMouseEvent *event, GroupManager *group) {}
-    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
-    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
+    void handleMousePressEvent(QMouseEvent*, GroupManager*) {}
+    void handleMouseReleaseEvent(QMouseEvent*, GroupManager*) {}
+    void handleMouseMoveEvent(QMouseEvent*, GroupManager*) {}
 };
 
 #endif // RESIZETOOL_HPP

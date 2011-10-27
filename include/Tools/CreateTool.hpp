@@ -37,15 +37,9 @@ class CreateTool : public Tool
         group->addNewShape( quad );
     }
 
-    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
-    {
+    void handleMouseReleaseEvent(QMouseEvent*, GroupManager*){}
 
-    }
-
-    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
-    {
-
-    }
+    void handleMouseMoveEvent(QMouseEvent*, GroupManager*){}
 };
 
 #endif // CREATETOOL_HPP
