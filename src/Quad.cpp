@@ -28,16 +28,16 @@ Quad::Quad( double origin_x, double origin_y )
     double* m = m_mat.data();
     m[12] = origin_x;
     m[13] = origin_y;
-    m_vertices[0] = 0;
-    m_vertices[1] = 0;
-    m_vertices[2] = 0;
-    m_vertices[3] = 0;
-    m_vertices[4] = 0;
-    m_vertices[5] = 0;
-    m_vertices[6] = 0;
-    m_vertices[7] = 0;
+    m_normals.push_back(QVector2D( -EIGEN_1_1_0, -EIGEN_1_1_0 ));
+    m_normals.push_back(QVector2D( -EIGEN_1_1_0,  EIGEN_1_1_0 ));
+    m_normals.push_back(QVector2D(  EIGEN_1_1_0,  EIGEN_1_1_0 ));
+    m_normals.push_back(QVector2D(  EIGEN_1_1_0, -EIGEN_1_1_0 ));
+    m_vertices.push_back(QVector2D());
+    m_vertices.push_back(QVector2D());
+    m_vertices.push_back(QVector2D());
+    m_vertices.push_back(QVector2D());
 }
-
+/*
 void Quad::draw(bool skipColor)
 {
     glPushMatrix();
@@ -53,12 +53,12 @@ void Quad::draw(bool skipColor)
     glEnd();
     glPopMatrix();
 }
-
+*/
 void Quad::resize(double x, double y)
 {
-    m_vertices[3] += y;
-    m_vertices[4] += x;
-    m_vertices[5] += y;
-    m_vertices[6] += x;
+	m_vertices[1].setY( m_vertices[1].y() + y);
+	m_vertices[2].setX( m_vertices[2].x() + x);
+	m_vertices[2].setY( m_vertices[2].y() + y);
+	m_vertices[3].setX( m_vertices[3].x() + x);
 }
 

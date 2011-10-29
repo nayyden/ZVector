@@ -61,7 +61,7 @@ void QDrawMainWindow::on_actionSelect_triggered()
 
 void QDrawMainWindow::on_actionCreate_triggered()
 {
-    emit changeTool(ToolFactory::getSingletonPtr()->getCreateTool());
+    emit changeTool(ToolFactory::getSingletonPtr()->getCreateQuadTool());
 }
 
 void QDrawMainWindow::on_actionMove_triggered()
@@ -89,4 +89,9 @@ void QDrawMainWindow::on_actionNew_triggered()
 void QDrawMainWindow::on_actionDraw_Ellipse_triggered()
 {
     emit(changeTool(ToolFactory::getSingletonPtr()->getCreateEllipseTool()));
+}
+
+void QDrawMainWindow::on_actionDraw_Triangle_triggered()
+{
+	emit(changeTool(ToolFactory::getSingletonPtr()->getTriangleTool()));
 }

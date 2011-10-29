@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>953</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -85,6 +85,7 @@
    <addaction name="actionMove"/>
    <addaction name="actionCreate"/>
    <addaction name="actionDraw_Ellipse"/>
+   <addaction name="actionDraw_Triangle"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="maximumSize">
@@ -217,6 +218,14 @@
    </property>
    <property name="shortcut">
     <string>E</string>
+   </property>
+  </action>
+  <action name="actionDraw_Triangle">
+   <property name="text">
+    <string>Draw Triangle</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Triangle</string>
    </property>
   </action>
  </widget>

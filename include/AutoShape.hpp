@@ -9,7 +9,6 @@ public:
     AutoShape(double origin_x, double origin_y, int vertices = 360);
 
 protected:
-    void draw(bool skipColor);
     void resize(double x, double y);
 
 private:

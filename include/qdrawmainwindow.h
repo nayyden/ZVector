@@ -53,6 +53,8 @@ private slots:
 
     void on_actionMove_triggered();
 
+    void on_actionDraw_Triangle_triggered();
+
 private:
     Ui::QDrawMainWindow *ui;
     GLDebugBufferWidget *m_debug;

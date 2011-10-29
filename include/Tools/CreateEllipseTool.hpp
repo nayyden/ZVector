@@ -10,6 +10,9 @@ public:
     {
         AutoShape *autoShape = new AutoShape(event->x(), event->y());
         group->addNewShape(autoShape);
+	m_diff.x = event->x();
+	m_diff.y = event->y();
+
     }
 
     void handleMouseReleaseEvent(QMouseEvent*, GroupManager*)
@@ -20,19 +23,13 @@ public:
 
     void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
     {
-        double dx;
-        double dy;
-        if(m_diff.x == 0 && m_diff.y == 0) {
-            dx = 0;
-            dy = 0;
-        } else {
-            dx = event->x() - m_diff.x;
-            dy = event->y() - m_diff.y;
-        }
-
-        group->getCurrentShape()->resize( dx, dy );
-        m_diff.x = event->x();
-        m_diff.y = event->y();
+	    double dx;
+	    double dy;
+	    dx = event->x() - m_diff.x;
+	    dy = event->y() - m_diff.y;
+	    group->getCurrentShape()->resize( dx, dy );
+	    m_diff.x = event->x();
+	    m_diff.y = event->y();
     }
 };
 

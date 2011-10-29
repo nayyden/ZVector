@@ -47,9 +47,11 @@ HEADERS  += \
     include/Tools/TranslateTool.hpp \
     include/qtcolortriangle.h\
     include/AutoShape.hpp \
-    include/Tools/CreateEllipseTool.hpp
+    include/Tools/CreateEllipseTool.hpp \
+    include/Tools/CreateTriangleTool.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
+
 

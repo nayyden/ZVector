@@ -28,8 +28,10 @@
 #include "SelectTool.hpp"
 #include "ResizeTool.hpp"
 #include "CreateTool.hpp"
+#include "CreateQuadTool.hpp"
 #include "TranslateTool.hpp"
 #include "CreateEllipseTool.hpp"
+#include "CreateTriangleTool.hpp"
 
 class ToolFactory{
 public:
@@ -60,6 +62,13 @@ public:
        return m_pCreate;
    }
 
+   inline Tool* getCreateQuadTool()
+   {
+       if( !m_pCreateQuad )
+	   m_pCreateQuad = new CreateQuadTool();
+       return m_pCreateQuad;
+   }
+
    inline Tool* getTranslateTool()
    {
        if( !m_pTranslate )
@@ -74,6 +83,13 @@ public:
        return m_pCreateEllipse;
    }
 
+   inline Tool* getTriangleTool()
+   {
+       if(!m_pCreateTriangle)
+	   m_pCreateTriangle = new CreateTriangleTool();
+       return m_pCreateTriangle;
+   }
+
 private:
    ToolFactory()
    {
@@ -82,6 +98,8 @@ private:
        m_pCreate = NULL;
        m_pCreateEllipse = NULL;
        m_pTranslate = NULL;
+       m_pCreateQuad = NULL;
+       m_pCreateTriangle = NULL;
    }
 
    virtual ~ToolFactory()
@@ -91,9 +109,13 @@ private:
        if(m_pResize)
            delete m_pResize;
        if(m_pCreate)
-           delete m_pCreate;
+	   delete m_pCreate;
        if(m_pTranslate)
-           delete m_pTranslate;
+	   delete m_pTranslate;
+       if(m_pCreateQuad)
+	   delete m_pCreateQuad;
+       if(m_pCreateTriangle)
+	       delete m_pCreateTriangle;
    }
 
    static ToolFactory* m_pInstance;
@@ -101,8 +123,10 @@ private:
    SelectTool* m_pSelect;
    ResizeTool* m_pResize;
    CreateTool* m_pCreate;
+   CreateQuadTool* m_pCreateQuad;
    CreateEllipseTool* m_pCreateEllipse;
    TranslateTool* m_pTranslate;
+   CreateTriangleTool* m_pCreateTriangle;
 };
 
 #endif // TOOLFACTORY_HPP

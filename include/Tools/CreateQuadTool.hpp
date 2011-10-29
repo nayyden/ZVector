@@ -26,16 +26,29 @@
 #include "Tool.hpp"
 #include "Quad.hpp"
 
-class CreateQuadool : public Tool
+class CreateQuadTool : public Tool
 {
-   public:
-    void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
-    {
-        Quad* quad = new Quad(event->x(), event->y());
-        group->addNewShape( quad );
-    }
-    void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group) {}
-    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group) {}
+public:
+	void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
+	{
+		Quad* quad = new Quad(event->x(), event->y());
+		group->addNewShape( quad );
+		m_diff.x = event->x();
+		m_diff.y = event->y();
+	}
+	void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
+	{
+		m_diff.x = 0;
+		m_diff.y = 0;
+	}
+	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+	{
+		double dx = event->x() - m_diff.x;
+		double dy = event->y() - m_diff.y;
+		group->getCurrentShape()->resize( dx, dy );
+		m_diff.x = event->x();
+		m_diff.y = event->y();
+	}
 };
 
 #endif // CREATEQUADTOOL_HPP

@@ -29,44 +29,46 @@
 #include <QList>
 #include <QLinkedList>
 
+#include <GL/gl.h>
+
 class Shape
 {
 public:
-	Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(6.f)
+	Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(60.f)
 	{
 		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
+		m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;
 	}
 
-    virtual void draw( bool skipColor = false ) = 0;
-    virtual void resize( double x, double y ) = 0;
+	virtual void draw( bool skipColor = false );
+	virtual void resize( double x, double y ) = 0;
 
-    virtual void translate( double x, double y );
-    virtual void rotate( double angle );
-    virtual void setFillColor(double r, double g, double b);
-    virtual void setFillColor(const QColor& color);
-    virtual QColor getFillColor();
+	virtual void translate( double x, double y );
+	virtual void rotate( double angle );
+	virtual void setFillColor(double r, double g, double b);
+	virtual void setFillColor(const QColor& color);
+	virtual QColor getFillColor();
 
 	virtual void setContourColor(double r, double g, double b);
 	virtual void setContourColor(const QColor& color);
 	virtual QColor getContourColor();
 
 protected:
-    QList<QVector2D> m_vertices;
-    QList<QVector2D> m_normals;
-    QMatrix4x4 m_mat;
+	QList<QVector2D> m_vertices;
+	QList<QVector2D> m_normals;
+	QMatrix4x4 m_mat;
 
-    double m_fillColor[3];
-    double m_contourColor[3];
+	double m_fillColor[3];
+	double m_contourColor[3];
 
-    bool m_bDrawCountour;
-    bool m_bDrawFill;
-    float m_contourWidth;
+	bool m_bDrawCountour;
+	bool m_bDrawFill;
+	float m_contourWidth;
 
-
-    /*
-      use only when neccessary, ie the number vertices has changed
-      */
-    void recalculateNormals();
+	/*
+	   use only when neccessary, ie the number vertices has changed
+	*/
+	void recalculateNormals();
 };
 
 #endif // SHAPE_HPP
