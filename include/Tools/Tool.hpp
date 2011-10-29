@@ -28,23 +28,22 @@
 
 class Tool : public QObject
 {
-    Q_OBJECT
-
+	Q_OBJECT
 public:
-    explicit Tool(QObject *parent = 0): QObject(parent) { m_diff.x = 0.0, m_diff.y = 0.0; }
-    virtual void handleMousePressEvent( QMouseEvent *event, GroupManager* group ) = 0;
-    virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
-    virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;
+	explicit Tool(QObject *parent = 0): QObject(parent) { m_diff.x = 0.0, m_diff.y = 0.0; }
+	virtual void handleMousePressEvent( QMouseEvent *event, GroupManager* group ) = 0;
+	virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
+	virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;
 
 signals:
-    void redrawSelectionBuffer();
-    void refreshColorPane(QColor);
+	void redrawSelectionBuffer();
+	void refreshColorPane(QColor);
 
 public slots:
 
 protected:
-    // Used to keep mouse pos difference between hadleMouse* calls
-    struct { float x,y; } m_diff;
+	// Used to keep mouse pos difference between hadleMouse* calls
+	struct { float x,y; } m_diff;
 };
 
 #endif // BASETOOL_HPP

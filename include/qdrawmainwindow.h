@@ -30,37 +30,37 @@
 #include "include/GLDebugBufferWidget.h"
 
 namespace Ui {
-    class QDrawMainWindow;
+class QDrawMainWindow;
 }
 
 class QDrawMainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit QDrawMainWindow(QWidget *parent = 0);
-    ~QDrawMainWindow();
+	explicit QDrawMainWindow(QWidget *parent = 0);
+	~QDrawMainWindow();
 
 private slots:
-    void on_actionDraw_Ellipse_triggered();
-    void redrawSelectBuffer();
+	void on_actionDraw_Ellipse_triggered();
+	void redrawSelectBuffer();
 
-    void on_actionSelect_triggered();
+	void on_actionSelect_triggered();
 
-    void on_actionCreate_triggered();
+	void on_actionCreate_triggered();
 
-    void on_actionNew_triggered();
+	void on_actionNew_triggered();
 
-    void on_actionMove_triggered();
+	void on_actionMove_triggered();
 
-    void on_actionDraw_Triangle_triggered();
+	void on_actionDraw_Triangle_triggered();
 
 private:
-    Ui::QDrawMainWindow *ui;
-    GLDebugBufferWidget *m_debug;
+	Ui::QDrawMainWindow *ui;
+	GLDebugBufferWidget *m_debug;
 
 signals:
-    void changeTool (Tool*);
+	void changeTool (Tool*);
 };
 
 #endif // QDRAWMAINWINDOW_H

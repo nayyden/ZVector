@@ -35,47 +35,47 @@
 
 class GLCanvas : public QGLWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    explicit GLCanvas(QWidget *parent = 0);
-    virtual ~GLCanvas()
-    {
-     //   delete m_program;
-        delete m_groupManager;
-    }
-    void redrawSelectionBufer();
+	explicit GLCanvas(QWidget *parent = 0);
+	virtual ~GLCanvas()
+	{
+		//   delete m_program;
+		delete m_groupManager;
+	}
+	void redrawSelectionBufer();
 
 signals:
-    void sendFrameBuffer(QImage buffer);
+	void sendFrameBuffer(QImage buffer);
 
 protected:
-    void initializeGL();
-    void resizeGL(int w, int h);
-    void paintGL();
+	void initializeGL();
+	void resizeGL(int w, int h);
+	void paintGL();
 
-    void keyPressEvent(QKeyEvent *e);
+	void keyPressEvent(QKeyEvent *e);
 
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event );
-    void mouseMoveEvent(QMouseEvent * event );
+	void mousePressEvent(QMouseEvent *event);
+	void mouseReleaseEvent(QMouseEvent *event );
+	void mouseMoveEvent(QMouseEvent * event );
 
 public slots:
-    void changeTool( Tool* tool ) { m_currentTool = tool; }
-    void setCurrentGroupColor(QColor color)
-    {
-	m_groupManager->getCurrentShape()->setFillColor(color);
-        updateGL();
-        paintGL();
-    }
+	void changeTool( Tool* tool ) { m_currentTool = tool; }
+	void setCurrentGroupColor(QColor color)
+	{
+		m_groupManager->getCurrentShape()->setFillColor(color);
+		updateGL();
+		paintGL();
+	}
 
 private:
-    QVector2D m_mousePos;
+	QVector2D m_mousePos;
 
-    GroupManager* m_groupManager;
+	GroupManager* m_groupManager;
 
-    Tool* m_currentTool;
-    ToolFactory* m_toolFactory;
-    QGLShaderProgram* m_program;
+	Tool* m_currentTool;
+	ToolFactory* m_toolFactory;
+	QGLShaderProgram* m_program;
 
 };
 

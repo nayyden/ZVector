@@ -4,20 +4,20 @@
 
 class GLDebugBufferWidget : public QGLWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    GLDebugBufferWidget(QWidget *parent = 0);
+	GLDebugBufferWidget(QWidget *parent = 0);
 
 public slots:
-    void drawBuffer(QImage buffer);
+	void drawBuffer(QImage buffer);
 
 protected:
-    void initializeGL();
-    void resizeGL(int w, int h);
-    void paintGL();
+	void initializeGL();
+	void resizeGL(int w, int h);
+	void paintGL();
 
 private:
-    QImage buffer;
+	QImage buffer;
 };
 
 #endif // GLDEBUGBUFFERWIDGET_H

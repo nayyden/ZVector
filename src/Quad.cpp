@@ -25,35 +25,19 @@
 
 Quad::Quad( double origin_x, double origin_y )
 {
-    double* m = m_mat.data();
-    m[12] = origin_x;
-    m[13] = origin_y;
-    m_normals.push_back(QVector2D( -EIGEN_1_1_0, -EIGEN_1_1_0 ));
-    m_normals.push_back(QVector2D( -EIGEN_1_1_0,  EIGEN_1_1_0 ));
-    m_normals.push_back(QVector2D(  EIGEN_1_1_0,  EIGEN_1_1_0 ));
-    m_normals.push_back(QVector2D(  EIGEN_1_1_0, -EIGEN_1_1_0 ));
-    m_vertices.push_back(QVector2D());
-    m_vertices.push_back(QVector2D());
-    m_vertices.push_back(QVector2D());
-    m_vertices.push_back(QVector2D());
+	double* m = m_mat.data();
+	m[12] = origin_x;
+	m[13] = origin_y;
+	m_normals.push_back(QVector2D( -EIGEN_1_1_0, -EIGEN_1_1_0 ));
+	m_normals.push_back(QVector2D( -EIGEN_1_1_0,  EIGEN_1_1_0 ));
+	m_normals.push_back(QVector2D(  EIGEN_1_1_0,  EIGEN_1_1_0 ));
+	m_normals.push_back(QVector2D(  EIGEN_1_1_0, -EIGEN_1_1_0 ));
+	m_vertices.push_back(QVector2D());
+	m_vertices.push_back(QVector2D());
+	m_vertices.push_back(QVector2D());
+	m_vertices.push_back(QVector2D());
 }
-/*
-void Quad::draw(bool skipColor)
-{
-    glPushMatrix();
-    glMultMatrixd(m_mat.constData());
-    glBegin(GL_QUADS);
-    glLineWidth(2.0);
-    if(!skipColor)
-        glColor3dv(m_fillColor);
-    for(int i = 0; i < 8; i+=2) {
-        glVertex2dv(m_vertices + i);
-    }
 
-    glEnd();
-    glPopMatrix();
-}
-*/
 void Quad::resize(double x, double y)
 {
 	m_vertices[1].setY( m_vertices[1].y() + y);

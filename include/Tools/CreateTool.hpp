@@ -29,17 +29,17 @@
 
 class CreateTool : public Tool
 {
-   public:
-    void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
-    {
-        Quad* quad = new Quad(event->x(), event->y());
-        quad->resize(100, 200);
-        group->addNewShape( quad );
-    }
+public:
+	void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
+	{
+		Quad* quad = new Quad(event->x(), event->y());
+		quad->resize(100, 200);
+		group->addNewShape( quad );
+	}
 
-    void handleMouseReleaseEvent(QMouseEvent*, GroupManager*){}
+	void handleMouseReleaseEvent(QMouseEvent*, GroupManager*){}
 
-    void handleMouseMoveEvent(QMouseEvent*, GroupManager*){}
+	void handleMouseMoveEvent(QMouseEvent*, GroupManager*){}
 };
 
 #endif // CREATETOOL_HPP

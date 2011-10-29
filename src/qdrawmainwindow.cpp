@@ -25,70 +25,70 @@
 #include "qtcolortriangle.h"
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::QDrawMainWindow)
+	QMainWindow(parent),
+	ui(new Ui::QDrawMainWindow)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 
-    m_debug = new GLDebugBufferWidget(this);
+	m_debug = new GLDebugBufferWidget(this);
 
-    ui->mdiArea->addSubWindow(m_debug);
+	ui->mdiArea->addSubWindow(m_debug);
 
 }
 
 QDrawMainWindow::~QDrawMainWindow()
 {
-    QList<QMdiSubWindow*> wins = ui->mdiArea->subWindowList();
-    QList<QMdiSubWindow*>::iterator it = wins.begin();
-    while(it != wins.end())
-    {
-        delete *it;
-        it++;
-    }
-    delete ui;
+	QList<QMdiSubWindow*> wins = ui->mdiArea->subWindowList();
+	QList<QMdiSubWindow*>::iterator it = wins.begin();
+	while(it != wins.end())
+	{
+		delete *it;
+		it++;
+	}
+	delete ui;
 }
 
 void QDrawMainWindow::redrawSelectBuffer()
 {
-    GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
-    activeCanvas->redrawSelectionBufer();
+	GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+	activeCanvas->redrawSelectionBufer();
 }
 
 void QDrawMainWindow::on_actionSelect_triggered()
 {
-    emit changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
+	emit changeTool(ToolFactory::getSingletonPtr()->getSelectTool());
 }
 
 void QDrawMainWindow::on_actionCreate_triggered()
 {
-    emit changeTool(ToolFactory::getSingletonPtr()->getCreateQuadTool());
+	emit changeTool(ToolFactory::getSingletonPtr()->getCreateQuadTool());
 }
 
 void QDrawMainWindow::on_actionMove_triggered()
 {
-    emit changeTool(ToolFactory::getSingletonPtr()->getTranslateTool());
+	emit changeTool(ToolFactory::getSingletonPtr()->getTranslateTool());
 }
 
 void QDrawMainWindow::on_actionNew_triggered()
 {
-    GLCanvas* canvas = new GLCanvas(this);
-    connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
-    connect(canvas, SIGNAL(sendFrameBuffer(QImage)), m_debug, SLOT(drawBuffer(QImage)));
+	GLCanvas* canvas = new GLCanvas(this);
+	connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
+	connect(canvas, SIGNAL(sendFrameBuffer(QImage)), m_debug, SLOT(drawBuffer(QImage)));
 
-    // Color <-> Shape connection
-    connect(ui->colorTriangle, SIGNAL(colorChanged(QColor)), canvas, SLOT(setCurrentGroupColor(QColor)));
-    connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
+	// Color <-> Shape connection
+	connect(ui->colorTriangle, SIGNAL(colorChanged(QColor)), canvas, SLOT(setCurrentGroupColor(QColor)));
+	connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
 
-    ui->mdiArea->addSubWindow(canvas);
+	ui->mdiArea->addSubWindow(canvas);
 
-    canvas->setWindowTitle("New Drawing*");
-    canvas->show();
+	canvas->setWindowTitle("New Drawing*");
+	canvas->show();
 }
 
 
 void QDrawMainWindow::on_actionDraw_Ellipse_triggered()
 {
-    emit(changeTool(ToolFactory::getSingletonPtr()->getCreateEllipseTool()));
+	emit(changeTool(ToolFactory::getSingletonPtr()->getCreateEllipseTool()));
 }
 
 void QDrawMainWindow::on_actionDraw_Triangle_triggered()

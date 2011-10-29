@@ -66,8 +66,8 @@ protected:
 	float m_contourWidth;
 
 	/*
-	   use only when neccessary, ie the number vertices has changed
-	*/
+    use only when neccessary, ie the number vertices has changed
+ */
 	void recalculateNormals();
 };
 

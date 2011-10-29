@@ -36,7 +36,7 @@ public:
 		m_diff.x = event->x();
 		m_diff.y = event->y();
 	}
-	void handleMouseReleaseEvent(QMouseEvent *event, GroupManager *group)
+	void handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
 	{
 		m_diff.x = 0;
 		m_diff.y = 0;

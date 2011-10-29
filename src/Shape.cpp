@@ -24,9 +24,9 @@
 
 void Shape::translate( double x, double y )
 {
-    double* m = m_mat.data();
-    m[12] += x;
-    m[13] += y;
+	double* m = m_mat.data();
+	m[12] += x;
+	m[13] += y;
 }
 
 void Shape::rotate( double /* angle */ )
@@ -36,50 +36,50 @@ void Shape::rotate( double /* angle */ )
 
 void Shape::setFillColor(double r, double g, double b)
 {
-    m_fillColor[0] = r;
-    m_fillColor[1] = g;
-    m_fillColor[2] = b;
+	m_fillColor[0] = r;
+	m_fillColor[1] = g;
+	m_fillColor[2] = b;
 }
 
 
 void Shape::setContourColor(double r, double g, double b)
 {
-    m_contourColor[0] = r;
-    m_contourColor[1] = g;
-    m_contourColor[2] = b;
+	m_contourColor[0] = r;
+	m_contourColor[1] = g;
+	m_contourColor[2] = b;
 }
 
 void Shape::setFillColor(const QColor& color)
 {
-    m_fillColor[0] = color.redF();
-    m_fillColor[1] = color.greenF();
-    m_fillColor[2] = color.blueF();
+	m_fillColor[0] = color.redF();
+	m_fillColor[1] = color.greenF();
+	m_fillColor[2] = color.blueF();
 }
 
 void Shape::setContourColor(const QColor& color)
 {
-    m_contourColor[0] = color.redF();
-    m_contourColor[1] = color.greenF();
-    m_contourColor[2] = color.blueF();
+	m_contourColor[0] = color.redF();
+	m_contourColor[1] = color.greenF();
+	m_contourColor[2] = color.blueF();
 }
 
 QColor Shape::getFillColor()
 {
-    QColor c(
-		m_fillColor[0]*255,
-		m_fillColor[1]*255,
-		m_fillColor[2]*255
-		);
-    return c;
+	QColor c(
+				m_fillColor[0]*255,
+				m_fillColor[1]*255,
+				m_fillColor[2]*255
+				);
+	return c;
 }
 QColor Shape::getContourColor()
 {
-    QColor c(
-		m_contourColor[0]*255,
-		m_contourColor[1]*255,
-		m_contourColor[2]*255
-		);
-    return c;
+	QColor c(
+				m_contourColor[0]*255,
+				m_contourColor[1]*255,
+				m_contourColor[2]*255
+				);
+	return c;
 }
 
 // private
@@ -105,51 +105,51 @@ void Shape::recalculateNormals()
 
 void Shape::draw(bool skipColor)
 {
-    glPushMatrix();
-    glMultMatrixd(m_mat.constData());
+	glPushMatrix();
+	glMultMatrixd(m_mat.constData());
 
-    //calculateNormals();
-    if(!skipColor)
-	    glColor3dv(m_fillColor);
+	//calculateNormals();
+	if(!skipColor)
+		glColor3dv(m_fillColor);
 
-    QList<QVector2D>::iterator it = m_vertices.begin();
+	QList<QVector2D>::iterator it = m_vertices.begin();
 
-    if(m_bDrawFill) {
-	    glBegin(GL_POLYGON);
-	    while(it != m_vertices.end())
-	    {
-		    glVertex2d(it->x(), it->y());
-		    it++;
-	    }
-	    glEnd();
-    }
-    if(m_bDrawCountour) {
-	    if(!skipColor)
-		    glColor3dv(m_contourColor);
-	    it = m_vertices.begin();
-	    glBegin(GL_QUADS);
-	    int i = 0;
-	    while(it != m_vertices.end()-1)
-	    {
-		    QVector2D tmp(*it - m_normals[i]*m_contourWidth );
-		    glVertex2d(tmp.x(), tmp.y());
-		    glVertex2d((it)->x(), (it)->y());
-		    glVertex2d((it+1)->x(), (it+1)->y());
-		    tmp =*(it+1) - m_normals[i+1]*m_contourWidth;
-		    glVertex2d(tmp.x(), tmp.y());
-		    it++;
-		    i++;
-	    }
-	    // close with the first
-	    QVector2D tmp(*it - m_normals[i]*m_contourWidth );
-	    glVertex2d(tmp.x(), tmp.y());
-	    glVertex2d((it)->x(), (it)->y());
-	    glVertex2d(m_vertices[0].x(), m_vertices[0].y());
-	    tmp = m_vertices[0] - m_normals[0]*m_contourWidth;
-	    glVertex2d(tmp.x(), tmp.y());
+	if(m_bDrawFill) {
+		glBegin(GL_POLYGON);
+		while(it != m_vertices.end())
+		{
+			glVertex2d(it->x(), it->y());
+			it++;
+		}
+		glEnd();
+	}
+	if(m_bDrawCountour) {
+		if(!skipColor)
+			glColor3dv(m_contourColor);
+		it = m_vertices.begin();
+		glBegin(GL_QUADS);
+		int i = 0;
+		while(it != m_vertices.end()-1)
+		{
+			QVector2D tmp(*it - m_normals[i]*m_contourWidth );
+			glVertex2d(tmp.x(), tmp.y());
+			glVertex2d((it)->x(), (it)->y());
+			glVertex2d((it+1)->x(), (it+1)->y());
+			tmp =*(it+1) - m_normals[i+1]*m_contourWidth;
+			glVertex2d(tmp.x(), tmp.y());
+			it++;
+			i++;
+		}
+		// close with the first
+		QVector2D tmp(*it - m_normals[i]*m_contourWidth );
+		glVertex2d(tmp.x(), tmp.y());
+		glVertex2d((it)->x(), (it)->y());
+		glVertex2d(m_vertices[0].x(), m_vertices[0].y());
+		tmp = m_vertices[0] - m_normals[0]*m_contourWidth;
+		glVertex2d(tmp.x(), tmp.y());
 
-	    glEnd();
-    }
+		glEnd();
+	}
 
-    glPopMatrix();
+	glPopMatrix();
 }

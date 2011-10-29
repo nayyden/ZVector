@@ -31,62 +31,62 @@
 class Group: public Shape
 {
 public:
-    virtual ~Group()
-    {
-        deleteShapes();
-    }
+	virtual ~Group()
+	{
+		deleteShapes();
+	}
 
-    void addShape( Shape* shape);
+	void addShape( Shape* shape);
 
-    virtual void resize( double x, double y )
-    {
-        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-        while( sit != m_shapes.end())
-        {
-            (*sit)->resize(x, y);
-            sit++;
-        }
+	virtual void resize( double x, double y )
+	{
+		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+		while( sit != m_shapes.end())
+		{
+			(*sit)->resize(x, y);
+			sit++;
+		}
 
-    }
+	}
 
-    inline void draw(bool skipColor = false)
-    {
-        glPushMatrix();
-        glMultMatrixd(m_mat.constData());
-        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-        while( sit != m_shapes.end())
-        {
-            (*sit)->draw(skipColor);
-            sit++;
-        }
-        glPopMatrix();
-    }
+	inline void draw(bool skipColor = false)
+	{
+		glPushMatrix();
+		glMultMatrixd(m_mat.constData());
+		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+		while( sit != m_shapes.end())
+		{
+			(*sit)->draw(skipColor);
+			sit++;
+		}
+		glPopMatrix();
+	}
 
-    virtual void setFillColor(const QColor& color)
-    {
-        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-        while( sit != m_shapes.end())
-        {
-	    (*sit)->setFillColor(color);
-            sit++;
-        }
-    }
+	virtual void setFillColor(const QColor& color)
+	{
+		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+		while( sit != m_shapes.end())
+		{
+			(*sit)->setFillColor(color);
+			sit++;
+		}
+	}
 
-    QColor getFillColor()
-    {
-        if(!m_shapes.empty())
-            return m_shapes.front()->getFillColor();
-        else
-        {
-            QColor c(0,0,0);
-            return c;
-        }
-    }
+	QColor getFillColor()
+	{
+		if(!m_shapes.empty())
+			return m_shapes.front()->getFillColor();
+		else
+		{
+			QColor c(0,0,0);
+			return c;
+		}
+	}
 
 private:
-    QLinkedList<Shape*> m_shapes;
+	QLinkedList<Shape*> m_shapes;
 
-    void deleteShapes();
+	void deleteShapes();
 
 };
 

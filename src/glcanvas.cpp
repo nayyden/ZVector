@@ -29,37 +29,37 @@ using namespace std;
 
 GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 {
-    m_toolFactory = ToolFactory::getSingletonPtr();
-    m_currentTool = m_toolFactory->getSelectTool();
-    m_groupManager = new GroupManager();
+	m_toolFactory = ToolFactory::getSingletonPtr();
+	m_currentTool = m_toolFactory->getSelectTool();
+	m_groupManager = new GroupManager();
 }
 
 void GLCanvas::initializeGL()
 {
-    glClearColor(1.f, 1.f, 1.f, 1.f);
+	glClearColor(1.f, 1.f, 1.f, 1.f);
 }
 
 void GLCanvas::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    m_groupManager->draw();
+	glClear(GL_COLOR_BUFFER_BIT);
+	m_groupManager->draw();
 }
 
 void GLCanvas::redrawSelectionBufer()
 {
-    glDrawBuffer( GL_AUX0 );
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDrawBuffer( GL_BACK );
+	glDrawBuffer( GL_AUX0 );
+	glClear(GL_COLOR_BUFFER_BIT);
+	glDrawBuffer( GL_BACK );
 }
 
 void GLCanvas::resizeGL(int w, int h)
 {
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0, w, h, 0, -1, 1); // Match qt coord origin
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, w, h, 0, -1, 1); // Match qt coord origin
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
 }
 
@@ -69,29 +69,29 @@ void GLCanvas::keyPressEvent(QKeyEvent*)
 
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
+	m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
 }
 
 void GLCanvas::mouseMoveEvent(QMouseEvent *event)
 {
-    m_currentTool->handleMouseMoveEvent( event, m_groupManager );
-    paintGL();
-    updateGL();
+	m_currentTool->handleMouseMoveEvent( event, m_groupManager );
+	paintGL();
+	updateGL();
 }
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)
 {
-    setAutoBufferSwap(false);
+	setAutoBufferSwap(false);
 
-    m_currentTool->handleMousePressEvent( event, m_groupManager );
+	m_currentTool->handleMousePressEvent( event, m_groupManager );
 
-//    glReadBuffer( GL_BACK );
-//    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
-//    emit sendFrameBuffer(fetchedBuffer);
+	//    glReadBuffer( GL_BACK );
+	//    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
+	//    emit sendFrameBuffer(fetchedBuffer);
 
-    setAutoBufferSwap(true);
-    paintGL();
-    updateGL();
+	setAutoBufferSwap(true);
+	paintGL();
+	updateGL();
 }
 
 

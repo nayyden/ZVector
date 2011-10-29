@@ -30,10 +30,9 @@
 class Quad : public Shape
 {
 public:
-    Quad( double origin_x, double origin_y );
+	Quad( double origin_x, double origin_y );
 
-    //void draw(bool skipColor = false);
-    void resize(double x, double y);
+	void resize(double x, double y);
 
 private:
 

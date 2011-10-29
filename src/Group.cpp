@@ -24,15 +24,15 @@
 
 void Group::deleteShapes()
 {
-    while( !m_shapes.empty() )
-    {
-        delete m_shapes.back();
-        m_shapes.pop_back();
-    }
+	while( !m_shapes.empty() )
+	{
+		delete m_shapes.back();
+		m_shapes.pop_back();
+	}
 }
 
 void Group::addShape(Shape * shape)
 {
-    m_shapes.push_back(shape);
+	m_shapes.push_back(shape);
 }
 

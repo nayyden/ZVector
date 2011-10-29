@@ -30,29 +30,28 @@
 
 class TranslateTool: public SelectTool
 {
-
 public:
-    void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
-    {
-        SelectTool::handleMousePressEvent(event, group);
-        m_diff.x = event->x();
-        m_diff.y = event->y();
-    }
+	void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
+	{
+		SelectTool::handleMousePressEvent(event, group);
+		m_diff.x = event->x();
+		m_diff.y = event->y();
+	}
 
-    void handleMouseReleaseEvent(QMouseEvent*, GroupManager*)
-    {
-        m_diff.x = 0;
-        m_diff.y = 0;
-    }
+	void handleMouseReleaseEvent(QMouseEvent*, GroupManager*)
+	{
+		m_diff.x = 0;
+		m_diff.y = 0;
+	}
 
-    void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
-    {
-        double dx = event->x() - m_diff.x;
-        double dy = event->y() - m_diff.y;
-        group->getCurrentShape()->translate( dx, dy );
-        m_diff.x = event->x();
-        m_diff.y = event->y();
-    }
+	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+	{
+		double dx = event->x() - m_diff.x;
+		double dy = event->y() - m_diff.y;
+		group->getCurrentShape()->translate( dx, dy );
+		m_diff.x = event->x();
+		m_diff.y = event->y();
+	}
 };
 
 #endif // TRANSLATETOOL_HPP

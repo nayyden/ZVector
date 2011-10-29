@@ -4,23 +4,23 @@
 
 AutoShape::AutoShape(double origin_x, double origin_y, int vertices)
 {
-    double* m = m_mat.data();
-    m[12] = origin_x;
-    m[13] = origin_y;
-    m_majorRadius = 0;
-    m_minorRadius = 0;
-    m_numberOfVertices = vertices;
-    m_vertices.reserve(m_numberOfVertices);
-    addVertices();
-    recalculateNormals();
+	double* m = m_mat.data();
+	m[12] = origin_x;
+	m[13] = origin_y;
+	m_majorRadius = 0;
+	m_minorRadius = 0;
+	m_numberOfVertices = vertices;
+	m_vertices.reserve(m_numberOfVertices);
+	addVertices();
+	recalculateNormals();
 }
 
 void AutoShape::resize(double x, double y)
 {
-    m_minorRadius += y;
-    m_majorRadius += x;
-    recalculateVertices();
-    recalculateNormals();
+	m_minorRadius += y;
+	m_majorRadius += x;
+	recalculateVertices();
+	recalculateNormals();
 }
 
 void AutoShape::changeDetailsCount()

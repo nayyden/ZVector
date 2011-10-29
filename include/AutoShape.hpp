@@ -6,20 +6,20 @@
 class AutoShape : public Shape
 {
 public:
-    AutoShape(double origin_x, double origin_y, int vertices = 360);
+	AutoShape(double origin_x, double origin_y, int vertices = 360);
 
 protected:
-    void resize(double x, double y);
+	void resize(double x, double y);
 
 private:
-    static const float DEG2RAD = 3.14159/180;
-    int m_majorRadius;
-    int m_minorRadius;
-    int m_numberOfVertices;
+	static const float DEG2RAD = 3.14159/180;
+	int m_majorRadius;
+	int m_minorRadius;
+	int m_numberOfVertices;
 
-    void addVertices();
-    void recalculateVertices();
-    void changeDetailsCount();
+	void addVertices();
+	void recalculateVertices();
+	void changeDetailsCount();
 };
 
 

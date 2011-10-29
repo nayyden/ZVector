@@ -27,9 +27,9 @@ ToolFactory* ToolFactory::m_pInstance = 0;
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QDrawMainWindow w;
-    w.show();
+	QApplication a(argc, argv);
+	QDrawMainWindow w;
+	w.show();
 
-    return a.exec();
+	return a.exec();
 }
