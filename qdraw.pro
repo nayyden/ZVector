@@ -28,30 +28,48 @@ SOURCES += \
     src/GroupManager.cpp \
     src/qtcolortriangle.cpp\
     src/AutoShape.cpp \
-    src/Shape.cpp
+    src/Shape.cpp \
+    src/Tools/SelectTool.cpp \
+    src/Tools/TranslateTool.cpp \
+    src/Tools/ToolFactory.cpp \
+    src/Tools/ResizeTool.cpp \
+	src/Tools/CreateEllipseTool.cpp \
+	src/Tools/CreateQuadTool.cpp \
+    src/Tools/CreateTriangleTool.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
     include/glcanvas.h \
     include/Shape.hpp \
-    include/Quad.hpp \
-    include/Tools/SelectTool.hpp \
-    include/Tools/ResizeTool.hpp \
-    include/Tools/Tool.hpp \
-    include/Tools/ToolFactory.hpp \
-    include/GLDebugBufferWidget.h \
-    include/Group.hpp \
-    include/Tools/CreateTool.hpp \
-    include/GroupManager.hpp \
-    include/Tools/CreateQuadTool.hpp \
-    include/Tools/TranslateTool.hpp \
-    include/qtcolortriangle.h\
-    include/AutoShape.hpp \
+	include/AutoShape.hpp \
+	include/Group.hpp \
+	include/GroupManager.hpp \
+	include/Quad.hpp \
+	include/GLDebugBufferWidget.h \
+	include/qtcolortriangle.h\
+	include/Tools/ToolFactory.hpp \
+	include/Tools/Tool.hpp \
+	include/Tools/SelectTool.hpp \
+	include/Tools/TranslateTool.hpp \
+	include/Tools/ResizeTool.hpp \
+	include/Tools/CreateQuadTool.hpp \
     include/Tools/CreateEllipseTool.hpp \
-    include/Tools/CreateTriangleTool.hpp
+	include/Tools/CreateTriangleTool.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
+
+
+
+
+
+
+
+
+
+
+
+
 
 

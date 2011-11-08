@@ -20,18 +20,29 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef CREATEQUADTOOL_HPP
-#define CREATEQUADTOOL_HPP
+#include "../../include/Tools/SelectTool.hpp"
 
-#include "Tool.hpp"
-#include "Quad.hpp"
-
-class CreateQuadTool : public Tool
+void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-public:
-	void handleMousePressEvent(QMouseEvent *event, GroupManager *group);
-	void handleMouseReleaseEvent(QMouseEvent *, GroupManager *);
-	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group);
-};
+	group->drawToSelectionBuffer();
 
-#endif // CREATEQUADTOOL_HPP
+	glReadBuffer( GL_BACK);
+	GLint viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	unsigned char pixels[4];
+	glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
+
+	int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
+	std::cout << index << '\n';
+
+	group->setCurrentShape(index);
+	emit refreshColorPane(group->getCurrentShape()->getFillColor());
+}
+
+void SelectTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
+{
+}
+
+void SelectTool::handleMouseMoveEvent(QMouseEvent *, GroupManager *)
+{
+}

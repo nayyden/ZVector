@@ -20,18 +20,33 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef CREATEQUADTOOL_HPP
-#define CREATEQUADTOOL_HPP
+#include "../../include/Tools/CreateTriangleTool.hpp"
 
-#include "Tool.hpp"
-#include "Quad.hpp"
-
-class CreateQuadTool : public Tool
+void CreateTriangleTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-public:
-	void handleMousePressEvent(QMouseEvent *event, GroupManager *group);
-	void handleMouseReleaseEvent(QMouseEvent *, GroupManager *);
-	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group);
-};
+	AutoShape* triangle = new AutoShape(event->x(), event->y(), 3);
+	group->addNewShape(triangle);
+	m_diff.x = event->x();
+	m_diff.y = event->y();
 
-#endif // CREATEQUADTOOL_HPP
+}
+
+void CreateTriangleTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
+{
+	m_diff.x = 0;
+	m_diff.y = 0;
+}
+
+void CreateTriangleTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+{
+	double dx;
+	double dy;
+
+	dx = event->x() - m_diff.x;
+	dy = event->y() - m_diff.y;
+
+
+	group->getCurrentShape()->resize( dx, dy );
+	m_diff.x = event->x();
+	m_diff.y = event->y();
+}

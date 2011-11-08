@@ -20,18 +20,25 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef CREATEQUADTOOL_HPP
-#define CREATEQUADTOOL_HPP
+#include "../../include/Tools/CreateQuadTool.hpp"
 
-#include "Tool.hpp"
-#include "Quad.hpp"
-
-class CreateQuadTool : public Tool
+void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-public:
-	void handleMousePressEvent(QMouseEvent *event, GroupManager *group);
-	void handleMouseReleaseEvent(QMouseEvent *, GroupManager *);
-	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group);
-};
-
-#endif // CREATEQUADTOOL_HPP
+	Quad* quad = new Quad(event->x(), event->y());
+	group->addNewShape( quad );
+	m_diff.x = event->x();
+	m_diff.y = event->y();
+}
+void CreateQuadTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
+{
+	m_diff.x = 0;
+	m_diff.y = 0;
+}
+void CreateQuadTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+{
+	double dx = event->x() - m_diff.x;
+	double dy = event->y() - m_diff.y;
+	group->getCurrentShape()->resize( dx, dy );
+	m_diff.x = event->x();
+	m_diff.y = event->y();
+}

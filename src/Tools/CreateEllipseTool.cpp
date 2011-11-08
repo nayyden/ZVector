@@ -20,26 +20,30 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef CREATETOOL_HPP
-#define CREATETOOL_HPP
+#include "../../include/Tools/CreateEllipseTool.hpp"
 
-#include "Tool.hpp"
-#include "Quad.hpp"
-#include "AutoShape.hpp"
-
-class CreateTool : public Tool
+void CreateEllipseTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-public:
-	void handleMousePressEvent(QMouseEvent *event, GroupManager *group)
-	{
-		Quad* quad = new Quad(event->x(), event->y());
-		quad->resize(100, 200);
-		group->addNewShape( quad );
-	}
+	AutoShape *autoShape = new AutoShape(event->x(), event->y());
+	group->addNewShape(autoShape);
+	m_diff.x = event->x();
+	m_diff.y = event->y();
 
-	void handleMouseReleaseEvent(QMouseEvent*, GroupManager*){}
+}
 
-	void handleMouseMoveEvent(QMouseEvent*, GroupManager*){}
-};
+void CreateEllipseTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
+{
+	m_diff.x = 0.0;
+	m_diff.y = 0.0;
+}
 
-#endif // CREATETOOL_HPP
+void CreateEllipseTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
+{
+	double dx;
+	double dy;
+	dx = event->x() - m_diff.x;
+	dy = event->y() - m_diff.y;
+	group->getCurrentShape()->resize( dx, dy );
+	m_diff.x = event->x();
+	m_diff.y = event->y();
+}

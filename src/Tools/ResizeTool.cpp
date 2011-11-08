@@ -20,18 +20,17 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#ifndef CREATEQUADTOOL_HPP
-#define CREATEQUADTOOL_HPP
+#include "../../include/Tools/ResizeTool.hpp"
 
-#include "Tool.hpp"
-#include "Quad.hpp"
-
-class CreateQuadTool : public Tool
+void ResizeTool::handleMousePressEvent(QMouseEvent*, GroupManager*)
 {
-public:
-	void handleMousePressEvent(QMouseEvent *event, GroupManager *group);
-	void handleMouseReleaseEvent(QMouseEvent *, GroupManager *);
-	void handleMouseMoveEvent(QMouseEvent *event, GroupManager *group);
-};
 
-#endif // CREATEQUADTOOL_HPP
+}
+
+void ResizeTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
+{
+}
+
+void ResizeTool::handleMouseMoveEvent(QMouseEvent *, GroupManager *)
+{
+}
