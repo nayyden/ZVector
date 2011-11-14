@@ -21,6 +21,7 @@
  */
 
 #include "include/Shape.hpp"
+#include <math.h>
 
 void Shape::translate( double x, double y )
 {
@@ -29,9 +30,21 @@ void Shape::translate( double x, double y )
 	m[13] += y;
 }
 
-void Shape::rotate( double /* angle */ )
+void Shape::rotate(double  angle)
 {
+        m_rotationAngle = angle;
+        double radians = angle * DEG2RAD;
+        double* m = m_mat.data();
 
+        m[0] = cos(radians);
+        m[1] = -sin(radians);
+        m[4] = sin(radians);
+        m[5] = cos(radians);
+}
+
+double Shape::getRotationAngle()
+{
+        return m_rotationAngle;
 }
 
 void Shape::setFillColor(double r, double g, double b)

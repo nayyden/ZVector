@@ -37,6 +37,7 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 
 	group->setCurrentShape(index);
 	emit refreshColorPane(group->getCurrentShape()->getFillColor());
+        emit currentShapeRotation(group->getCurrentShape()->getRotationAngle());
 }
 
 void SelectTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)

@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>953</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -119,10 +119,45 @@
          <height>300</height>
         </size>
        </property>
+       <zorder>widget_2</zorder>
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="widget_2" native="true"/>
+      <widget class="QWidget" name="widget_2" native="true">
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>151</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="rotateLabel">
+           <property name="text">
+            <string>Rotate by:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="angleLabel">
+             <property name="text">
+              <string>Angle:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="angleSpinbox"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
      </item>
     </layout>
    </widget>

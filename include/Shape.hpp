@@ -34,10 +34,11 @@
 class Shape
 {
 public:
-	Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(60.f)
+        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(3.f)
 	{
 		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
 		m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;
+                m_rotationAngle = 0;
 	}
 
 	virtual void draw( bool skipColor = false );
@@ -52,6 +53,7 @@ public:
 	virtual void setContourColor(double r, double g, double b);
 	virtual void setContourColor(const QColor& color);
 	virtual QColor getContourColor();
+        virtual double getRotationAngle();
 
 protected:
 	QList<QVector2D> m_vertices;
@@ -60,10 +62,12 @@ protected:
 
 	double m_fillColor[3];
 	double m_contourColor[3];
+        double m_rotationAngle;
 
 	bool m_bDrawCountour;
 	bool m_bDrawFill;
 	float m_contourWidth;
+        static const float DEG2RAD = 3.14159/180;
 
 	/*
     use only when neccessary, ie the number vertices has changed
