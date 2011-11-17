@@ -1,4 +1,4 @@
-#include "include/GLDebugBufferWidget.h"
+#include "GLDebugBufferWidget.h"
 
 GLDebugBufferWidget::GLDebugBufferWidget(QWidget *parent)
 	:QGLWidget(parent)

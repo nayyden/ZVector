@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/Shape.hpp"
+#include "Shape.hpp"
 
 void Shape::translate( double x, double y )
 {

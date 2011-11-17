@@ -25,7 +25,7 @@
 
 #include <GL/gl.h>
 #include "Shape.hpp"
-
+#include "Group.hpp"
 
 class GroupManager
 {
@@ -33,7 +33,7 @@ public:
 	GroupManager();
 	virtual ~GroupManager()
 	{
-		QList<Shape*>::iterator it = m_shapes.begin();
+                QList<Shape*>::iterator it = m_shapes.begin();
 		while( it != m_shapes.end())
 		{
 			if(*it)
@@ -55,6 +55,36 @@ public:
 		return m_shapes[m_currentShape];
 	}
 
+        Shape* getShape(unsigned int index)
+        {
+               Shape* shape;
+               QList<Shape*>::iterator it = m_shapes.begin();
+               int position = 0;
+               while(it != m_shapes.end()) {
+                       if(position == index) {
+                               shape = m_shapes[position];
+                               m_shapes.erase(it);
+                               return shape;
+                       }
+                       ++it;
+                       ++position;
+               }
+        }
+
+
+        void addShapeToGroup(int index)
+        {
+                if(!currentGroup) {
+                        currentGroup = new Group();
+                        m_shapes.push_back(currentGroup);
+                }
+
+                Shape *shape = getShape(index);
+                currentGroup->addShape(shape);
+
+
+        }
+
 
 	void addNewShape( Shape* shape )
 	{
@@ -64,7 +94,7 @@ public:
 
 	inline void draw()
 	{
-		QList<Shape*>::iterator it = m_shapes.begin();
+                QList<Shape*>::iterator it = m_shapes.begin();
 		while( it != m_shapes.end())
 		{
 			(*it)->draw();
@@ -88,7 +118,8 @@ public:
 	}
 
 private:
-	QList<Shape*> m_shapes;
+        QList<Shape*> m_shapes;
+        Group *currentGroup;
 	int m_currentShape;
 };
 

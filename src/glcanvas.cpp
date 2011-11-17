@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/glcanvas.h"
+#include "glcanvas.h"
 #include <iostream>
 #include "Quad.hpp"
 #include <GL/glext.h>

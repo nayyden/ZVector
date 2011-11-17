@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/Quad.hpp"
+#include "Quad.hpp"
 #include <GL/gl.h>
 
 Quad::Quad( double origin_x, double origin_y )

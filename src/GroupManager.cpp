@@ -20,11 +20,12 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/GroupManager.hpp"
+#include "GroupManager.hpp"
 #include "Group.hpp"
 
 GroupManager::GroupManager()
 {
 	m_shapes.append(new Group());
 	m_currentShape = 0;
+        currentGroup = NULL;
 }

@@ -21,7 +21,7 @@
  */
 
 #include <QtGui/QApplication>
-#include "include/qdrawmainwindow.h"
+#include "qdrawmainwindow.h"
 
 ToolFactory* ToolFactory::m_pInstance = 0;
 

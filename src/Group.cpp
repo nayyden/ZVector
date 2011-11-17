@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "include/Group.hpp"
+#include "Group.hpp"
 
 void Group::deleteShapes()
 {

@@ -1,4 +1,4 @@
-#include "include/AutoShape.hpp"
+#include "AutoShape.hpp"
 #include <GL/gl.h>
 #include <math.h>
 

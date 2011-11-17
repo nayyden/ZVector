@@ -21,22 +21,39 @@
  */
 
 #include "../../include/Tools/SelectTool.hpp"
-
+#include <iostream>
+#include "Group.hpp"
 void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-	group->drawToSelectionBuffer();
+        if(event->modifiers() == Qt::ControlModifier) {
 
-	glReadBuffer( GL_BACK);
-	GLint viewport[4];
-	glGetIntegerv(GL_VIEWPORT, viewport);
-	unsigned char pixels[4];
-	glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
+                group->drawToSelectionBuffer();
 
-	int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
-	std::cout << index << '\n';
+                glReadBuffer( GL_BACK);
+                GLint viewport[4];
+                glGetIntegerv(GL_VIEWPORT, viewport);
+                unsigned char pixels[4];
+                glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
 
-	group->setCurrentShape(index);
-	emit refreshColorPane(group->getCurrentShape()->getFillColor());
+                int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
+
+                group->addShapeToGroup(index);
+                std::cout << "Added to group" << '\n';
+        } else {
+                group->drawToSelectionBuffer();
+
+                glReadBuffer(GL_BACK);
+                GLint viewport[4];
+                glGetIntegerv(GL_VIEWPORT, viewport);
+                unsigned char pixels[4];
+                glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
+
+                int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
+                std::cout << index << '\n';
+
+                group->setCurrentShape(index);
+                emit refreshColorPane(group->getCurrentShape()->getFillColor());
+        }
 }
 
 void SelectTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)

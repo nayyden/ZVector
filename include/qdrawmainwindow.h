@@ -27,7 +27,7 @@
 #include <QMdiSubWindow>
 
 #include "glcanvas.h"
-#include "include/GLDebugBufferWidget.h"
+#include "GLDebugBufferWidget.h"
 
 namespace Ui {
 class QDrawMainWindow;
