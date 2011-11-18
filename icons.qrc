@@ -4,5 +4,6 @@
         <file alias="ellipse">data/icons/ellipse.png</file>
         <file alias="move">data/icons/move.png</file>
         <file alias="rect">data/icons/rect.png</file>
+        <file alias="triangle">data/icons/triangle.png</file>
     </qresource>
 </RCC>

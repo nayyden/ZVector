@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "../../include/Tools/CreateTriangleTool.hpp"
+#include "CreateTriangleTool.hpp"
 
 void CreateTriangleTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {

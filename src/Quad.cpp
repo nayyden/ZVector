@@ -40,9 +40,15 @@ Quad::Quad( double origin_x, double origin_y )
 
 void Quad::resize(double x, double y)
 {
+
 	m_vertices[1].setY( m_vertices[1].y() + y);
 	m_vertices[2].setX( m_vertices[2].x() + x);
 	m_vertices[2].setY( m_vertices[2].y() + y);
-	m_vertices[3].setX( m_vertices[3].x() + x);
+        m_vertices[3].setX( m_vertices[3].x() + x);
+        m_bounds[0] = m_vertices[0].x();
+        m_bounds[1] = m_vertices[0].y();
+        m_bounds[2] = m_vertices[2].x();
+        m_bounds[3] = m_vertices[2].y();
+
 }
 

@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "../../include/Tools/SelectTool.hpp"
+#include "SelectTool.hpp"
 #include <iostream>
 #include "Group.hpp"
 void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
@@ -37,7 +37,7 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 
                 int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
 
-                group->addShapeToGroup(index);
+                group->addToSelection(index);
                 std::cout << "Added to group" << '\n';
         } else {
                 group->drawToSelectionBuffer();
@@ -53,6 +53,7 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 
                 group->setCurrentShape(index);
                 emit refreshColorPane(group->getCurrentShape()->getFillColor());
+                emit currentShapeRotation(group->getCurrentShape()->getRotationAngle());
         }
 }
 

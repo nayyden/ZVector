@@ -46,7 +46,6 @@ public:
 			(*sit)->resize(x, y);
 			sit++;
 		}
-
 	}
 
 	inline void draw(bool skipColor = false)
@@ -82,6 +81,8 @@ public:
 			return c;
 		}
 	}
+
+        double* getBoundingBox();
 
 private:
 	QLinkedList<Shape*> m_shapes;

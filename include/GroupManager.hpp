@@ -24,8 +24,10 @@
 #define GROUPMANAGER_HPP
 
 #include <GL/gl.h>
+
 #include "Shape.hpp"
 #include "Group.hpp"
+#include "SelectionGroup.hpp"
 
 class GroupManager
 {
@@ -46,8 +48,8 @@ public:
 	{
 		if(index > m_shapes.size())
 			m_currentShape = 0;
-		else
-			m_currentShape = index;
+                else
+                        m_currentShape = index;
 	}
 
 	Shape* getCurrentShape()
@@ -55,7 +57,7 @@ public:
 		return m_shapes[m_currentShape];
 	}
 
-        Shape* getShape(unsigned int index)
+        Shape* popShape(unsigned int index)
         {
                Shape* shape;
                QList<Shape*>::iterator it = m_shapes.begin();
@@ -71,20 +73,19 @@ public:
                }
         }
 
-
-        void addShapeToGroup(int index)
+        void addToSelection(int index)
         {
-                if(!currentGroup) {
-                        currentGroup = new Group();
-                        m_shapes.push_back(currentGroup);
+                if(index > m_shapes.size())
+                {
+                        m_currentShape = 0;
+                        m_selectionGroup.clear();
                 }
-
-                Shape *shape = getShape(index);
-                currentGroup->addShape(shape);
-
-
+                else
+                {
+                        m_selectionGroup.addShape(m_shapes[index], index);
+                        m_currentGroup = &m_selectionGroup;
+                }
         }
-
 
 	void addNewShape( Shape* shape )
 	{
@@ -117,10 +118,26 @@ public:
 		}
 	}
 
+        void groupSelected()
+        {
+                m_currentGroup = new Group();
+                m_shapes.push_back(m_currentGroup);
+
+                QMap<int,int>::iterator it = m_selectionGroup.begin();
+                while (it!= m_selectionGroup.end())
+                {
+                        Shape *shape = popShape(it.key());
+                        m_currentGroup->addShape(shape);
+                        it++;
+                }
+                m_selectionGroup.clear();
+        }
+
 private:
         QList<Shape*> m_shapes;
-        Group *currentGroup;
-	int m_currentShape;
+        Group *m_currentGroup;
+        int m_currentShape;
+        SelectionGroup m_selectionGroup;
 };
 
 #endif // GROUPMANAGER_HPP

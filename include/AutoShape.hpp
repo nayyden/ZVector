@@ -12,14 +12,16 @@ protected:
 	void resize(double x, double y);
 
 private:
-	static const float DEG2RAD = 3.14159/180;
+
 	int m_majorRadius;
 	int m_minorRadius;
 	int m_numberOfVertices;
 
+
 	void addVertices();
 	void recalculateVertices();
 	void changeDetailsCount();
+
 };
 
 

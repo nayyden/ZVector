@@ -10,7 +10,8 @@ TEMPLATE = app
 
 DESTDIR = bin
 
-INCLUDEPATH += include
+INCLUDEPATH += include\
+include/Tools
 
 OBJECTS_DIR=../qdraw-objects
 MOC_DIR =../qdraw-objects
@@ -35,7 +36,8 @@ SOURCES += \
     src/Tools/ResizeTool.cpp \
 	src/Tools/CreateEllipseTool.cpp \
 	src/Tools/CreateQuadTool.cpp \
-    src/Tools/CreateTriangleTool.cpp
+    src/Tools/CreateTriangleTool.cpp \
+    src/SelectionGroup.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -54,22 +56,9 @@ HEADERS  += \
 	include/Tools/ResizeTool.hpp \
 	include/Tools/CreateQuadTool.hpp \
     include/Tools/CreateEllipseTool.hpp \
-	include/Tools/CreateTriangleTool.hpp
+	include/Tools/CreateTriangleTool.hpp \
+    include/SelectionGroup.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 
 RESOURCES += icons.qrc
-
-
-
-
-
-
-
-
-
-
-
-
-
-

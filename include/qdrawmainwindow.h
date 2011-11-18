@@ -56,8 +56,7 @@ private slots:
 	void on_actionDraw_Triangle_triggered();
 
 private:
-	Ui::QDrawMainWindow *ui;
-	GLDebugBufferWidget *m_debug;
+        Ui::QDrawMainWindow *ui;
 
 signals:
 	void changeTool (Tool*);

@@ -61,7 +61,8 @@ protected:
 
 public slots:
 	void changeTool( Tool* tool ) { m_currentTool = tool; }
-	void setCurrentGroupColor(QColor color)
+        void rotateShapeByAngle(int angle);
+        void setCurrentGroupColor(QColor color)
 	{
 		m_groupManager->getCurrentShape()->setFillColor(color);
 		updateGL();

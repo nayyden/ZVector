@@ -21,6 +21,7 @@
  */
 
 #include "Group.hpp"
+#include <limits>
 
 void Group::deleteShapes()
 {
@@ -35,4 +36,37 @@ void Group::addShape(Shape * shape)
 {
 	m_shapes.push_back(shape);
 }
+
+double * Group::getBoundingBox()
+{
+        double* bounds = new double[4];
+        bounds[0] = std::numeric_limits<double>::max();
+        bounds[1] = bounds[0];
+        bounds[2] = std::numeric_limits<double>::min();
+        bounds[3] = bounds[2];
+
+        QLinkedList<Shape*>::iterator it = m_shapes.begin();
+        while(it != m_shapes.end()) {
+                double* shapeBounds = (*it)->getBoundingBox();
+
+                if(shapeBounds[0] < bounds[0]) {
+                        bounds[0] = shapeBounds[0];
+                }
+                if(shapeBounds[1] < bounds[1]) {
+                        bounds[1] = shapeBounds[1];
+                }
+
+                if(shapeBounds[2] > bounds[2]) {
+                        bounds[2] = shapeBounds[2];
+                }
+                if(shapeBounds[3] > bounds[3]) {
+                        bounds[3] = shapeBounds[3];
+                }
+                ++it;
+                delete[] shapeBounds;
+        }
+
+        return bounds;
+}
+
 

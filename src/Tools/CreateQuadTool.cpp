@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "../../include/Tools/CreateQuadTool.hpp"
+#include "CreateQuadTool.hpp"
 
 void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {

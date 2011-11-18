@@ -30,9 +30,7 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	m_debug = new GLDebugBufferWidget(this);
-
-	ui->mdiArea->addSubWindow(m_debug);
+        ui->angleSpinbox->setRange(0, 360);
 
 }
 
@@ -72,13 +70,15 @@ void QDrawMainWindow::on_actionMove_triggered()
 void QDrawMainWindow::on_actionNew_triggered()
 {
 	GLCanvas* canvas = new GLCanvas(this);
-	connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
-	connect(canvas, SIGNAL(sendFrameBuffer(QImage)), m_debug, SLOT(drawBuffer(QImage)));
+        connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
+        connect(ui->angleSpinbox, SIGNAL(valueChanged(int)), canvas, SLOT(rotateShapeByAngle(int)));
 
 	// Color <-> Shape connection
 	connect(ui->colorTriangle, SIGNAL(colorChanged(QColor)), canvas, SLOT(setCurrentGroupColor(QColor)));
-	connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
 
+        connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
+        connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
+        connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
 	ui->mdiArea->addSubWindow(canvas);
 
 	canvas->setWindowTitle("New Drawing*");

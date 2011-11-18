@@ -21,6 +21,7 @@
  */
 
 #include "Shape.hpp"
+#include <math.h>
 
 void Shape::translate( double x, double y )
 {
@@ -29,9 +30,21 @@ void Shape::translate( double x, double y )
 	m[13] += y;
 }
 
-void Shape::rotate( double /* angle */ )
+void Shape::rotate(double  angle)
 {
+        m_rotationAngle = angle;
+        double radians = angle * DEG2RAD;
+        double* m = m_mat.data();
 
+        m[0] = cos(radians);
+        m[1] = -sin(radians);
+        m[4] = sin(radians);
+        m[5] = cos(radians);
+}
+
+double Shape::getRotationAngle()
+{
+        return m_rotationAngle;
 }
 
 void Shape::setFillColor(double r, double g, double b)
@@ -152,4 +165,16 @@ void Shape::draw(bool skipColor)
 	}
 
 	glPopMatrix();
+}
+
+double * Shape::getBoundingBox()
+{
+        double* m = m_mat.data();
+        double* globalBounds = new double[4];
+        globalBounds[0] = m_bounds[0] + m[12];
+        globalBounds[1] = m_bounds[1] + m[13];
+        globalBounds[2] = m_bounds[2] + m[12];
+        globalBounds[3] = m_bounds[3] + m[13];
+
+        return globalBounds;
 }

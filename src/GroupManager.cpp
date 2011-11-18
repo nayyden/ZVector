@@ -27,5 +27,5 @@ GroupManager::GroupManager()
 {
 	m_shapes.append(new Group());
 	m_currentShape = 0;
-        currentGroup = NULL;
+        m_currentGroup = NULL;
 }

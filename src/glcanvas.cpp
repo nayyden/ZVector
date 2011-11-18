@@ -94,5 +94,13 @@ void GLCanvas::mousePressEvent(QMouseEvent *event)
 	updateGL();
 }
 
+void GLCanvas::rotateShapeByAngle(int angle)
+{
+        m_groupManager->getCurrentShape()->rotate(angle);
+        paintGL();
+        updateGL();
+}
+
+
 
 

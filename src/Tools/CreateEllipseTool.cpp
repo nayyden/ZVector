@@ -20,7 +20,7 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "../../include/Tools/CreateEllipseTool.hpp"
+#include "CreateEllipseTool.hpp"
 
 void CreateEllipseTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
