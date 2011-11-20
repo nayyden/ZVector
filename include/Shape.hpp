@@ -54,7 +54,8 @@ public:
 	virtual void setContourColor(const QColor& color);
 	virtual QColor getContourColor();
         virtual double getRotationAngle();
-        double* getBoundingBox();
+        virtual double* getBoundingBox();
+        virtual void drawBoundingBox(double* b);
 
 protected:
 	QList<QVector2D> m_vertices;

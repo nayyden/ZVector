@@ -26,8 +26,8 @@
 Quad::Quad( double origin_x, double origin_y )
 {
 	double* m = m_mat.data();
-	m[12] = origin_x;
-	m[13] = origin_y;
+        m[12] = origin_x;
+        m[13] = origin_y;
 	m_normals.push_back(QVector2D( -EIGEN_1_1_0, -EIGEN_1_1_0 ));
 	m_normals.push_back(QVector2D( -EIGEN_1_1_0,  EIGEN_1_1_0 ));
 	m_normals.push_back(QVector2D(  EIGEN_1_1_0,  EIGEN_1_1_0 ));

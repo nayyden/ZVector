@@ -85,11 +85,7 @@ void GLCanvas::mousePressEvent(QMouseEvent *event)
 
 	m_currentTool->handleMousePressEvent( event, m_groupManager );
 
-	//    glReadBuffer( GL_BACK );
-	//    QImage fetchedBuffer = QGLWidget::convertToGLFormat(grabFrameBuffer());
-	//    emit sendFrameBuffer(fetchedBuffer);
-
-	setAutoBufferSwap(true);
+        setAutoBufferSwap(true);
 	paintGL();
 	updateGL();
 }
@@ -99,6 +95,11 @@ void GLCanvas::rotateShapeByAngle(int angle)
         m_groupManager->getCurrentShape()->rotate(angle);
         paintGL();
         updateGL();
+}
+
+void GLCanvas::groupSelectedShapes()
+{
+        m_groupManager->groupSelected();
 }
 
 

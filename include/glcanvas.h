@@ -68,6 +68,7 @@ public slots:
 		updateGL();
 		paintGL();
 	}
+        void groupSelectedShapes();
 
 private:
 	QVector2D m_mousePos;

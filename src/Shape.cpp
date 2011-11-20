@@ -178,3 +178,27 @@ double * Shape::getBoundingBox()
 
         return globalBounds;
 }
+
+void Shape::drawBoundingBox(double *b)
+{
+
+        glLineStipple(5, 0xAAAA);
+        glEnable(GL_LINE_STIPPLE);
+
+        glBegin(GL_LINE_STRIP);
+
+
+                glVertex2d(b[0], b[1]);
+                glVertex2d(b[2], b[1]);
+
+                glVertex2d(b[2], b[1]);
+                glVertex2d(b[2], b[3]);
+
+                glVertex2d(b[2], b[3]);
+                glVertex2d(b[0], b[3]);
+
+                glVertex2d(b[0], b[3]);
+                glVertex2d(b[0], b[1]);
+
+        glEnd();
+}

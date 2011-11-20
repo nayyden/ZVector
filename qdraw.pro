@@ -11,11 +11,11 @@ TEMPLATE = app
 DESTDIR = bin
 
 INCLUDEPATH += include\
-include/Tools
+        include/Tools
 
-OBJECTS_DIR=../qdraw-objects
-MOC_DIR =../qdraw-objects
-UI_DIR=../qdraw-objects
+OBJECTS_DIR=qdraw-objects
+MOC_DIR =qdraw-objects
+UI_DIR=qdraw-objects
 
 #DEFINES += GL_GLEXT_PROTOTYPES
 

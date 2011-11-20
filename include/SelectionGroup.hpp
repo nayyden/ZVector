@@ -8,13 +8,16 @@ class SelectionGroup : public Group
 {
 public:
         SelectionGroup();
-        void addShape(Shape *shape, int index);
+        void addShape(int index, Shape *shape);
         void clear();
         void draw(bool skipColor);
         void resize(double x, double y);
-
+        double* getBoundingBox();
+         QMap<int,Shape*> m_shapes;
+        bool contains(int key);
+        void remove(int key);
 private:
-        QMap<int,Shape*> m_shapes;
+
 };
 
 #endif // SELECTIONGROUP_HPP

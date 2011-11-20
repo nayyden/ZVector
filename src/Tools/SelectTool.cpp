@@ -23,6 +23,9 @@
 #include "SelectTool.hpp"
 #include <iostream>
 #include "Group.hpp"
+#include "GroupManager.hpp"
+
+
 void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
         if(event->modifiers() == Qt::ControlModifier) {

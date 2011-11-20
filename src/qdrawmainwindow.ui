@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>953</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -86,6 +86,7 @@
    <addaction name="actionCreate"/>
    <addaction name="actionDraw_Ellipse"/>
    <addaction name="actionDraw_Triangle"/>
+   <addaction name="actionGroup"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="maximumSize">
@@ -129,7 +130,7 @@
           <x>0</x>
           <y>0</y>
           <width>151</width>
-          <height>50</height>
+          <height>54</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -264,6 +265,14 @@
    </property>
    <property name="toolTip">
     <string>Draw Triangle</string>
+   </property>
+  </action>
+  <action name="actionGroup">
+   <property name="text">
+    <string>Group</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
    </property>
   </action>
  </widget>

@@ -55,6 +55,8 @@ private slots:
 
 	void on_actionDraw_Triangle_triggered();
 
+        void on_actionGroup_triggered();
+
 private:
         Ui::QDrawMainWindow *ui;
 

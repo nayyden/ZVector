@@ -79,7 +79,7 @@ void QDrawMainWindow::on_actionNew_triggered()
         connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
         connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
         connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
-	ui->mdiArea->addSubWindow(canvas);
+        ui->mdiArea->addSubWindow(canvas);
 
 	canvas->setWindowTitle("New Drawing*");
 	canvas->show();
@@ -94,4 +94,12 @@ void QDrawMainWindow::on_actionDraw_Ellipse_triggered()
 void QDrawMainWindow::on_actionDraw_Triangle_triggered()
 {
 	emit(changeTool(ToolFactory::getSingletonPtr()->getTriangleTool()));
+}
+
+
+
+void QDrawMainWindow::on_actionGroup_triggered()
+{
+    GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+    activeCanvas->groupSelectedShapes();
 }

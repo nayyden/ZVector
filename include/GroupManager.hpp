@@ -26,8 +26,10 @@
 #include <GL/gl.h>
 
 #include "Shape.hpp"
-#include "Group.hpp"
+#include <iostream>
 #include "SelectionGroup.hpp"
+
+
 
 class GroupManager
 {
@@ -44,94 +46,26 @@ public:
 		}
 	}
 
-	void setCurrentShape( int index )
-	{
-		if(index > m_shapes.size())
-			m_currentShape = 0;
-                else
-                        m_currentShape = index;
-	}
+        void setCurrentShape( int index );
 
-	Shape* getCurrentShape()
-	{
-		return m_shapes[m_currentShape];
-	}
+        Shape* getCurrentShape();
 
-        Shape* popShape(unsigned int index)
-        {
-               Shape* shape;
-               QList<Shape*>::iterator it = m_shapes.begin();
-               int position = 0;
-               while(it != m_shapes.end()) {
-                       if(position == index) {
-                               shape = m_shapes[position];
-                               m_shapes.erase(it);
-                               return shape;
-                       }
-                       ++it;
-                       ++position;
-               }
-        }
+        void popShape(unsigned int index);
 
-        void addToSelection(int index)
-        {
-                if(index > m_shapes.size())
-                {
-                        m_currentShape = 0;
-                        m_selectionGroup.clear();
-                }
-                else
-                {
-                        m_selectionGroup.addShape(m_shapes[index], index);
-                        m_currentGroup = &m_selectionGroup;
-                }
-        }
+        void addToSelection(int index);
 
-	void addNewShape( Shape* shape )
-	{
-		m_shapes.push_back(shape);
-		m_currentShape = m_shapes.size() - 1;
-	}
+        void addNewShape( Shape* shape );
 
-	inline void draw()
-	{
-                QList<Shape*>::iterator it = m_shapes.begin();
-		while( it != m_shapes.end())
-		{
-			(*it)->draw();
-			it++;
-		}
-	}
+        void draw();
 
-	inline void drawToSelectionBuffer()
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		for( int i = 0; i<m_shapes.size(); i++)
-		{
-			int blue = (unsigned char)i;
-			int green = (unsigned char)(i >> 8);
-			int red = (unsigned char)(i >> 16);
 
-			glColor3f(red/255.f, green/255.f, blue/255.f);
+        void drawToSelectionBuffer();
 
-			m_shapes[i]->draw(true);
-		}
-	}
 
-        void groupSelected()
-        {
-                m_currentGroup = new Group();
-                m_shapes.push_back(m_currentGroup);
+        void groupSelected();
 
-                QMap<int,int>::iterator it = m_selectionGroup.begin();
-                while (it!= m_selectionGroup.end())
-                {
-                        Shape *shape = popShape(it.key());
-                        m_currentGroup->addShape(shape);
-                        it++;
-                }
-                m_selectionGroup.clear();
-        }
+        Shape *getShape(int index);
+
 
 private:
         QList<Shape*> m_shapes;

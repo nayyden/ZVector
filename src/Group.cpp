@@ -69,4 +69,21 @@ double * Group::getBoundingBox()
         return bounds;
 }
 
+void Group::draw(bool skipColor = false)
+{
+        glPushMatrix();
+        glMultMatrixd(m_mat.constData());
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->draw(skipColor);
+                sit++;
+        }
+        double *boundingBox = getBoundingBox();
+        drawBoundingBox(boundingBox);
+        delete[] boundingBox;
+
+        glPopMatrix();
+
+}
 

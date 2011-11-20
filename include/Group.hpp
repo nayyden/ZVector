@@ -48,18 +48,8 @@ public:
 		}
 	}
 
-	inline void draw(bool skipColor = false)
-	{
-		glPushMatrix();
-		glMultMatrixd(m_mat.constData());
-		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-		while( sit != m_shapes.end())
-		{
-			(*sit)->draw(skipColor);
-			sit++;
-		}
-		glPopMatrix();
-	}
+        void draw(bool skipColor);
+
 
 	virtual void setFillColor(const QColor& color)
 	{
@@ -69,6 +59,7 @@ public:
 			(*sit)->setFillColor(color);
 			sit++;
 		}
+
 	}
 
 	QColor getFillColor()
