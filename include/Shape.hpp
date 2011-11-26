@@ -34,9 +34,10 @@
 class Shape
 {
 public:
-        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(35.f)
+        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(2.f)
 	{
 		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
+                m_fillColor[3] = m_contourColor[3] = 1.0;
 		m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;
                 m_rotationAngle = 0;
 	}
@@ -47,11 +48,18 @@ public:
 	virtual void translate( double x, double y );
 	virtual void rotate( double angle );
 	virtual void setFillColor(double r, double g, double b);
-	virtual void setFillColor(const QColor& color);
-	virtual QColor getFillColor();
+        virtual void setFillColor(const QColor& color);
+
+        virtual QColor getFillColor();
+        virtual double getFillOpacity();
+        virtual double getContourOpacity();
 
 	virtual void setContourColor(double r, double g, double b);
 	virtual void setContourColor(const QColor& color);
+
+        virtual void setFillColorOpacity(double alpha);
+        virtual void setContourColorOpacity(double alpha);
+
 	virtual QColor getContourColor();
         virtual double getRotationAngle();
         virtual double* getBoundingBox();
@@ -62,8 +70,8 @@ protected:
 	QList<QVector2D> m_normals;
 	QMatrix4x4 m_mat;
 
-	double m_fillColor[3];
-	double m_contourColor[3];
+        double m_fillColor[4];
+        double m_contourColor[4];
         double m_rotationAngle;
         double m_bounds[4];
 
@@ -71,7 +79,6 @@ protected:
 	bool m_bDrawFill;
 	float m_contourWidth;
         static const float DEG2RAD = 3.14159/180;
-
 	/*
     use only when neccessary, ie the number vertices has changed
  */

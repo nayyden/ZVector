@@ -153,9 +153,7 @@ void GLCanvas::applyViewportTransform()
         glViewport(0,0,m_width, m_height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        //glOrtho(m_x, m_width*m_zoom - m_x, m_height*m_zoom - m_y, m_y, -1, 1); // Match qt coord origin
         glOrtho( -m_width*m_zoom/2+m_x, m_width*m_zoom/2+m_x, m_height*m_zoom/2+m_y, -m_height*m_zoom/2+m_y, -1, 1);
-        // Match qt coord origin
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         paintGL();

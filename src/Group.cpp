@@ -87,3 +87,53 @@ void Group::draw(bool skipColor = false)
 
 }
 
+void Group::setFillColorOpacity(double alpha)
+{
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->setFillColorOpacity(alpha);
+                sit++;
+        }
+}
+
+void Group::setContourColorOpacity(double alpha)
+{
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->setContourColorOpacity(alpha);
+                sit++;
+        }
+}
+
+void Group::setFillColor(const QColor &color)
+{
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->setFillColor(color);
+                sit++;
+        }
+}
+
+void Group::setContourColor(const QColor &color)
+{
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->setContourColor(color);
+                sit++;
+        }
+}
+
+void Group::resize(double x, double y)
+{
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+                (*sit)->resize(x, y);
+                sit++;
+        }
+}
+

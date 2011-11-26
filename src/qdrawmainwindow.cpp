@@ -31,7 +31,10 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 	ui->setupUi(this);
 
         ui->angleSpinbox->setRange(0, 360);
-
+        connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(shapeChanged(Shape*)),
+                this, SLOT(updateWidgetsForSelectedShape(Shape*)));
+        connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(shapeChanged(Shape*)),
+                this, SLOT(updateWidgetsForSelectedShape(Shape*)));
 }
 
 QDrawMainWindow::~QDrawMainWindow()
@@ -100,6 +103,58 @@ void QDrawMainWindow::on_actionGroup_triggered()
 
 void QDrawMainWindow::on_colorTriangle_colorChanged(const QColor &color)
 {
-        GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
-        activeCanvas->setCurrentGroupColor(color);
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                Shape* shape = activeCanvas->getCurrentShape();
+                if(ui->fill->isChecked())
+                {
+                        shape->setFillColor(color);
+                }
+                else if(ui->outline->isChecked())
+                {
+                        shape->setContourColor(color);
+                }
+                activeCanvas->flush();
+        }
+}
+
+void QDrawMainWindow::on_mdiArea_subWindowActivated(QMdiSubWindow *)
+{
+    //GLCanvas* activeCanvas = (GLCanvas*)canvas->widget();
+    // TODO: send cursor position somehow
+}
+
+void QDrawMainWindow::on_opacity_valueChanged(int value)
+{
+        ui->opacity_value->setText(QString::number(value)+QString('%'));
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                Shape* shape = activeCanvas->getCurrentShape();
+                if(ui->fill->isChecked())
+                {
+                        shape->setFillColorOpacity((double)value/100);
+                }
+                else if(ui->outline->isChecked())
+                {
+                        shape->setContourColorOpacity((double)value/100);
+                }
+                activeCanvas->flush();
+        }
+}
+
+void QDrawMainWindow::updateWidgetsForSelectedShape(Shape* shape)
+{
+        if(ui->fill->isChecked())
+        {
+                ui->colorTriangle->setColor(shape->getFillColor());
+                ui->opacity->setValue(shape->getFillOpacity()*100);
+        }
+        else if(ui->outline->isChecked())
+        {
+                ui->colorTriangle->setColor(shape->getContourColor());
+                ui->opacity->setValue(shape->getContourOpacity()*100);
+        }
+        ui->angleSpinbox->setValue(shape->getRotationAngle());
 }

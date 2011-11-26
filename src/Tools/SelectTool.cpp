@@ -55,8 +55,7 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
                 std::cout << index << '\n';
 
                 group->setCurrentShape(index);
-                emit refreshColorPane(group->getCurrentShape()->getFillColor());
-                emit currentShapeRotation(group->getCurrentShape()->getRotationAngle());
+                emit shapeChanged(group->getCurrentShape());
         }
 }
 

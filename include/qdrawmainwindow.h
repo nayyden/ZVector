@@ -59,6 +59,12 @@ private slots:
 
         void on_colorTriangle_colorChanged(const QColor &);
 
+        void on_mdiArea_subWindowActivated(QMdiSubWindow *arg1);
+
+        void on_opacity_valueChanged(int value);
+
+        void updateWidgetsForSelectedShape(Shape* shape);
+
 private:
         Ui::QDrawMainWindow *ui;
 

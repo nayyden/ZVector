@@ -55,12 +55,21 @@ void Shape::setFillColor(double r, double g, double b)
 	m_fillColor[2] = b;
 }
 
-
 void Shape::setContourColor(double r, double g, double b)
 {
 	m_contourColor[0] = r;
 	m_contourColor[1] = g;
 	m_contourColor[2] = b;
+}
+
+void Shape::setFillColorOpacity(double alpha)
+{
+        m_fillColor[3] = alpha;
+}
+
+void Shape::setContourColorOpacity(double alpha)
+{
+        m_contourColor[3] = alpha;
 }
 
 void Shape::setFillColor(const QColor& color)
@@ -122,7 +131,7 @@ void Shape::draw(bool skipColor)
 
 	//calculateNormals();
 	if(!skipColor)
-		glColor3dv(m_fillColor);
+                glColor4dv(m_fillColor);
 
 	QList<QVector2D>::iterator it = m_vertices.begin();
 
@@ -135,9 +144,9 @@ void Shape::draw(bool skipColor)
 		}
 		glEnd();
 	}
-	if(m_bDrawCountour) {
+        if(m_contourWidth) {
 		if(!skipColor)
-			glColor3dv(m_contourColor);
+                        glColor4dv(m_contourColor);
 		it = m_vertices.begin();
                 glBegin(GL_QUADS);
 		int i = 0;
@@ -180,7 +189,6 @@ double * Shape::getBoundingBox()
 
 void Shape::drawBoundingBox(double *b)
 {
-
         glLineStipple(5, 0xAAAA);
         glEnable(GL_LINE_STIPPLE);
 
@@ -199,5 +207,15 @@ void Shape::drawBoundingBox(double *b)
                 glVertex2d(b[0], b[3]);
                 glVertex2d(b[0], b[1]);
 
-        glEnd();
+                glEnd();
+}
+
+double Shape::getFillOpacity()
+{
+        return m_fillColor[3];
+}
+
+double Shape::getContourOpacity()
+{
+        return m_contourColor[3];
 }

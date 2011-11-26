@@ -38,40 +38,17 @@ public:
 
 	void addShape( Shape* shape);
 
-	virtual void resize( double x, double y )
-	{
-		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-		while( sit != m_shapes.end())
-		{
-			(*sit)->resize(x, y);
-			sit++;
-		}
-	}
-
+        virtual void resize( double x, double y );
         void draw(bool skipColor);
 
+        virtual void setFillColor(const QColor& color);
+        virtual void setContourColor(const QColor& color);
 
-	virtual void setFillColor(const QColor& color)
-	{
-		QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-		while( sit != m_shapes.end())
-		{
-			(*sit)->setFillColor(color);
-			sit++;
-		}
+        inline QColor getFillColor();
+        inline QColor getContourColor();
 
-	}
-
-	QColor getFillColor()
-	{
-		if(!m_shapes.empty())
-			return m_shapes.front()->getFillColor();
-		else
-		{
-			QColor c(0,0,0);
-			return c;
-		}
-	}
+        virtual void setFillColorOpacity(double alpha);
+        virtual void setContourColorOpacity(double alpha);
 
         double* getBoundingBox();
 
@@ -81,5 +58,26 @@ private:
 	void deleteShapes();
 
 };
+
+QColor Group::getFillColor()
+{
+        if(!m_shapes.empty())
+                return m_shapes.front()->getFillColor();
+        else
+        {
+                QColor c(0,0,0);
+                return c;
+        }
+}
+QColor Group::getContourColor()
+{
+        if(!m_shapes.empty())
+                return m_shapes.front()->getContourColor();
+        else
+        {
+                QColor c(0,0,0);
+                return c;
+        }
+}
 
 #endif // GROUP_HPP

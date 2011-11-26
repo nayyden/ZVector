@@ -101,6 +101,7 @@ void GroupManager::draw()
 
 void GroupManager::drawToSelectionBuffer()
 {
+        glDisable(GL_BLEND);
         glClear(GL_COLOR_BUFFER_BIT);
         for( int i = 0; i<m_shapes.size(); i++)
         {
@@ -113,6 +114,7 @@ void GroupManager::drawToSelectionBuffer()
                         m_shapes[i]->draw(true);
                 }
         }
+        glEnable(GL_BLEND);
 }
 
 void GroupManager::groupSelected()

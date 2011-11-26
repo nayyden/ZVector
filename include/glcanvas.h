@@ -63,12 +63,10 @@ protected:
 public slots:
 	void changeTool( Tool* tool ) { m_currentTool = tool; }
         void rotateShapeByAngle(int angle);
-        void setCurrentGroupColor(QColor color)
-	{
-		m_groupManager->getCurrentShape()->setFillColor(color);
-		updateGL();
-		paintGL();
-	}
+
+        inline Shape* getCurrentShape();
+        inline void flush();
+
         void groupSelectedShapes();
 
 private:
@@ -90,5 +88,16 @@ private:
         bool leftButtonPressed;
         bool middleButtonPressed;
 };
+
+Shape* GLCanvas::getCurrentShape()
+{
+        return m_groupManager->getCurrentShape();
+}
+
+void GLCanvas::flush()
+{
+        updateGL();
+        paintGL();
+}
 
 #endif // GLCANVAS_H
