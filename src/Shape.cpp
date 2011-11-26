@@ -22,6 +22,7 @@
 
 #include "Shape.hpp"
 #include <math.h>
+#include <iostream>
 
 void Shape::translate( double x, double y )
 {
@@ -102,17 +103,15 @@ void Shape::recalculateNormals()
 	{
 		m_normals.erase(m_normals.begin(), m_normals.end());
 	}
-	QList<QVector2D>::iterator it = m_vertices.begin();
-	it++;
-	m_normals.push_back( ((*(it-1)-*it).normalized() + (*(it+1)-*it).normalized()).normalized() ) ;
-	m_normals.push_back(m_normals.first());
-	it++;
+        QList<QVector2D>::iterator it = m_vertices.begin();
+        m_normals.push_back( ((m_vertices.last() -*it).normalized() + (*(it+1)-*it).normalized()).normalized() ) ;
+        it++;
 	while(it!=m_vertices.end()-1)
 	{
 		m_normals.push_back( ((*(it-1)-*it).normalized() + (*(it+1)-*it).normalized()).normalized() ) ;
 		it++;
-	}
-	m_normals.push_back(m_normals.last());
+        }
+        m_normals.push_back( ((*(it-1) - m_vertices.last()).normalized() + (m_vertices.first()-m_vertices.last()).normalized()).normalized() );
 }
 
 
@@ -140,7 +139,7 @@ void Shape::draw(bool skipColor)
 		if(!skipColor)
 			glColor3dv(m_contourColor);
 		it = m_vertices.begin();
-		glBegin(GL_QUADS);
+                glBegin(GL_QUADS);
 		int i = 0;
 		while(it != m_vertices.end()-1)
 		{

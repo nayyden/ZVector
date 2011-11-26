@@ -24,10 +24,13 @@
 
 void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-	Quad* quad = new Quad(event->x(), event->y());
-	group->addNewShape( quad );
-	m_diff.x = event->x();
-	m_diff.y = event->y();
+        m_diff.x = event->x();
+        m_diff.y = event->y();
+
+        double X, Y;
+        ZUtils::unProject(event->x(), event->y(), &X, &Y );
+        Quad* quad = new Quad(X, Y);
+        group->addNewShape( quad );
 }
 void CreateQuadTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
 {
@@ -36,8 +39,8 @@ void CreateQuadTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
 }
 void CreateQuadTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *group)
 {
-	double dx = event->x() - m_diff.x;
-	double dy = event->y() - m_diff.y;
+        double dx = (event->x() - m_diff.x)*group->getZoomFactor();
+        double dy = (event->y() - m_diff.y)*group->getZoomFactor();
 	group->getCurrentShape()->resize( dx, dy );
 	m_diff.x = event->x();
 	m_diff.y = event->y();

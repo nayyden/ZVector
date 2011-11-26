@@ -32,11 +32,18 @@ GLCanvas::GLCanvas(QWidget *parent) : QGLWidget(parent)
 	m_toolFactory = ToolFactory::getSingletonPtr();
 	m_currentTool = m_toolFactory->getSelectTool();
 	m_groupManager = new GroupManager();
+        m_x = 0;
+        m_y = 0;
+        m_zoom = 1;
 }
 
 void GLCanvas::initializeGL()
 {
 	glClearColor(1.f, 1.f, 1.f, 1.f);
+        glEnable( GL_POLYGON_SMOOTH );
+        glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void GLCanvas::paintGL()
@@ -54,13 +61,9 @@ void GLCanvas::redrawSelectionBufer()
 
 void GLCanvas::resizeGL(int w, int h)
 {
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, w, h, 0, -1, 1); // Match qt coord origin
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
+        m_width = w;
+        m_height = h;
+        applyViewportTransform();
 }
 
 void GLCanvas::keyPressEvent(QKeyEvent*)
@@ -69,25 +72,68 @@ void GLCanvas::keyPressEvent(QKeyEvent*)
 
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)
 {
-	m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
+        if(event->button() == Qt::LeftButton)
+        {
+                leftButtonPressed = false;
+        }
+        else if(event->button() == Qt::MiddleButton)
+        {
+                middleButtonPressed = false;
+        }
+        m_currentTool->handleMouseReleaseEvent( event, m_groupManager );
+        m_diff.x = 0;
+        m_diff.y = 0;
 }
 
 void GLCanvas::mouseMoveEvent(QMouseEvent *event)
 {
-	m_currentTool->handleMouseMoveEvent( event, m_groupManager );
-	paintGL();
-	updateGL();
+        if(leftButtonPressed)
+        {
+                m_currentTool->handleMouseMoveEvent( event, m_groupManager );
+                paintGL();
+                updateGL();
+        }
+        else if(middleButtonPressed)
+        {
+                double dx = event->x() - m_diff.x;
+                double dy = event->y() - m_diff.y;
+
+                m_x -= dx*m_zoom;
+                m_y -= dy*m_zoom;
+                applyViewportTransform();
+
+                m_diff.x = event->x();
+                m_diff.y = event->y();
+        }
+
 }
 
 void GLCanvas::mousePressEvent(QMouseEvent *event)
 {
-	setAutoBufferSwap(false);
+        if(event->button() == Qt::LeftButton)
+        {
+                leftButtonPressed = true;
+        }
+        else if(event->button() == Qt::MiddleButton)
+        {
+                middleButtonPressed = true;
+        }
 
-	m_currentTool->handleMousePressEvent( event, m_groupManager );
+        if(leftButtonPressed)
+        {
+                setAutoBufferSwap(false);
 
-        setAutoBufferSwap(true);
-	paintGL();
-	updateGL();
+                m_currentTool->handleMousePressEvent( event, m_groupManager );
+
+                setAutoBufferSwap(true);
+                paintGL();
+                updateGL() ;
+        }
+        else
+        {
+                m_diff.x = event->x();
+                m_diff.y = event->y();
+        }
 }
 
 void GLCanvas::rotateShapeByAngle(int angle)
@@ -100,6 +146,34 @@ void GLCanvas::rotateShapeByAngle(int angle)
 void GLCanvas::groupSelectedShapes()
 {
         m_groupManager->groupSelected();
+}
+
+void GLCanvas::applyViewportTransform()
+{
+        glViewport(0,0,m_width, m_height);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        //glOrtho(m_x, m_width*m_zoom - m_x, m_height*m_zoom - m_y, m_y, -1, 1); // Match qt coord origin
+        glOrtho( -m_width*m_zoom/2+m_x, m_width*m_zoom/2+m_x, m_height*m_zoom/2+m_y, -m_height*m_zoom/2+m_y, -1, 1);
+        // Match qt coord origin
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        paintGL();
+        updateGL();
+}
+
+void GLCanvas::wheelEvent(QWheelEvent *e)
+{
+        if(e->delta()<0)
+        {
+                m_zoom *= 1.1;
+        }
+        else
+        {
+                m_zoom /= 1.1;
+        }
+        m_groupManager->setZoomFactor(m_zoom);
+        applyViewportTransform();
 }
 
 

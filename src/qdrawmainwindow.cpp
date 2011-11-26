@@ -43,7 +43,7 @@ QDrawMainWindow::~QDrawMainWindow()
 		delete *it;
 		it++;
 	}
-	delete ui;
+        delete ui;
 }
 
 void QDrawMainWindow::redrawSelectBuffer()
@@ -73,9 +73,6 @@ void QDrawMainWindow::on_actionNew_triggered()
         connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
         connect(ui->angleSpinbox, SIGNAL(valueChanged(int)), canvas, SLOT(rotateShapeByAngle(int)));
 
-	// Color <-> Shape connection
-	connect(ui->colorTriangle, SIGNAL(colorChanged(QColor)), canvas, SLOT(setCurrentGroupColor(QColor)));
-
         connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
         connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
         connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
@@ -84,7 +81,6 @@ void QDrawMainWindow::on_actionNew_triggered()
 	canvas->setWindowTitle("New Drawing*");
 	canvas->show();
 }
-
 
 void QDrawMainWindow::on_actionDraw_Ellipse_triggered()
 {
@@ -96,10 +92,14 @@ void QDrawMainWindow::on_actionDraw_Triangle_triggered()
 	emit(changeTool(ToolFactory::getSingletonPtr()->getTriangleTool()));
 }
 
-
-
 void QDrawMainWindow::on_actionGroup_triggered()
 {
-    GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
-    activeCanvas->groupSelectedShapes();
+        GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+        activeCanvas->groupSelectedShapes();
+}
+
+void QDrawMainWindow::on_colorTriangle_colorChanged(const QColor &color)
+{
+        GLCanvas* activeCanvas = (GLCanvas*)ui->mdiArea->activeSubWindow()->widget();
+        activeCanvas->setCurrentGroupColor(color);
 }

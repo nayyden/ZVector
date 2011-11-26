@@ -24,10 +24,14 @@
 
 void CreateTriangleTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-	AutoShape* triangle = new AutoShape(event->x(), event->y(), 3);
-	group->addNewShape(triangle);
-	m_diff.x = event->x();
-	m_diff.y = event->y();
+        m_diff.x = event->x();
+        m_diff.y = event->y();
+
+        double X, Y;
+        ZUtils::unProject(event->x(), event->y(), &X, &Y );
+
+        AutoShape* triangle = new AutoShape(X, Y, 3);
+        group->addNewShape(triangle);
 
 }
 
@@ -42,10 +46,8 @@ void CreateTriangleTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *
 	double dx;
 	double dy;
 
-	dx = event->x() - m_diff.x;
-	dy = event->y() - m_diff.y;
-
-
+        dx = (event->x() - m_diff.x)*group->getZoomFactor();
+        dy = (event->y() - m_diff.y)*group->getZoomFactor();
 	group->getCurrentShape()->resize( dx, dy );
 	m_diff.x = event->x();
 	m_diff.y = event->y();

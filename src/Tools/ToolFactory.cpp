@@ -22,6 +22,8 @@
 
 #include "ToolFactory.hpp"
 
+ToolFactory* ToolFactory::m_pInstance = 0;
+
 ToolFactory* ToolFactory::getSingletonPtr()
 {
 	if (!m_pInstance)

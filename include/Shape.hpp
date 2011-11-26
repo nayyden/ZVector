@@ -34,7 +34,7 @@
 class Shape
 {
 public:
-        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(3.f)
+        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(35.f)
 	{
 		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
 		m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;

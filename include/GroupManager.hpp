@@ -61,6 +61,9 @@ public:
 
         void drawToSelectionBuffer();
 
+        void setZoomFactor(float factor);
+
+        float getZoomFactor();
 
         void groupSelected();
 
@@ -72,6 +75,7 @@ private:
         Group *m_currentGroup;
         int m_currentShape;
         SelectionGroup m_selectionGroup;
+        float m_zoomFactor;
 };
 
 #endif // GROUPMANAGER_HPP

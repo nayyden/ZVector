@@ -58,6 +58,7 @@ protected:
 	void mousePressEvent(QMouseEvent *event);
 	void mouseReleaseEvent(QMouseEvent *event );
 	void mouseMoveEvent(QMouseEvent * event );
+        void wheelEvent(QWheelEvent *);
 
 public slots:
 	void changeTool( Tool* tool ) { m_currentTool = tool; }
@@ -71,14 +72,23 @@ public slots:
         void groupSelectedShapes();
 
 private:
+        void applyViewportTransform();
+        struct { float x,y; } m_diff;
+
 	QVector2D m_mousePos;
-
 	GroupManager* m_groupManager;
-
 	Tool* m_currentTool;
 	ToolFactory* m_toolFactory;
-	QGLShaderProgram* m_program;
+        QGLShaderProgram* m_program;
 
+        float m_zoom;
+        float m_x;
+        float m_y;
+        int m_width;
+        int m_height;
+
+        bool leftButtonPressed;
+        bool middleButtonPressed;
 };
 
 #endif // GLCANVAS_H

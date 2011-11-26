@@ -26,6 +26,14 @@
 #include <QMouseEvent>
 #include "GroupManager.hpp"
 
+#include <GL/glu.h>
+
+namespace ZUtils
+{
+void unProject( double in_x, double in_y, double* out_x, double* out_y );
+
+}// namespace ZUtils
+
 class Tool : public QObject
 {
 	Q_OBJECT
@@ -34,6 +42,8 @@ public:
 	virtual void handleMousePressEvent( QMouseEvent *event, GroupManager* group ) = 0;
 	virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
 	virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;
+
+
 
 signals:
 	void redrawSelectionBuffer();
@@ -45,6 +55,7 @@ public slots:
 protected:
 	// Used to keep mouse pos difference between hadleMouse* calls
 	struct { float x,y; } m_diff;
+
 };
 
 #endif // BASETOOL_HPP

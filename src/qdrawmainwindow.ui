@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>953</width>
-    <height>581</height>
+    <width>1055</width>
+    <height>674</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,8 +31,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>953</width>
-     <height>25</height>
+     <width>1055</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -62,14 +62,6 @@
    <addaction name="menuTools"/>
    <addaction name="menu_Windows"/>
   </widget>
-  <widget class="QToolBar" name="operationsBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -95,11 +87,48 @@
      <height>524287</height>
     </size>
    </property>
+   <property name="windowIcon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/color</normaloff>:/color</iconset>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Object Properties</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QRadioButton" name="radioButton">
+         <property name="text">
+          <string>Fill</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="text">
+          <string>Outline</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
      <item>
       <widget class="QtColorTriangle" name="colorTriangle" native="true">
        <property name="sizePolicy">
@@ -129,8 +158,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>151</width>
-          <height>54</height>
+          <width>180</width>
+          <height>79</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -154,6 +183,28 @@
             <widget class="QSpinBox" name="angleSpinbox"/>
            </item>
           </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>120</y>
+          <width>178</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="autoShapeDetailsLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>AutoShape deatails:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="autoShapeDetails"/>
          </item>
         </layout>
        </widget>
@@ -283,6 +334,9 @@
    <extends>QWidget</extends>
    <header>qtcolortriangle.h</header>
    <container>1</container>
+   <slots>
+    <signal>colorChanged(QColor)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>

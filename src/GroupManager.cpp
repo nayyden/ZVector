@@ -28,6 +28,7 @@ GroupManager::GroupManager()
 	m_shapes.append(new Group());
 	m_currentShape = 0;
         m_currentGroup = NULL;
+        m_zoomFactor = 1;
 }
 
 void GroupManager::setCurrentShape(int index)
@@ -137,4 +138,15 @@ void GroupManager::groupSelected()
 Shape * GroupManager::getShape(int index)
 {
         return m_shapes[index];
+}
+
+float GroupManager::getZoomFactor()
+{
+        return m_zoomFactor;
+}
+
+
+void GroupManager::setZoomFactor(float factor)
+{
+        m_zoomFactor = factor;
 }

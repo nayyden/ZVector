@@ -62,6 +62,11 @@ void AutoShape::recalculateVertices()
                 }
 
 	}
+        m_bounds[0] -= m_contourWidth;
+        m_bounds[1] -= m_contourWidth;
+        m_bounds[2] += m_contourWidth;
+        m_bounds[3] += m_contourWidth;
+
 }
 
 

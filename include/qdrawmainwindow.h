@@ -57,6 +57,8 @@ private slots:
 
         void on_actionGroup_triggered();
 
+        void on_colorTriangle_colorChanged(const QColor &);
+
 private:
         Ui::QDrawMainWindow *ui;
 

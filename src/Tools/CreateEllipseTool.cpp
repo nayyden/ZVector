@@ -24,11 +24,14 @@
 
 void CreateEllipseTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-	AutoShape *autoShape = new AutoShape(event->x(), event->y());
-	group->addNewShape(autoShape);
 	m_diff.x = event->x();
 	m_diff.y = event->y();
 
+        double X, Y;
+        ZUtils::unProject(event->x(), event->y(), &X, &Y );
+
+        AutoShape *autoShape = new AutoShape(X, Y);
+        group->addNewShape(autoShape);
 }
 
 void CreateEllipseTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
@@ -41,8 +44,8 @@ void CreateEllipseTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *g
 {
 	double dx;
 	double dy;
-	dx = event->x() - m_diff.x;
-	dy = event->y() - m_diff.y;
+        dx = (event->x() - m_diff.x)*group->getZoomFactor();
+        dy = (event->y() - m_diff.y)*group->getZoomFactor();
 	group->getCurrentShape()->resize( dx, dy );
 	m_diff.x = event->x();
 	m_diff.y = event->y();
