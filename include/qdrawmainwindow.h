@@ -65,6 +65,12 @@ private slots:
 
         void updateWidgetsForSelectedShape(Shape* shape);
 
+        void on_outline_width_valueChanged(int arg1);
+
+        void on_actionReset_Zoom_triggered();
+
+        void on_autoShapeDetails_valueChanged(int arg1);
+
 private:
         Ui::QDrawMainWindow *ui;
 

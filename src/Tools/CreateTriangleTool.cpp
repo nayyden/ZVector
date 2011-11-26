@@ -48,7 +48,16 @@ void CreateTriangleTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *
 
         dx = (event->x() - m_diff.x)*group->getZoomFactor();
         dy = (event->y() - m_diff.y)*group->getZoomFactor();
-	group->getCurrentShape()->resize( dx, dy );
+
+        if(event->modifiers() && Qt::ControlModifier)
+        {
+                group->getCurrentShape()->resize( dx, dx );
+        }
+        else
+        {
+                group->getCurrentShape()->resize( dx, dy );
+        }
+
 	m_diff.x = event->x();
 	m_diff.y = event->y();
 }

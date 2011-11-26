@@ -44,11 +44,10 @@ public:
         virtual void setFillColor(const QColor& color);
         virtual void setContourColor(const QColor& color);
 
-        inline QColor getFillColor();
-        inline QColor getContourColor();
-
         virtual void setFillColorOpacity(double alpha);
         virtual void setContourColorOpacity(double alpha);
+
+        virtual void setContourWidth(double width);
 
         double* getBoundingBox();
 
@@ -59,25 +58,5 @@ private:
 
 };
 
-QColor Group::getFillColor()
-{
-        if(!m_shapes.empty())
-                return m_shapes.front()->getFillColor();
-        else
-        {
-                QColor c(0,0,0);
-                return c;
-        }
-}
-QColor Group::getContourColor()
-{
-        if(!m_shapes.empty())
-                return m_shapes.front()->getContourColor();
-        else
-        {
-                QColor c(0,0,0);
-                return c;
-        }
-}
 
 #endif // GROUP_HPP

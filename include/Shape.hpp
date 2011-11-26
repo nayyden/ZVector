@@ -54,8 +54,11 @@ public:
         virtual double getFillOpacity();
         virtual double getContourOpacity();
 
-	virtual void setContourColor(double r, double g, double b);
-	virtual void setContourColor(const QColor& color);
+        virtual void setContourColor(double r, double g, double b);
+        virtual void setContourColor(const QColor& color);
+
+        virtual void setContourWidth(double width);
+        virtual float getContourWidth();
 
         virtual void setFillColorOpacity(double alpha);
         virtual void setContourColorOpacity(double alpha);

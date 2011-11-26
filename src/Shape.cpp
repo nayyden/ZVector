@@ -193,8 +193,7 @@ void Shape::drawBoundingBox(double *b)
         glEnable(GL_LINE_STIPPLE);
 
         glBegin(GL_LINE_STRIP);
-
-
+        {
                 glVertex2d(b[0], b[1]);
                 glVertex2d(b[2], b[1]);
 
@@ -206,8 +205,8 @@ void Shape::drawBoundingBox(double *b)
 
                 glVertex2d(b[0], b[3]);
                 glVertex2d(b[0], b[1]);
-
-                glEnd();
+        }
+        glEnd();
 }
 
 double Shape::getFillOpacity()
@@ -218,4 +217,14 @@ double Shape::getFillOpacity()
 double Shape::getContourOpacity()
 {
         return m_contourColor[3];
+}
+
+void Shape::setContourWidth(double width)
+{
+        m_contourWidth = width;
+}
+
+float Shape::getContourWidth()
+{
+        return m_contourWidth;
 }

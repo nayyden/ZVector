@@ -6,5 +6,7 @@
         <file alias="rect">data/icons/rect.png</file>
         <file alias="triangle">data/icons/triangle.png</file>
         <file alias="color">data/icons/color.png</file>
+        <file alias="group">data/icons/group.png</file>
+        <file alias="zoom">data/icons/zoom-reset.png</file>
     </qresource>
 </RCC>

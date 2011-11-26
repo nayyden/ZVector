@@ -174,6 +174,12 @@ void GLCanvas::wheelEvent(QWheelEvent *e)
         applyViewportTransform();
 }
 
+void GLCanvas::setZoomFactor(float zoom_factor)
+{
+        m_zoom = zoom_factor;
+        applyViewportTransform();
+}
+
 
 
 

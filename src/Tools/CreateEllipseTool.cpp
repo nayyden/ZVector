@@ -46,7 +46,16 @@ void CreateEllipseTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *g
 	double dy;
         dx = (event->x() - m_diff.x)*group->getZoomFactor();
         dy = (event->y() - m_diff.y)*group->getZoomFactor();
-	group->getCurrentShape()->resize( dx, dy );
-	m_diff.x = event->x();
+
+        if(event->modifiers() && Qt::ControlModifier)
+        {
+                group->getCurrentShape()->resize( dx, dx );
+        }
+        else
+        {
+                group->getCurrentShape()->resize( dx, dy );
+        }
+
+        m_diff.x = event->x();
 	m_diff.y = event->y();
 }

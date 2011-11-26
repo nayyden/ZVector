@@ -39,7 +39,7 @@ void TranslateTool::handleMouseMoveEvent(QMouseEvent *event, GroupManager *group
 {
         double dx = (event->x() - m_diff.x)*group->getZoomFactor();
         double dy = (event->y() - m_diff.y)*group->getZoomFactor();
-	group->getCurrentShape()->translate( dx, dy );
+        group->getCurrentShape()->translate( dx, dy );
 	m_diff.x = event->x();
 	m_diff.y = event->y();
 }

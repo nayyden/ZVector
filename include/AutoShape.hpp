@@ -6,22 +6,20 @@
 class AutoShape : public Shape
 {
 public:
-	AutoShape(double origin_x, double origin_y, int vertices = 360);
+        AutoShape(double origin_x, double origin_y, int vertices = 300);
+        void setNumDetails(int);
+        int getNumDetails();
 
 protected:
 	void resize(double x, double y);
 
 private:
+        void addVertices();
+        void recalculateVertices();
 
 	int m_majorRadius;
 	int m_minorRadius;
-	int m_numberOfVertices;
-
-
-	void addVertices();
-	void recalculateVertices();
-	void changeDetailsCount();
-
+        int m_numberOfVertices;
 };
 
 

@@ -25,8 +25,8 @@
 
 GroupManager::GroupManager()
 {
-	m_shapes.append(new Group());
-	m_currentShape = 0;
+        m_shapes.append(new Group());
+        m_currentShape = 0;
         m_currentGroup = NULL;
         m_zoomFactor = 1;
 }
@@ -42,6 +42,11 @@ void GroupManager::setCurrentShape(int index)
 Shape * GroupManager::getCurrentShape()
 {
         return m_shapes[m_currentShape];
+}
+
+Group* GroupManager::getSelection()
+{
+        return &m_selectionGroup;
 }
 
 void GroupManager::popShape(unsigned int index)

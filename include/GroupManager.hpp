@@ -34,7 +34,7 @@
 class GroupManager
 {
 public:
-	GroupManager();
+        GroupManager();
 	virtual ~GroupManager()
 	{
                 QList<Shape*>::iterator it = m_shapes.begin();
@@ -49,6 +49,8 @@ public:
         void setCurrentShape( int index );
 
         Shape* getCurrentShape();
+
+        Group* getSelection();
 
         void popShape(unsigned int index);
 

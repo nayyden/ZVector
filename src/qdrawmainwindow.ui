@@ -75,10 +75,14 @@
    </attribute>
    <addaction name="actionSelect"/>
    <addaction name="actionMove"/>
+   <addaction name="separator"/>
    <addaction name="actionCreate"/>
    <addaction name="actionDraw_Ellipse"/>
    <addaction name="actionDraw_Triangle"/>
+   <addaction name="separator"/>
    <addaction name="actionGroup"/>
+   <addaction name="separator"/>
+   <addaction name="actionReset_Zoom"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="sizePolicy">
@@ -231,7 +235,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="autoShapeDetails"/>
+             <widget class="QSpinBox" name="autoShapeDetails">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -240,14 +251,14 @@
             <item>
              <widget class="QLabel" name="angleLabel_2">
               <property name="text">
-               <string>Rotation:</string>
+               <string>Outline Width:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="angleSpinbox_2">
+             <widget class="QSpinBox" name="outline_width">
               <property name="suffix">
-               <string>°</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -395,11 +406,27 @@
    </property>
   </action>
   <action name="actionGroup">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/group</normaloff>:/group</iconset>
+   </property>
    <property name="text">
     <string>Group</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="actionReset_Zoom">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/zoom</normaloff>:/zoom</iconset>
+   </property>
+   <property name="text">
+    <string>Reset Zoom</string>
+   </property>
+   <property name="shortcut">
+    <string>1</string>
    </property>
   </action>
  </widget>

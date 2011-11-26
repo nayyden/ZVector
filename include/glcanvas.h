@@ -44,6 +44,7 @@ public:
 		delete m_groupManager;
 	}
 	void redrawSelectionBufer();
+        void setZoomFactor(float zoom_factor);
 
 signals:
 	void sendFrameBuffer(QImage buffer);

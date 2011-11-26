@@ -43,8 +43,6 @@ public:
 	virtual void handleMouseReleaseEvent( QMouseEvent *event, GroupManager* group) = 0;
 	virtual void handleMouseMoveEvent( QMouseEvent *event, GroupManager* group  ) = 0;
 
-
-
 signals:
         void shapeChanged(Shape*);
 	void redrawSelectionBuffer();

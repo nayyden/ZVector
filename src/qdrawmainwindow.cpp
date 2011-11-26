@@ -76,9 +76,6 @@ void QDrawMainWindow::on_actionNew_triggered()
         connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
         connect(ui->angleSpinbox, SIGNAL(valueChanged(int)), canvas, SLOT(rotateShapeByAngle(int)));
 
-        connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(refreshColorPane(QColor)), ui->colorTriangle, SLOT(setColor(QColor)));
-        connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
-        connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(currentShapeRotation(int)), ui->angleSpinbox, SLOT(setValue(int)));
         ui->mdiArea->addSubWindow(canvas);
 
 	canvas->setWindowTitle("New Drawing*");
@@ -121,8 +118,8 @@ void QDrawMainWindow::on_colorTriangle_colorChanged(const QColor &color)
 
 void QDrawMainWindow::on_mdiArea_subWindowActivated(QMdiSubWindow *)
 {
-    //GLCanvas* activeCanvas = (GLCanvas*)canvas->widget();
-    // TODO: send cursor position somehow
+        //GLCanvas* activeCanvas = (GLCanvas*)canvas->widget();
+        // TODO: send cursor position somehow
 }
 
 void QDrawMainWindow::on_opacity_valueChanged(int value)
@@ -144,6 +141,16 @@ void QDrawMainWindow::on_opacity_valueChanged(int value)
         }
 }
 
+void QDrawMainWindow::on_outline_width_valueChanged(int value)
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                activeCanvas->getCurrentShape()->setContourWidth(value);
+                activeCanvas->flush();
+        }
+}
+
 void QDrawMainWindow::updateWidgetsForSelectedShape(Shape* shape)
 {
         if(ui->fill->isChecked())
@@ -157,4 +164,38 @@ void QDrawMainWindow::updateWidgetsForSelectedShape(Shape* shape)
                 ui->opacity->setValue(shape->getContourOpacity()*100);
         }
         ui->angleSpinbox->setValue(shape->getRotationAngle());
+        ui->outline_width->setValue(shape->getContourWidth());
+
+        if(AutoShape* autoShape = dynamic_cast<AutoShape*>(shape))
+        {
+                ui->autoShapeDetails->setEnabled(true);
+                ui->autoShapeDetails->setValue(autoShape->getNumDetails());
+        }
+        else
+        {
+                ui->autoShapeDetails->setEnabled(false);
+        }
+}
+
+
+void QDrawMainWindow::on_actionReset_Zoom_triggered()
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                activeCanvas->setZoomFactor(1.f);
+        }
+}
+
+void QDrawMainWindow::on_autoShapeDetails_valueChanged(int details)
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                if( AutoShape* shape =  dynamic_cast<AutoShape*>(activeCanvas->getCurrentShape()))
+                {
+                        shape->setNumDetails(details);
+                        activeCanvas->flush();
+                }
+        }
 }

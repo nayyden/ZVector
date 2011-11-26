@@ -24,15 +24,11 @@ void AutoShape::resize(double x, double y)
 	recalculateNormals();
 }
 
-void AutoShape::changeDetailsCount()
-{
-}
-
 void AutoShape::addVertices()
 {
-	for (int i=0; i < m_numberOfVertices; i ++) {
-		float rad =  (360/m_numberOfVertices)*i*DEG2RAD;
-		m_vertices.push_back(QVector2D(cos(rad) * m_majorRadius , sin(rad) * m_minorRadius));
+        for (float angle=-M_PI_2; angle < 2*M_PI - M_PI_2; angle += 2*M_PI/m_numberOfVertices )
+        {
+                m_vertices.push_back(QVector2D(cos(angle) * m_majorRadius , sin(angle) * m_minorRadius));
 	}
 }
 
@@ -43,21 +39,25 @@ void AutoShape::recalculateVertices()
         m_bounds[2] = std::numeric_limits<double>::min();
         m_bounds[3] = m_bounds[2];
 
-	for (int i=0; i < m_numberOfVertices; i ++) {
-		float rad =  (360/m_numberOfVertices)*i*DEG2RAD;
+        for (int i=0; i < m_numberOfVertices; i ++)
+        {
+                float rad =  i*2*M_PI/m_numberOfVertices - M_PI_2;
 		m_vertices[i].setX(cos(rad) * m_majorRadius);
 		m_vertices[i].setY(sin(rad) * m_minorRadius);
-                if(m_vertices[i].x() < m_bounds[0]) {
+                if(m_vertices[i].x() < m_bounds[0])
+                {
                         m_bounds[0] = m_vertices[i].x();
                 }
-                if(m_vertices[i].y() < m_bounds[1]) {
+                if(m_vertices[i].y() < m_bounds[1])
+                {
                         m_bounds[1] = m_vertices[i].y();
                 }
-
-                if(m_vertices[i].x() > m_bounds[2]) {
+                if(m_vertices[i].x() > m_bounds[2])
+                {
                         m_bounds[2] = m_vertices[i].x();
                 }
-                if(m_vertices[i].y() > m_bounds[3]) {
+                if(m_vertices[i].y() > m_bounds[3])
+                {
                         m_bounds[3] = m_vertices[i].y();
                 }
 
@@ -67,6 +67,20 @@ void AutoShape::recalculateVertices()
         m_bounds[2] += m_contourWidth;
         m_bounds[3] += m_contourWidth;
 
+}
+
+void AutoShape::setNumDetails(int details)
+{
+        m_vertices.clear();
+        m_numberOfVertices = details;
+        m_vertices.reserve(m_numberOfVertices);
+        addVertices();
+        recalculateNormals();
+}
+
+int AutoShape::getNumDetails()
+{
+        return m_numberOfVertices;
 }
 
 
