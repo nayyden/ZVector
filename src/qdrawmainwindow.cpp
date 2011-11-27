@@ -74,7 +74,6 @@ void QDrawMainWindow::on_actionNew_triggered()
 {
 	GLCanvas* canvas = new GLCanvas(this);
         connect(this, SIGNAL(changeTool(Tool*)), canvas, SLOT(changeTool(Tool*)));
-        connect(ui->angleSpinbox, SIGNAL(valueChanged(int)), canvas, SLOT(rotateShapeByAngle(int)));
 
         ui->mdiArea->addSubWindow(canvas);
 
@@ -195,6 +194,19 @@ void QDrawMainWindow::on_autoShapeDetails_valueChanged(int details)
                 if( AutoShape* shape =  dynamic_cast<AutoShape*>(activeCanvas->getCurrentShape()))
                 {
                         shape->setNumDetails(details);
+                        activeCanvas->flush();
+                }
+        }
+}
+
+void QDrawMainWindow::on_angleSpinbox_valueChanged(int angle)
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                if(Shape* shape = activeCanvas->getCurrentShape())
+                {
+                        shape->rotate(angle);
                         activeCanvas->flush();
                 }
         }

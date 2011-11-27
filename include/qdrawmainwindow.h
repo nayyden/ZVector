@@ -42,7 +42,8 @@ public:
 	~QDrawMainWindow();
 
 private slots:
-	void on_actionDraw_Ellipse_triggered();
+        void on_angleSpinbox_valueChanged(int );
+ void on_actionDraw_Ellipse_triggered();
 	void redrawSelectBuffer();
 
 	void on_actionSelect_triggered();
