@@ -30,7 +30,8 @@ QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-        ui->angleSpinbox->setRange(0, 360);
+        ui->angleSpinbox->setRange(-360, 360);
+
         connect(ToolFactory::getSingletonPtr()->getSelectTool(), SIGNAL(shapeChanged(Shape*)),
                 this, SLOT(updateWidgetsForSelectedShape(Shape*)));
         connect(ToolFactory::getSingletonPtr()->getTranslateTool(), SIGNAL(shapeChanged(Shape*)),
@@ -201,6 +202,23 @@ void QDrawMainWindow::on_autoShapeDetails_valueChanged(int details)
 
 void QDrawMainWindow::on_angleSpinbox_valueChanged(int angle)
 {
+        rotateCurrentShapeBy(angle);
+}
+
+void QDrawMainWindow::on_rotatePlus90_clicked()
+{
+        rotateCurrentShapeBy(90);
+        ui->angleSpinbox->setValue(90);
+}
+
+void QDrawMainWindow::on_rotateMinus90_clicked()
+{
+        rotateCurrentShapeBy(-90);
+        ui->angleSpinbox->setValue(-90);
+}
+
+void QDrawMainWindow::rotateCurrentShapeBy(int angle)
+{
         if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
         {
                 GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
@@ -210,4 +228,5 @@ void QDrawMainWindow::on_angleSpinbox_valueChanged(int angle)
                         activeCanvas->flush();
                 }
         }
+
 }

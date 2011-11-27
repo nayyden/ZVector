@@ -42,7 +42,10 @@ public:
 	~QDrawMainWindow();
 
 private slots:
+        void on_rotateMinus90_clicked();
+        void on_rotatePlus90_clicked();
         void on_angleSpinbox_valueChanged(int );
+        void rotateCurrentShapeBy(int angle);
  void on_actionDraw_Ellipse_triggered();
 	void redrawSelectBuffer();
 
