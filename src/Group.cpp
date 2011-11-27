@@ -37,9 +37,8 @@ void Group::addShape(Shape * shape)
 	m_shapes.push_back(shape);
 }
 
-double * Group::getBoundingBox()
+void Group::getBoundingBox4dv( double* bounds )
 {
-        double* bounds = new double[4];
         bounds[0] = std::numeric_limits<double>::max();
         bounds[1] = bounds[0];
         bounds[2] = std::numeric_limits<double>::min();
@@ -47,7 +46,8 @@ double * Group::getBoundingBox()
 
         QLinkedList<Shape*>::iterator it = m_shapes.begin();
         while(it != m_shapes.end()) {
-                double* shapeBounds = (*it)->getBoundingBox();
+                double shapeBounds[4];
+                (*it)->getBoundingBox4dv(shapeBounds);
 
                 if(shapeBounds[0] < bounds[0]) {
                         bounds[0] = shapeBounds[0];
@@ -63,26 +63,25 @@ double * Group::getBoundingBox()
                         bounds[3] = shapeBounds[3];
                 }
                 ++it;
-                delete[] shapeBounds;
         }
-
-        return bounds;
 }
 
 void Group::draw(bool skipColor = false)
 {
         glPushMatrix();
         glMultMatrixd(m_mat.constData());
-        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
-        while( sit != m_shapes.end())
+        if(m_shapes.size())
         {
-                (*sit)->draw(skipColor);
-                sit++;
+                QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+                while( sit != m_shapes.end())
+                {
+                        (*sit)->draw(skipColor);
+                        sit++;
+                }
+                double boundingBox[4];
+                getBoundingBox4dv(boundingBox);
+                drawBoundingBox(boundingBox);
         }
-        double *boundingBox = getBoundingBox();
-        drawBoundingBox(boundingBox);
-        delete[] boundingBox;
-
         glPopMatrix();
 
 }

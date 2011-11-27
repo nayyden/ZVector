@@ -24,6 +24,7 @@
 
 void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
+        group->clearSelection();
         m_diff.x = event->x();
         m_diff.y = event->y();
 

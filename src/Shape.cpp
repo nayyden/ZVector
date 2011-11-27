@@ -24,6 +24,18 @@
 #include <math.h>
 #include <iostream>
 
+Shape::Shape()
+{
+        m_bDrawCountour = true;
+        m_bDrawFill = true;
+        m_contourWidth = 2.f;
+        m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
+        m_fillColor[3] = m_contourColor[3] = 1.0;
+        m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;
+        m_rotationAngle = 0;
+        m_index = -1;
+}
+
 void Shape::translate( double x, double y )
 {
 	double* m = m_mat.data();
@@ -88,20 +100,12 @@ void Shape::setContourColor(const QColor& color)
 
 QColor Shape::getFillColor()
 {
-	QColor c(
-				m_fillColor[0]*255,
-				m_fillColor[1]*255,
-				m_fillColor[2]*255
-				);
+        QColor c( m_fillColor[0]*255, m_fillColor[1]*255, m_fillColor[2]*255 );
 	return c;
 }
 QColor Shape::getContourColor()
 {
-	QColor c(
-				m_contourColor[0]*255,
-				m_contourColor[1]*255,
-				m_contourColor[2]*255
-				);
+        QColor c( m_contourColor[0]*255, m_contourColor[1]*255, m_contourColor[2]*255 );
 	return c;
 }
 
@@ -175,16 +179,13 @@ void Shape::draw(bool skipColor)
 	glPopMatrix();
 }
 
-double * Shape::getBoundingBox()
+void Shape::getBoundingBox4dv(double* globalBounds)
 {
         double* m = m_mat.data();
-        double* globalBounds = new double[4];
         globalBounds[0] = m_bounds[0] + m[12];
         globalBounds[1] = m_bounds[1] + m[13];
         globalBounds[2] = m_bounds[2] + m[12];
         globalBounds[3] = m_bounds[3] + m[13];
-
-        return globalBounds;
 }
 
 void Shape::drawBoundingBox(double *b)
@@ -228,3 +229,14 @@ float Shape::getContourWidth()
 {
         return m_contourWidth;
 }
+
+void Shape::setIndex(int index)
+{
+        m_index = index;
+}
+
+int Shape::getIndex()
+{
+        return m_index;
+}
+

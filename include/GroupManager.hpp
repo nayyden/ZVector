@@ -29,28 +29,16 @@
 #include <iostream>
 #include "SelectionGroup.hpp"
 
-
-
 class GroupManager
 {
 public:
         GroupManager();
-	virtual ~GroupManager()
-	{
-                QList<Shape*>::iterator it = m_shapes.begin();
-		while( it != m_shapes.end())
-		{
-			if(*it)
-				delete *it;
-			it++;
-		}
-	}
+
+        virtual ~GroupManager();
 
         void setCurrentShape( int index );
 
         Shape* getCurrentShape();
-
-        Group* getSelection();
 
         void popShape(unsigned int index);
 
@@ -59,7 +47,6 @@ public:
         void addNewShape( Shape* shape );
 
         void draw();
-
 
         void drawToSelectionBuffer();
 
@@ -71,10 +58,10 @@ public:
 
         Shape *getShape(int index);
 
+        void clearSelection();
 
 private:
         QList<Shape*> m_shapes;
-        Group *m_currentGroup;
         int m_currentShape;
         SelectionGroup m_selectionGroup;
         float m_zoomFactor;

@@ -21,15 +21,14 @@
  */
 
 #include "SelectTool.hpp"
-#include <iostream>
 #include "Group.hpp"
 #include "GroupManager.hpp"
 
 
 void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
-        if(event->modifiers() == Qt::ControlModifier) {
-
+        if(event->modifiers() == Qt::ControlModifier)
+        {
                 group->drawToSelectionBuffer();
 
                 glReadBuffer( GL_BACK);
@@ -41,8 +40,9 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
                 int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
 
                 group->addToSelection(index);
-                std::cout << "Added to group" << '\n';
-        } else {
+        }
+        else
+        {
                 group->drawToSelectionBuffer();
 
                 glReadBuffer(GL_BACK);
@@ -52,7 +52,6 @@ void SelectTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
                 glReadPixels(event->x(),viewport[3] - event->y(),1,1,GL_RGBA,GL_UNSIGNED_BYTE,(void*)pixels);
 
                 int index = 256*256*pixels[0] + 256*pixels[1] + pixels[2];
-                std::cout << index << '\n';
 
                 group->setCurrentShape(index);
                 emit shapeChanged(group->getCurrentShape());

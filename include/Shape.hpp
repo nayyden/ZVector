@@ -34,13 +34,7 @@
 class Shape
 {
 public:
-        Shape():m_bDrawCountour(true),m_bDrawFill(true),m_contourWidth(2.f)
-	{
-		m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
-                m_fillColor[3] = m_contourColor[3] = 1.0;
-		m_contourColor[0] = m_contourColor[1] = m_contourColor[2] = 0.0;
-                m_rotationAngle = 0;
-	}
+        Shape();
 
 	virtual void draw( bool skipColor = false );
 	virtual void resize( double x, double y ) = 0;
@@ -65,8 +59,11 @@ public:
 
 	virtual QColor getContourColor();
         virtual double getRotationAngle();
-        virtual double* getBoundingBox();
+        virtual void getBoundingBox4dv(double*);
         virtual void drawBoundingBox(double* b);
+
+        int getIndex();
+        void setIndex(int index);
 
 protected:
 	QList<QVector2D> m_vertices;
@@ -86,6 +83,7 @@ protected:
     use only when neccessary, ie the number vertices has changed
  */
 	void recalculateNormals();
+        int m_index; // for selection
 };
 
 #endif // SHAPE_HPP

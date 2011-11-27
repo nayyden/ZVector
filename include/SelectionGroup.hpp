@@ -4,20 +4,29 @@
 #include <QMap>
 #include "Group.hpp"
 
+typedef QLinkedList<Shape*>::iterator SelectionIterator;
+
 class SelectionGroup : public Group
 {
 public:
         SelectionGroup();
-        void addShape(int index, Shape *shape);
+        virtual ~SelectionGroup();
+        void addShape(Shape *shape);
         void clear();
         void draw(bool skipColor);
-        void resize(double x, double y);
-        double* getBoundingBox();
-         QMap<int,Shape*> m_shapes;
-        bool contains(int key);
-        void remove(int key);
-private:
 
+        bool contains(int key);
+        bool empty();
+        void remove(int key);
+
+        void resize(double x, double y);
+        void translate(double x, double y);
+
+        void getBoundingBox4dv(double*);
+
+        SelectionIterator begin();
+        SelectionIterator end();
+private:
 };
 
 #endif // SELECTIONGROUP_HPP

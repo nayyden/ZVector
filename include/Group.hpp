@@ -49,9 +49,9 @@ public:
 
         virtual void setContourWidth(double width);
 
-        double* getBoundingBox();
+        void getBoundingBox4dv( double* bounds );
 
-private:
+protected:
 	QLinkedList<Shape*> m_shapes;
 
 	void deleteShapes();

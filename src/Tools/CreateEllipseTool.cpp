@@ -21,9 +21,11 @@
  */
 
 #include "CreateEllipseTool.hpp"
+#include <limits>
 
 void CreateEllipseTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
+        group->clearSelection();
 	m_diff.x = event->x();
 	m_diff.y = event->y();
 

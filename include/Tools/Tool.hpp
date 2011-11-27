@@ -45,9 +45,7 @@ public:
 
 signals:
         void shapeChanged(Shape*);
-	void redrawSelectionBuffer();
-	void refreshColorPane(QColor);
-        void currentShapeRotation(int angle);
+        void redrawSelectionBuffer();
 
 public slots:
 
