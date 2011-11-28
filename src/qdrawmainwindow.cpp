@@ -257,3 +257,19 @@ void QDrawMainWindow::on_popShapeFront_clicked()
         }
 
 }
+
+void QDrawMainWindow::on_doTranslate_clicked()
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                if(Shape* shape = activeCanvas->getCurrentShape())
+                {
+                        shape->translate(ui->xUnitSpinBox->value(), ui->yUnitSpinBox->value());
+                        ui->xUnitSpinBox->setValue(0);
+                        ui->yUnitSpinBox->setValue(0);
+                        activeCanvas->flush();
+                }
+        }
+
+}

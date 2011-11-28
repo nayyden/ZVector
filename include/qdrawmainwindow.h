@@ -43,6 +43,7 @@ public:
 
 private slots:
 
+        void on_doTranslate_clicked();
         void on_popShapeFront_clicked();
         void on_pushShapeBack_clicked();
         void keyPressEvent(QKeyEvent *e);
