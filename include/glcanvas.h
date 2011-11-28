@@ -70,6 +70,12 @@ public slots:
 
         void groupSelectedShapes();
 
+        void pushCurrentShapeBack();
+
+        void popCurrentShapeFront();
+
+
+
 private:
         void applyViewportTransform();
         struct { float x,y; } m_diff;

@@ -230,3 +230,30 @@ void QDrawMainWindow::rotateCurrentShapeBy(int angle)
         }
 
 }
+
+void QDrawMainWindow::keyPressEvent(QKeyEvent* )
+{
+}
+
+void QDrawMainWindow::on_pushShapeBack_clicked()
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                activeCanvas->pushCurrentShapeBack();
+                activeCanvas->flush();
+
+        }
+}
+
+void QDrawMainWindow::on_popShapeFront_clicked()
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                activeCanvas->popCurrentShapeFront();
+                activeCanvas->flush();
+
+        }
+
+}

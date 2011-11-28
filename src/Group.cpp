@@ -78,9 +78,7 @@ void Group::draw(bool skipColor = false)
                         (*sit)->draw(skipColor);
                         sit++;
                 }
-                double boundingBox[4];
-                getBoundingBox4dv(boundingBox);
-                drawBoundingBox(boundingBox);
+
         }
         glPopMatrix();
 

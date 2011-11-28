@@ -183,3 +183,30 @@ void GroupManager::clearSelection()
         m_currentShape = 0;
         m_selectionGroup.clear();
 }
+
+void GroupManager::moveCurrentShapeBack()
+{
+       int previousShape = m_currentShape - 1;
+       while(previousShape >= 1) {
+               if(m_shapes[previousShape]) {
+                       m_shapes.swap(m_currentShape, previousShape);
+                       m_currentShape = previousShape;
+                       break;
+               }
+               --previousShape;
+       }
+
+}
+
+void GroupManager::moveCurrentShapeFront()
+{
+        int nextShape = m_currentShape + 1;
+        while(nextShape < m_shapes.size()) {
+                if(m_shapes[nextShape]) {
+                        m_shapes.swap(m_currentShape, nextShape);
+                        m_currentShape = nextShape;
+                        break;
+                }
+                ++nextShape;
+        }
+}

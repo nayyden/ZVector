@@ -66,8 +66,9 @@ void GLCanvas::resizeGL(int w, int h)
         applyViewportTransform();
 }
 
-void GLCanvas::keyPressEvent(QKeyEvent*)
+void GLCanvas::keyPressEvent(QKeyEvent* e)
 {
+
 }
 
 void GLCanvas::mouseReleaseEvent(QMouseEvent *event)
@@ -178,6 +179,16 @@ void GLCanvas::setZoomFactor(float zoom_factor)
 {
         m_zoom = zoom_factor;
         applyViewportTransform();
+}
+
+void GLCanvas::pushCurrentShapeBack()
+{
+        m_groupManager->moveCurrentShapeBack();
+}
+
+void GLCanvas::popCurrentShapeFront()
+{
+        m_groupManager->moveCurrentShapeFront();
 }
 
 

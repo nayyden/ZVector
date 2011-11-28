@@ -60,6 +60,10 @@ public:
 
         void clearSelection();
 
+        void moveCurrentShapeBack();
+
+        void moveCurrentShapeFront();
+
 private:
         QList<Shape*> m_shapes;
         int m_currentShape;
