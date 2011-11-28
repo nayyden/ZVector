@@ -22,7 +22,7 @@ public:
         void resize(double x, double y);
         void translate(double x, double y);
 
-        void getBoundingBox4dv(double*);
+        void getBoundingBox4dv(QVector3D*);
 
         SelectionIterator begin();
         SelectionIterator end();

@@ -158,6 +158,7 @@ void GroupManager::groupSelected()
                 m_shapes[(*it)->getIndex()] = NULL;
                 it++;
         }
+        group->recalculateCenter();
         m_selectionGroup.clear();
         m_currentShape = m_shapes.size() - 1;
 }

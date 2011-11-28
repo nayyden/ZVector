@@ -25,37 +25,38 @@ void SelectionGroup::resize(double , double )
 
 }
 
-void SelectionGroup::getBoundingBox4dv( double* bounds )
+void SelectionGroup::getBoundingBox4dv(QVector3D* bounds )
 {
-        bounds[0] = std::numeric_limits<double>::max();
-        bounds[1] = bounds[0];
-        bounds[2] = std::numeric_limits<double>::min();
-        bounds[3] = bounds[2];
+
+        bounds[0].setX(std::numeric_limits<double>::max());
+        bounds[0].setY(bounds[0].x());
+        bounds[1].setX(-bounds[0].x());
+        bounds[1].setY(bounds[1].x());
 
         QLinkedList<Shape*>::iterator it = m_shapes.begin();
         while(it != m_shapes.end())
         {
-                double shapeBounds[4];
+                QVector3D shapeBounds[2];
                 (*it)->getBoundingBox4dv(shapeBounds);
-
-                if(shapeBounds[0] < bounds[0])
+                if(shapeBounds[0].x() < bounds[0].x())
                 {
-                        bounds[0] = shapeBounds[0];
+                        bounds[0].setX(shapeBounds[0].x());
                 }
-                if(shapeBounds[1] < bounds[1])
+                if(shapeBounds[0].y() < bounds[0].y())
                 {
-                        bounds[1] = shapeBounds[1];
+                        bounds[0].setY(shapeBounds[0].y());
                 }
-                if(shapeBounds[2] > bounds[2])
+                if(shapeBounds[1].x() > bounds[1].x())
                 {
-                        bounds[2] = shapeBounds[2];
+                        bounds[1].setX(shapeBounds[1].x());
                 }
-                if(shapeBounds[3] > bounds[3])
+                if(shapeBounds[1].y() > bounds[1].y())
                 {
-                        bounds[3] = shapeBounds[3];
+                        bounds[1].setY(shapeBounds[1].y());
                 }
                 ++it;
         }
+
 }
 
 bool SelectionGroup::contains(int key)
@@ -100,7 +101,7 @@ void SelectionGroup::draw(bool)
         glPushMatrix();
         glMultMatrixd(m_mat.constData());
         {
-                double boundingBox[4];
+                QVector3D boundingBox[2];
                 getBoundingBox4dv(boundingBox);
                 drawBoundingBox(boundingBox);
         }
