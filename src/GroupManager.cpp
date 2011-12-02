@@ -26,6 +26,8 @@
 GroupManager::GroupManager()
 {
         m_shapes.append(new Group());
+        m_shapes.append(new Handler());
+        m_handler = (Handler*)m_shapes[1];
         m_currentShape = 0;
         m_zoomFactor = 1;
 }
@@ -51,6 +53,10 @@ void GroupManager::setCurrentShape(int index)
         }
         else
         {
+                if(index == 1)
+                {
+                        m_handler->setShape(m_shapes[m_currentShape]);
+                }
                 m_currentShape = index;
                 if(!m_selectionGroup.contains(index))
                 {
@@ -117,13 +123,20 @@ void GroupManager::addNewShape(Shape *shape)
 
 void GroupManager::draw()
 {
-        QList<Shape*>::iterator it = m_shapes.begin();
+        QList<Shape*>::iterator it = m_shapes.begin()+2;
         while( it != m_shapes.end())
         {
                 if((*it) != NULL) {
                         (*it)->draw();
                 }
                 it++;
+        }
+        if(m_currentShape)
+        {
+                double bb[4];
+                m_shapes[m_currentShape]->getBoundingBox4dv(bb);
+                m_handler->setPosition(bb[2], bb[3]);
+                m_handler->draw(false);
         }
         m_selectionGroup.draw(false);
 }
@@ -195,7 +208,6 @@ void GroupManager::moveCurrentShapeBack()
                }
                --previousShape;
        }
-
 }
 
 void GroupManager::moveCurrentShapeFront()

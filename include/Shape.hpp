@@ -65,6 +65,8 @@ public:
         int getIndex();
         void setIndex(int index);
 
+        void setPosition(double x, double y);
+
 protected:
 	QList<QVector2D> m_vertices;
 	QList<QVector2D> m_normals;

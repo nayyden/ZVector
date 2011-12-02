@@ -38,7 +38,8 @@ SOURCES += \
 	src/Tools/CreateQuadTool.cpp \
     src/Tools/CreateTriangleTool.cpp \
     src/SelectionGroup.cpp \
-    src/Utils.cpp
+    src/Utils.cpp \
+    src/Handler.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -58,7 +59,8 @@ HEADERS  += \
 	include/Tools/CreateQuadTool.hpp \
     include/Tools/CreateEllipseTool.hpp \
 	include/Tools/CreateTriangleTool.hpp \
-    include/SelectionGroup.hpp
+    include/SelectionGroup.hpp \
+    include/Handler.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 

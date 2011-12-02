@@ -240,3 +240,10 @@ int Shape::getIndex()
         return m_index;
 }
 
+void Shape::setPosition(double x, double y)
+{
+        double* m = m_mat.data();
+        m[12] = x;
+        m[13] = y;
+}
+

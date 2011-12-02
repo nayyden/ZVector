@@ -24,10 +24,11 @@
 #define GROUPMANAGER_HPP
 
 #include <GL/gl.h>
+#include <iostream>
 
 #include "Shape.hpp"
-#include <iostream>
 #include "SelectionGroup.hpp"
+#include "Handler.hpp"
 
 class GroupManager
 {
@@ -69,6 +70,7 @@ private:
         int m_currentShape;
         SelectionGroup m_selectionGroup;
         float m_zoomFactor;
+        Handler* m_handler;
 };
 
 #endif // GROUPMANAGER_HPP
