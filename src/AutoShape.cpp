@@ -2,6 +2,7 @@
 #include <GL/gl.h>
 #include <math.h>
 #include <limits>
+#include <sstream>
 
 AutoShape::AutoShape(double origin_x, double origin_y, int vertices)
 {
@@ -83,6 +84,12 @@ int AutoShape::getNumDetails()
         return m_numberOfVertices;
 }
 
+std::string AutoShape::toString()
+{
+        std::stringstream serialized;
 
+        serialized << AUTO_SHAPE << " " << Shape::toString() << " "
+                   << m_numberOfVertices << "\n";
 
-
+        return serialized.str();
+}

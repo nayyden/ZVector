@@ -86,6 +86,10 @@ private slots:
 
         void on_autoShapeDetails_valueChanged(int arg1);
 
+
+
+        void on_actionSave_as_triggered();
+
 private:
         Ui::QDrawMainWindow *ui;
 

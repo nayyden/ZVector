@@ -22,6 +22,7 @@
 
 #include "GroupManager.hpp"
 #include "Group.hpp"
+#include <fstream>
 
 GroupManager::GroupManager()
 {
@@ -133,9 +134,9 @@ void GroupManager::draw()
         }
         if(m_currentShape)
         {
-                double bb[4];
+                QVector3D bb[2];
                 m_shapes[m_currentShape]->getBoundingBox4dv(bb);
-                m_handler->setPosition(bb[2], bb[3]);
+                m_handler->setPosition(bb[1].x(), bb[1].y());
                 m_handler->draw(false);
         }
         m_selectionGroup.draw(false);
@@ -221,4 +222,23 @@ void GroupManager::moveCurrentShapeFront()
                 }
                 ++nextShape;
         }
+}
+
+void GroupManager::saveToFile(std::string filename)
+{
+        std::ofstream ofile("/home/nayyden/draw.zdrw", std::ios_base::trunc);
+//        if(ofile.fail()) {
+//                throw "Cannot Save To File!";
+//        }
+
+        QList<Shape*>::iterator it = m_shapes.begin() + 2;
+        while( it != m_shapes.end())
+        {
+                if((*it) != NULL) {
+                        ofile << (*it)->toString();
+                }
+                it++;
+        }
+        ofile.close();
+
 }

@@ -65,6 +65,8 @@ public:
 
         void moveCurrentShapeFront();
 
+        void saveToFile(std::string filename);
+
 private:
         QList<Shape*> m_shapes;
         int m_currentShape;

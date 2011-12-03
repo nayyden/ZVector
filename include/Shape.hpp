@@ -31,6 +31,14 @@
 
 #include <GL/gl.h>
 
+enum SHAPETYPE
+{
+        QUAD,
+        AUTO_SHAPE,
+        GROUP,
+        GROUP_TERMINATOR
+};
+
 class Shape
 {
 public:
@@ -66,6 +74,8 @@ public:
         void setIndex(int index);
 
         void setPosition(double x, double y);
+
+        virtual std::string toString();
 
 protected:
 	QList<QVector2D> m_vertices;

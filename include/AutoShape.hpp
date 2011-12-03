@@ -9,6 +9,7 @@ public:
         AutoShape(double origin_x, double origin_y, int vertices = 300);
         void setNumDetails(int);
         int getNumDetails();
+        std::string toString();
 
 protected:
 	void resize(double x, double y);

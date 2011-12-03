@@ -74,6 +74,8 @@ public slots:
 
         void popCurrentShapeFront();
 
+        void saveSceneToFile(std::string filename);
+
 
 
 private:

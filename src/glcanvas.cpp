@@ -191,6 +191,11 @@ void GLCanvas::popCurrentShapeFront()
         m_groupManager->moveCurrentShapeFront();
 }
 
+void GLCanvas::saveSceneToFile(std::string filename)
+{
+        m_groupManager->saveToFile(filename);
+}
+
 
 
 

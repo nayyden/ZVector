@@ -23,6 +23,8 @@
 #include "qdrawmainwindow.h"
 #include "ui_qdrawmainwindow.h"
 #include "qtcolortriangle.h"
+#include <QFileDialog>
+#include <iostream>
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -271,5 +273,20 @@ void QDrawMainWindow::on_doTranslate_clicked()
                         activeCanvas->flush();
                 }
         }
+
+}
+
+void QDrawMainWindow::on_actionSave_as_triggered()
+{
+     //  QString filename =  QFileDialog::getSaveFileName(this, tr("Save as..."), "./",  tr("ZVector drawing (*.zdrw)"));
+       if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+       {
+               GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+               try {
+                       activeCanvas->saveSceneToFile("filename.toStdString()");
+               } catch (const char* exception) {
+                       std::cout << exception << "\n";
+               }
+       }
 
 }

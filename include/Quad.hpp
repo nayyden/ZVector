@@ -33,6 +33,7 @@ public:
 	Quad( double origin_x, double origin_y );
 
 	void resize(double x, double y);
+        std::string toString();
 
 private:
 

@@ -23,10 +23,11 @@
 #include "Shape.hpp"
 #include <math.h>
 #include <iostream>
+#include <string>
+#include <sstream>
 
 Shape::Shape()
 {
-        m_bDrawCountour = true;
         m_bDrawFill = true;
         m_contourWidth = 2.f;
         m_fillColor[0] = m_fillColor[1] = m_fillColor[2] = 0.3;
@@ -139,15 +140,15 @@ void Shape::draw(bool skipColor)
 
 	QList<QVector2D>::iterator it = m_vertices.begin();
 
-	if(m_bDrawFill) {
-		glBegin(GL_POLYGON);
-		while(it != m_vertices.end())
-		{
-			glVertex2d(it->x(), it->y());
-			it++;
-		}
-		glEnd();
-	}
+
+        glBegin(GL_POLYGON);
+        while(it != m_vertices.end())
+        {
+                glVertex2d(it->x(), it->y());
+                it++;
+        }
+        glEnd();
+
         if(m_contourWidth) {
 		if(!skipColor)
                         glColor4dv(m_contourColor);
@@ -245,5 +246,25 @@ void Shape::setPosition(double x, double y)
         double* m = m_mat.data();
         m[12] = x;
         m[13] = y;
+}
+
+std::string Shape::toString()
+{
+        std::stringstream serialized;
+
+
+        const double* mat = m_mat.constData();
+
+
+
+
+        serialized <<  (float)mat[12] << " " << (float)mat[13] << " " // position
+                    << m_contourWidth << " "
+                    << m_fillColor[0] << " " << m_fillColor[1] << " " << m_fillColor[2] << " " << m_fillColor[3] << " "
+                    << m_contourColor[0] << " " << m_contourColor[1] << " " << m_contourColor[2] << " " << m_fillColor[3] << " "
+                    << m_rotationAngle;
+
+        return serialized.str();
+
 }
 

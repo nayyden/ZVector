@@ -21,6 +21,7 @@
  */
 
 #include "CreateQuadTool.hpp"
+#include <iostream>
 
 void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *group)
 {
@@ -31,6 +32,7 @@ void CreateQuadTool::handleMousePressEvent(QMouseEvent *event, GroupManager *gro
         double X, Y;
         ZUtils::unProject(event->x(), event->y(), &X, &Y );
         Quad* quad = new Quad(X, Y);
+        std::cout << "Serializing Quad: " << quad->toString() << "\n";
         group->addNewShape( quad );
 }
 void CreateQuadTool::handleMouseReleaseEvent(QMouseEvent *, GroupManager *)
