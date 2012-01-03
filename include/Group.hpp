@@ -49,7 +49,9 @@ public:
 
         virtual void setContourWidth(double width);
 
-        void getBoundingBox4dv( double* bounds );
+        void getBoundingBox4dv(QVector3D* b);
+
+        void recalculateCenter();
 
 protected:
 	QLinkedList<Shape*> m_shapes;

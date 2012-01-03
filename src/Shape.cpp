@@ -180,33 +180,30 @@ void Shape::draw(bool skipColor)
 	glPopMatrix();
 }
 
-void Shape::getBoundingBox4dv(double* globalBounds)
+void Shape::getBoundingBox4dv(QVector3D* b)
 {
-        double* m = m_mat.data();
-        globalBounds[0] = m_bounds[0] + m[12];
-        globalBounds[1] = m_bounds[1] + m[13];
-        globalBounds[2] = m_bounds[2] + m[12];
-        globalBounds[3] = m_bounds[3] + m[13];
+        b[0] = m_mat * m_bounds[0];
+        b[1] = m_mat * m_bounds[1];
 }
 
-void Shape::drawBoundingBox(double *b)
+void Shape::drawBoundingBox(QVector3D* b)
 {
         glLineStipple(5, 0xAAAA);
         glEnable(GL_LINE_STIPPLE);
 
         glBegin(GL_LINE_STRIP);
         {
-                glVertex2d(b[0], b[1]);
-                glVertex2d(b[2], b[1]);
+                glVertex2d(b[0].x(), b[0].y());
+                glVertex2d(b[1].x(), b[0].y());
 
-                glVertex2d(b[2], b[1]);
-                glVertex2d(b[2], b[3]);
+                glVertex2d(b[1].x(), b[0].y());
+                glVertex2d(b[1].x(), b[1].y());
 
-                glVertex2d(b[2], b[3]);
-                glVertex2d(b[0], b[3]);
+                glVertex2d(b[1].x(), b[1].y());
+                glVertex2d(b[0].x(), b[1].y());
 
-                glVertex2d(b[0], b[3]);
-                glVertex2d(b[0], b[1]);
+                glVertex2d(b[0].x(), b[1].y());
+                glVertex2d(b[0].x(), b[0].y());
         }
         glEnd();
 }

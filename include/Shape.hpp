@@ -67,8 +67,8 @@ public:
 
 	virtual QColor getContourColor();
         virtual double getRotationAngle();
-        virtual void getBoundingBox4dv(double*);
-        virtual void drawBoundingBox(double* b);
+        virtual void getBoundingBox4dv(QVector3D* b);
+        virtual void drawBoundingBox(QVector3D* b);
 
         int getIndex();
         void setIndex(int index);
@@ -80,12 +80,12 @@ public:
 protected:
 	QList<QVector2D> m_vertices;
 	QList<QVector2D> m_normals;
-	QMatrix4x4 m_mat;
+        QMatrix4x4 m_mat;
 
         double m_fillColor[4];
         double m_contourColor[4];
         double m_rotationAngle;
-        double m_bounds[4];
+        QVector3D m_bounds[2];
 
 	bool m_bDrawCountour;
 	bool m_bDrawFill;

@@ -37,33 +37,37 @@ void Group::addShape(Shape * shape)
 	m_shapes.push_back(shape);
 }
 
-void Group::getBoundingBox4dv( double* bounds )
+void Group::getBoundingBox4dv(QVector3D* bounds)
 {
-        bounds[0] = std::numeric_limits<double>::max();
-        bounds[1] = bounds[0];
-        bounds[2] = std::numeric_limits<double>::min();
-        bounds[3] = bounds[2];
+        bounds[0].setX(std::numeric_limits<double>::max());
+        bounds[0].setY(bounds[0].x());
+        bounds[1].setX(-bounds[0].x());
+        bounds[1].setY(bounds[1].x());
 
         QLinkedList<Shape*>::iterator it = m_shapes.begin();
-        while(it != m_shapes.end()) {
-                double shapeBounds[4];
+        while(it != m_shapes.end())
+        {
+                QVector3D shapeBounds[2];
                 (*it)->getBoundingBox4dv(shapeBounds);
-
-                if(shapeBounds[0] < bounds[0]) {
-                        bounds[0] = shapeBounds[0];
+                if(shapeBounds[0].x() < bounds[0].x())
+                {
+                        bounds[0].setX(shapeBounds[0].x());
                 }
-                if(shapeBounds[1] < bounds[1]) {
-                        bounds[1] = shapeBounds[1];
+                if(shapeBounds[0].y() < bounds[0].y())
+                {
+                        bounds[0].setY(shapeBounds[0].y());
                 }
-
-                if(shapeBounds[2] > bounds[2]) {
-                        bounds[2] = shapeBounds[2];
+                if(shapeBounds[1].x() > bounds[1].x())
+                {
+                        bounds[1].setX(shapeBounds[1].x());
                 }
-                if(shapeBounds[3] > bounds[3]) {
-                        bounds[3] = shapeBounds[3];
+                if(shapeBounds[1].y() > bounds[1].y())
+                {
+                        bounds[1].setY(shapeBounds[1].y());
                 }
                 ++it;
         }
+
 }
 
 void Group::draw(bool skipColor = false)
@@ -78,6 +82,7 @@ void Group::draw(bool skipColor = false)
                         (*sit)->draw(skipColor);
                         sit++;
                 }
+
 
         }
         glPopMatrix();
@@ -147,6 +152,23 @@ void Group::resize(double x, double y)
                 (*sit)->resize(x, y);
                 sit++;
         }
+}
+
+void Group::recalculateCenter()
+{
+        double* m = m_mat.data();
+        QVector2D center;
+        QVector3D bounds[2];
+        getBoundingBox4dv(bounds);
+
+
+        center.setX((bounds[1].x() - bounds[0].x())/2);
+        center.setY((bounds[1].y() - bounds[0].y())/2);
+
+        translate(center.x() - m[12], center.y() - m[13]);
+        m[12] -= center.x();
+        m[13] -= center.y();
+
 }
 
 
