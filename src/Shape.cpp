@@ -90,6 +90,7 @@ void Shape::setFillColor(const QColor& color)
 	m_fillColor[0] = color.redF();
 	m_fillColor[1] = color.greenF();
 	m_fillColor[2] = color.blueF();
+        m_fillColor[3] = color.alphaF();
 }
 
 void Shape::setContourColor(const QColor& color)
@@ -97,6 +98,7 @@ void Shape::setContourColor(const QColor& color)
 	m_contourColor[0] = color.redF();
 	m_contourColor[1] = color.greenF();
 	m_contourColor[2] = color.blueF();
+        m_contourColor[3] = color.alphaF();
 }
 
 QColor Shape::getFillColor()
@@ -252,10 +254,11 @@ std::string Shape::toString()
 
         const double* mat = m_mat.constData();
 
-
+        QVector2D size = getSize();
 
 
         serialized <<  (float)mat[12] << " " << (float)mat[13] << " " // position
+                    << size.x() << " " << size.y() << " "
                     << m_contourWidth << " "
                     << m_fillColor[0] << " " << m_fillColor[1] << " " << m_fillColor[2] << " " << m_fillColor[3] << " "
                     << m_contourColor[0] << " " << m_contourColor[1] << " " << m_contourColor[2] << " " << m_fillColor[3] << " "
@@ -265,3 +268,17 @@ std::string Shape::toString()
 
 }
 
+QVector2D Shape::getSize()
+{
+        QVector2D size;
+
+        double size_x = m_bounds[1].x() - m_bounds[0].x();
+        double size_y = m_bounds[1].y() - m_bounds[0].y();
+
+        size.setX(size_x);
+        size.setY(size_y);
+
+        return size;
+
+
+}

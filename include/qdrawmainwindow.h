@@ -90,6 +90,8 @@ private slots:
 
         void on_actionSave_as_triggered();
 
+        void on_actionOpen_triggered();
+
 private:
         Ui::QDrawMainWindow *ui;
 

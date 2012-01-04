@@ -33,10 +33,12 @@
 
 enum SHAPETYPE
 {
+        SHAPE_TYPE_BEGIN,
         QUAD,
         AUTO_SHAPE,
-        GROUP,
-        GROUP_TERMINATOR
+        GROUP_SHAPE,
+        GROUP_TERMINATOR,
+        SHAPE_TYPE_END
 };
 
 class Shape
@@ -69,6 +71,7 @@ public:
         virtual double getRotationAngle();
         virtual void getBoundingBox4dv(QVector3D* b);
         virtual void drawBoundingBox(QVector3D* b);
+        virtual QVector2D getSize();
 
         int getIndex();
         void setIndex(int index);

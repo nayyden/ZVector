@@ -23,6 +23,9 @@
 #include "GroupManager.hpp"
 #include "Group.hpp"
 #include <fstream>
+#include <iostream>
+#include "Quad.hpp"
+
 
 GroupManager::GroupManager()
 {
@@ -227,10 +230,11 @@ void GroupManager::moveCurrentShapeFront()
 
 void GroupManager::saveToFile(std::string filename)
 {
-        std::ofstream ofile("/home/nayyden/draw.zdrw", std::ios_base::trunc);
-//        if(ofile.fail()) {
-//                throw "Cannot Save To File!";
-//        }
+        std::cout << filename << "\n";
+        std::ofstream ofile(filename.c_str(), std::ios_base::trunc);
+        if(ofile.fail()) {
+                throw "Cannot Save To File!";
+        }
 
         QList<Shape*>::iterator it = m_shapes.begin() + 2;
         while( it != m_shapes.end())
@@ -241,5 +245,48 @@ void GroupManager::saveToFile(std::string filename)
                 it++;
         }
         ofile.close();
+
+}
+
+void GroupManager::restoreFromFile(std::string filename)
+{
+        std::ifstream ifile(filename.c_str());
+        if(ifile.fail()) {
+                throw "Cannot read from file";
+        }
+        int shapeType;
+        double pos_x;
+        double pos_y;
+        double contourWidth;
+        double color[4];
+        double contourColor[4];
+        double size_x, size_y;
+
+
+
+        Shape* shape;
+
+        while((ifile >> shapeType)) {
+                if(shapeType) {
+                        ifile >> pos_x >> pos_y
+                              >> size_x >> size_y
+                              >> contourWidth
+                              >> color[0] >> color[1] >> color[2] >> color[3]
+                              >> contourColor[0] >> contourColor[1] >> contourColor[2] >> contourColor[3];
+                        std::cout << "Shape color:" <<color[0] << color[1] << color[2] << "\n";
+                        switch(shapeType) {
+                            case QUAD:
+                                shape = new Quad(pos_x, pos_y);
+                                break;
+                        }
+                        shape->setContourWidth(contourWidth);
+                        shape->setFillColor(color[0], color[1], color[2]);
+                        shape->setFillColorOpacity(color[3]);
+                        shape->setContourColor(QColor(contourColor[0], contourColor[1], contourColor[2]));
+                        shape->setContourColorOpacity(contourColor[3]);
+                        shape->resize(size_x, size_y);
+                        m_shapes.push_back(shape);
+                }
+        }
 
 }

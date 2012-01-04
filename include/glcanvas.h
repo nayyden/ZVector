@@ -76,6 +76,8 @@ public slots:
 
         void saveSceneToFile(std::string filename);
 
+        void restoreSceneFromFile(std::string filename);
+
 
 
 private:

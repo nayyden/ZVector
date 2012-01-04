@@ -24,6 +24,7 @@
 #include "ui_qdrawmainwindow.h"
 #include "qtcolortriangle.h"
 #include <QFileDialog>
+#include <QMessageBox>
 #include <iostream>
 
 QDrawMainWindow::QDrawMainWindow(QWidget *parent) :
@@ -278,15 +279,39 @@ void QDrawMainWindow::on_doTranslate_clicked()
 
 void QDrawMainWindow::on_actionSave_as_triggered()
 {
-     //  QString filename =  QFileDialog::getSaveFileName(this, tr("Save as..."), "./",  tr("ZVector drawing (*.zdrw)"));
+      
        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
        {
-               GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
-               try {
-                       activeCanvas->saveSceneToFile("filename.toStdString()");
-               } catch (const char* exception) {
-                       std::cout << exception << "\n";
-               }
+              QString filename =  QFileDialog::getSaveFileName(this, tr("Save as..."), "./",  tr("ZVector drawing (*.zdrw)"));
+              if(filename.isEmpty()) {
+                      return;
+              }
+              GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+              try {
+                       activeCanvas->saveSceneToFile(filename.toStdString());
+              } catch (const char* exception) {
+                      QMessageBox::warning(this, tr("ZVector"), tr("Cannot save file!"));
+              }
+             
        }
 
+}
+
+void QDrawMainWindow::on_actionOpen_triggered()
+{
+        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "./", tr("Zvector drawing (*.zdrw)"));
+                if(filename.isEmpty()) {
+                        return;
+                }
+                
+                
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+                try {
+                        activeCanvas->restoreSceneFromFile(filename.toStdString());
+                } catch (const char* exception) {
+                         QMessageBox::warning(this, tr("ZVector"), tr("Cannot open file!"));
+                }
+        }
 }

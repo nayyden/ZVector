@@ -192,10 +192,17 @@ void GLCanvas::popCurrentShapeFront()
 }
 
 void GLCanvas::saveSceneToFile(std::string filename)
-{
+{       
         m_groupManager->saveToFile(filename);
 }
 
+void GLCanvas::restoreSceneFromFile(std::string filename)
+{
+        m_groupManager->restoreFromFile(filename);
+
+        paintGL();
+        updateGL();
+}
 
 
 
