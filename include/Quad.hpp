@@ -32,6 +32,7 @@ class Quad : public Shape
 public:
 	Quad( double origin_x, double origin_y );
 
+        void rotate(double angle);
 	void resize(double x, double y);
         std::string toString();
 

@@ -20,12 +20,11 @@
  *  Rangel Ivanov: iron_steel_88 <at> abv <dot> bg
  */
 
-#include "GroupManager.hpp"
-#include "Group.hpp"
 #include <fstream>
 #include <iostream>
+#include "GroupManager.hpp"
+#include "Group.hpp"
 #include "Quad.hpp"
-
 
 GroupManager::GroupManager()
 {

@@ -23,6 +23,7 @@
 #include "Quad.hpp"
 #include <GL/gl.h>
 #include <sstream>
+#include <math.h>
 
 Quad::Quad( double origin_x, double origin_y )
 {
@@ -45,7 +46,6 @@ void Quad::resize(double x, double y)
         m_vertices[2].setX( m_vertices[2].x() + x);
         m_vertices[2].setY( m_vertices[2].y() + y);
         m_vertices[3].setX( m_vertices[3].x() + x);
-
 
         m_bounds[0].setX(m_vertices[0].x());
         m_bounds[0].setY(m_vertices[0].y());
@@ -89,3 +89,26 @@ std::string Quad::toString()
         return serialized.str();
 }
 
+void Quad::rotate(double angle)
+{
+        QVector3D bb[2];
+        double* m_mat_data = m_mat.data();
+        getBoundingBox4dv(bb);
+        double w = (bb[1].x() - bb[0].x())/2 + m_mat_data[12];
+        double h = (bb[1].y() - bb[0].y())/2 + m_mat_data[13];
+        QMatrix4x4 mat;
+        double* m = mat.data();
+        double radians = (m_rotationAngle - angle) * DEG2RAD ;
+
+        m[0] = cos(radians);
+        m[1] = -sin(radians);
+        m[4] = sin(radians);
+        m[5] = cos(radians);
+        m_mat_data[12] -= w;
+        m_mat_data[13] -= h;
+
+        m_mat = mat * m_mat;
+        m_mat_data[12] +=w;
+        m_mat_data[13] +=h;
+        m_rotationAngle = angle;
+}
