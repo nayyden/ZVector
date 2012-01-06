@@ -69,6 +69,8 @@ void Group::getBoundingBox4dv(QVector3D* bounds)
                 }
                 ++it;
         }
+	bounds[0] = m_mat * bounds[0];
+        bounds[1] = m_mat * bounds[1];
 
 }
 

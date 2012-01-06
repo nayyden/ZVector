@@ -329,7 +329,7 @@ void GroupManager::restoreGroup(std::ifstream& file, Group *group, int type)
 			break;
                     case GROUP_SHAPE:
 			shape = new Group(pos_x, pos_y);
-			restoreGroup(file, group, type);
+			restoreGroup(file, (Group *)shape, type);
 			break;
 			
                 }
