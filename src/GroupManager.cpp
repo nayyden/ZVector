@@ -22,6 +22,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <typeinfo>
 #include "GroupManager.hpp"
 #include "Group.hpp"
 #include "Quad.hpp"
@@ -202,6 +203,25 @@ void GroupManager::clearSelection()
         m_selectionGroup.clear();
 }
 
+void GroupManager::collapseSelectedGroup()
+{
+	if(typeid(*m_shapes[m_currentShape]) == typeid(Group) ) {
+		
+		Group* selectedGroup = (Group*)m_shapes[m_currentShape];
+		
+		selectedGroup->applyTransformToChildren();
+		while(!selectedGroup->isEmpty()) {
+			Shape* popped = selectedGroup->popFront();
+			m_shapes.push_back(popped);
+		}
+	
+		delete selectedGroup;
+		m_shapes[m_currentShape] = NULL;
+		
+		m_currentShape = 0;
+	}
+}
+
 void GroupManager::moveCurrentShapeBack()
 {
        int previousShape = m_currentShape - 1;
@@ -343,3 +363,5 @@ void GroupManager::restoreGroup(std::ifstream& file, Group *group, int type)
 		group->addShape(shape);
 	}
 }
+
+

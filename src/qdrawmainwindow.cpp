@@ -101,6 +101,17 @@ void QDrawMainWindow::on_actionGroup_triggered()
         activeCanvas->groupSelectedShapes();
 }
 
+void QDrawMainWindow::on_actionUngroup_triggered()
+{
+
+	if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
+        {
+                GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+		activeCanvas->collapseSelectedGroup();               
+        }
+    
+}
+
 void QDrawMainWindow::on_colorTriangle_colorChanged(const QColor &color)
 {
         if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
@@ -322,3 +333,5 @@ void QDrawMainWindow::on_actionOpen_triggered()
                 }
         }
 }
+
+

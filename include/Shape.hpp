@@ -48,6 +48,8 @@ public:
 
 	virtual void draw( bool skipColor = false );
 	virtual void resize( double x, double y ) = 0;
+	
+	virtual void applyTransform(QMatrix4x4& transform);
 
 	virtual void translate( double x, double y );
 	virtual void rotate( double angle );

@@ -182,6 +182,11 @@ void Shape::draw(bool skipColor)
 	glPopMatrix();
 }
 
+void Shape::applyTransform(QMatrix4x4 &transform)
+{
+	m_mat = transform * m_mat;
+}
+
 void Shape::getBoundingBox4dv(QVector3D* b)
 {
         b[0] = m_mat * m_bounds[0];

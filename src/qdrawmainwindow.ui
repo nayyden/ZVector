@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>1055</width>
-     <height>20</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -82,6 +82,7 @@
    <addaction name="actionDraw_Triangle"/>
    <addaction name="separator"/>
    <addaction name="actionGroup"/>
+   <addaction name="actionUngroup"/>
    <addaction name="separator"/>
    <addaction name="actionReset_Zoom"/>
   </widget>
@@ -95,7 +96,7 @@
    <property name="minimumSize">
     <size>
      <width>210</width>
-     <height>491</height>
+     <height>533</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -538,6 +539,17 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="actionUngroup">
+   <property name="text">
+    <string>Ungroup</string>
+   </property>
+   <property name="toolTip">
+    <string>Collapse Selected Group</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
    </property>
   </action>
  </widget>

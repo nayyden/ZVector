@@ -70,6 +70,8 @@ public:
         void restoreFromFile(std::string filename);
 	
 	void restoreGroup(std::ifstream &file, Group* group, int type);
+	
+	void collapseSelectedGroup();
 
 private:
         QList<Shape*> m_shapes;

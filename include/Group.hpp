@@ -48,6 +48,9 @@ public:
 	
 
 	void addShape( Shape* shape);
+	void applyTransformToChildren();
+	Shape* popFront();
+	bool isEmpty();
 
         virtual void resize( double x, double y );
         void draw(bool skipColor);

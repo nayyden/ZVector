@@ -39,6 +39,32 @@ void Group::addShape(Shape * shape)
 	m_shapes.push_back(shape);
 }
 
+void Group::applyTransformToChildren()
+{
+	QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+		(*sit)->applyTransform(m_mat);
+                sit++;
+        }
+	
+}
+
+Shape *Group::popFront()
+{
+	if(!m_shapes.isEmpty()) {
+		Shape* front = m_shapes.front();
+		m_shapes.pop_front();
+		return front;
+	}
+	return NULL;
+}
+
+bool Group::isEmpty()
+{
+	return m_shapes.isEmpty();
+}
+
 void Group::getBoundingBox4dv(QVector3D* bounds)
 {
         bounds[0].setX(std::numeric_limits<double>::max());
