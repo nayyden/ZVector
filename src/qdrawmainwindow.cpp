@@ -282,13 +282,17 @@ void QDrawMainWindow::on_actionSave_as_triggered()
       
        if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
        {
-              QString filename =  QFileDialog::getSaveFileName(this, tr("Save as..."), "./",  tr("ZVector drawing (*.zdrw)"));
-              if(filename.isEmpty()) {
+              QString fullPathToFile =  QFileDialog::getSaveFileName(this, tr("Save as..."), "./",  tr("ZVector drawing (*.zdrw)"));
+              if(fullPathToFile.isEmpty()) {
                       return;
               }
+	      
+	      QStringList splitted = fullPathToFile.split("/");
+	      QString filename = splitted.at(splitted.size() - 1);	      
               GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
               try {
-                       activeCanvas->saveSceneToFile(filename.toStdString());
+                       activeCanvas->saveSceneToFile(fullPathToFile.toStdString());
+		       activeCanvas->setWindowTitle(filename);
               } catch (const char* exception) {
                       QMessageBox::warning(this, tr("ZVector"), tr("Cannot save file!"));
               }
@@ -301,15 +305,18 @@ void QDrawMainWindow::on_actionOpen_triggered()
 {
         if(QMdiSubWindow* wnd = ui->mdiArea->activeSubWindow())
         {
-                QString filename = QFileDialog::getOpenFileName(this, tr("Open..."), "./", tr("Zvector drawing (*.zdrw)"));
-                if(filename.isEmpty()) {
+                QString fullPathToFile = QFileDialog::getOpenFileName(this, tr("Open..."), "./", tr("Zvector drawing (*.zdrw)"));
+                if(fullPathToFile.isEmpty()) {
                         return;
                 }
                 
-                
+        
                 GLCanvas* activeCanvas = (GLCanvas*)wnd->widget();
+		QStringList splitted = fullPathToFile.split("/");
+		QString filename = splitted.at(splitted.size() - 1);
                 try {
-                        activeCanvas->restoreSceneFromFile(filename.toStdString());
+                        activeCanvas->restoreSceneFromFile(fullPathToFile.toStdString());
+			activeCanvas->setWindowTitle(filename);
                 } catch (const char* exception) {
                          QMessageBox::warning(this, tr("ZVector"), tr("Cannot open file!"));
                 }
