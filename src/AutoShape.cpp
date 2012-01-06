@@ -66,8 +66,17 @@ void AutoShape::recalculateVertices()
         m_bounds[0].setX(m_bounds[0].x() - m_contourWidth);
         m_bounds[0].setY(m_bounds[0].y() - m_contourWidth);
         m_bounds[1].setX(m_bounds[1].x() + m_contourWidth);
-        m_bounds[1].setY(m_bounds[1].y() + m_contourWidth);
+	m_bounds[1].setY(m_bounds[1].y() + m_contourWidth);
+	
+}
 
+QVector2D AutoShape::getSize()
+{
+	QVector2D size;
+	size.setX(m_majorRadius);
+	size.setY(m_minorRadius);
+	
+	return size;
 }
 
 void AutoShape::setNumDetails(int details)

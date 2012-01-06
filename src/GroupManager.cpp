@@ -25,6 +25,7 @@
 #include "GroupManager.hpp"
 #include "Group.hpp"
 #include "Quad.hpp"
+#include "AutoShape.hpp"
 
 GroupManager::GroupManager()
 {
@@ -261,7 +262,7 @@ void GroupManager::restoreFromFile(std::string filename)
         double contourColor[4];
         double size_x, size_y;
 	double rotationAngle;
-
+	int numberOfVertices;
 
 
         Shape* shape;
@@ -278,6 +279,10 @@ void GroupManager::restoreFromFile(std::string filename)
                             case QUAD:
                                 shape = new Quad(pos_x, pos_y);
                                 break;
+                            case AUTO_SHAPE:
+				ifile >> numberOfVertices;
+				shape = new AutoShape(pos_x, pos_y, numberOfVertices);
+				break;
                         }
                         shape->setContourWidth(contourWidth);
                         shape->setFillColor(color[0], color[1], color[2]);

@@ -17,6 +17,7 @@ protected:
 private:
         void addVertices();
         void recalculateVertices();
+	QVector2D getSize();
 
 	int m_majorRadius;
 	int m_minorRadius;
