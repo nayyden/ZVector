@@ -22,6 +22,8 @@
 
 #include "Group.hpp"
 #include <limits>
+#include <sstream>
+
 
 void Group::deleteShapes()
 {
@@ -167,8 +169,25 @@ void Group::recalculateCenter()
 
         translate(center.x() - m[12], center.y() - m[13]);
         m[12] -= center.x();
-        m[13] -= center.y();
+	m[13] -= center.y();
+	
+}
 
+std::string Group::toString()
+{
+	std::stringstream serialized;
+	serialized << GROUP_SHAPE << " " << Shape::toString() << "\n";
+	QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+		serialized << (*sit)->toString();
+                sit++;
+        }
+	
+	
+	serialized << GROUP_TERMINATOR << "\n";
+	
+	return serialized.str();
 }
 
 

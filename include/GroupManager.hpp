@@ -68,6 +68,8 @@ public:
         void saveToFile(std::string filename);
 
         void restoreFromFile(std::string filename);
+	
+	void restoreGroup(std::ifstream &file, Group* group, int type);
 
 private:
         QList<Shape*> m_shapes;

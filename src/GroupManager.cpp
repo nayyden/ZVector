@@ -283,6 +283,10 @@ void GroupManager::restoreFromFile(std::string filename)
 				ifile >> numberOfVertices;
 				shape = new AutoShape(pos_x, pos_y, numberOfVertices);
 				break;
+                            case GROUP_SHAPE:
+				shape = new Group(pos_x, pos_y);
+				restoreGroup(ifile, (Group *)shape, shapeType);
+				break;
                         }
                         shape->setContourWidth(contourWidth);
                         shape->setFillColor(color[0], color[1], color[2]);
@@ -293,6 +297,49 @@ void GroupManager::restoreFromFile(std::string filename)
 			shape->rotate(rotationAngle);
                         m_shapes.push_back(shape);
                 }
-        }
+	}
+	
+}
 
+void GroupManager::restoreGroup(std::ifstream& file, Group *group, int type)
+{
+	Shape *shape;
+        double pos_x;
+        double pos_y;
+        double contourWidth;
+        double color[4];
+        double contourColor[4];
+        double size_x, size_y;
+	double rotationAngle;
+	int numberOfVertices;
+	while((file >> type) && type != GROUP_TERMINATOR) {
+		 file >> pos_x >> pos_y
+                      >> size_x >> size_y
+                      >> contourWidth
+                      >> color[0] >> color[1] >> color[2] >> color[3]
+                      >> contourColor[0] >> contourColor[1] >> contourColor[2] >> contourColor[3]
+                      >> rotationAngle;
+                switch(type) {
+                    case QUAD:
+                        shape = new Quad(pos_x, pos_y);
+                        break;
+                    case AUTO_SHAPE:
+			file >> numberOfVertices;
+			shape = new AutoShape(pos_x, pos_y, numberOfVertices);
+			break;
+                    case GROUP_SHAPE:
+			shape = new Group(pos_x, pos_y);
+			restoreGroup(file, group, type);
+			break;
+			
+                }
+                shape->setContourWidth(contourWidth);
+                shape->setFillColor(color[0], color[1], color[2]);
+                shape->setFillColorOpacity(color[3]);
+                shape->setContourColor(QColor(contourColor[0], contourColor[1], contourColor[2]));
+                shape->setContourColorOpacity(contourColor[3]);
+                shape->resize(size_x, size_y);
+		shape->rotate(rotationAngle);
+		group->addShape(shape);
+	}
 }

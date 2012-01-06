@@ -31,10 +31,21 @@
 class Group: public Shape
 {
 public:
+	Group() : Shape() 
+	{
+	}
+	Group(double origin_x, double origin_y) : Shape()
+	{
+		double* m = m_mat.data();
+		m[12] = origin_x;
+		m[13] = origin_y;
+	}
+		
 	virtual ~Group()
 	{
 		deleteShapes();
 	}
+	
 
 	void addShape( Shape* shape);
 
@@ -52,6 +63,8 @@ public:
         void getBoundingBox4dv(QVector3D* b);
 
         void recalculateCenter();
+	
+        std::string toString();
 
 protected:
 	QLinkedList<Shape*> m_shapes;
