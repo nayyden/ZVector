@@ -44,8 +44,7 @@ public:
 	virtual ~Group()
 	{
 		deleteShapes();
-	}
-	
+        }
 
 	void addShape( Shape* shape);
 

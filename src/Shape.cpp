@@ -90,7 +90,7 @@ void Shape::setFillColor(const QColor& color)
 	m_fillColor[0] = color.redF();
 	m_fillColor[1] = color.greenF();
 	m_fillColor[2] = color.blueF();
-        m_fillColor[3] = color.alphaF();
+//        m_fillColor[3] = color.alphaF();
 }
 
 void Shape::setContourColor(const QColor& color)
@@ -98,7 +98,7 @@ void Shape::setContourColor(const QColor& color)
 	m_contourColor[0] = color.redF();
 	m_contourColor[1] = color.greenF();
 	m_contourColor[2] = color.blueF();
-        m_contourColor[3] = color.alphaF();
+//        m_contourColor[3] = color.alphaF();
 }
 
 QColor Shape::getFillColor()
