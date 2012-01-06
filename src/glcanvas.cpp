@@ -178,12 +178,21 @@ void GLCanvas::wheelEvent(QWheelEvent *e)
 void GLCanvas::setZoomFactor(float zoom_factor)
 {
         m_zoom = zoom_factor;
-        applyViewportTransform();
+	applyViewportTransform();
+}
+
+void GLCanvas::collapseSelectedGroup()
+{
+	m_groupManager->collapseSelectedGroup();
+	paintGL();
+	updateGL();
 }
 
 void GLCanvas::pushCurrentShapeBack()
 {
         m_groupManager->moveCurrentShapeBack();
+	paintGL();
+	updateGL();
 }
 
 void GLCanvas::popCurrentShapeFront()

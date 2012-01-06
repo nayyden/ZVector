@@ -86,14 +86,20 @@ private slots:
 
         void on_autoShapeDetails_valueChanged(int arg1);
 
-
-
         void on_actionSave_as_triggered();
 
         void on_actionOpen_triggered();
 
+	void on_actionUngroup_triggered();
+	
+        void on_width_valueChanged(double arg1);
+
+        void on_height_valueChanged(double arg1);
+
 private:
         Ui::QDrawMainWindow *ui;
+
+        GLCanvas* getActiveCanvas();
 
 signals:
 	void changeTool (Tool*);

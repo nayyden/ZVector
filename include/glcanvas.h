@@ -45,6 +45,7 @@ public:
 	}
 	void redrawSelectionBufer();
         void setZoomFactor(float zoom_factor);
+	void collapseSelectedGroup();
 
 signals:
 	void sendFrameBuffer(QImage buffer);

@@ -182,6 +182,11 @@ void Shape::draw(bool skipColor)
 	glPopMatrix();
 }
 
+void Shape::applyTransform(QMatrix4x4 &transform)
+{
+	m_mat = transform * m_mat;
+}
+
 void Shape::getBoundingBox4dv(QVector3D* b)
 {
         b[0] = m_mat * m_bounds[0];
@@ -265,7 +270,6 @@ std::string Shape::toString()
                     << m_rotationAngle;
 
         return serialized.str();
-
 }
 
 QVector2D Shape::getSize()
@@ -279,6 +283,20 @@ QVector2D Shape::getSize()
         size.setY(size_y);
 
         return size;
+}
 
+void Shape::setSize(double x, double y)
+{
+        QVector2D size = getSize();
+        double diff_x = 0, diff_y = 0;
+        if(x)
+        {
+                diff_x = x - size.x();
+        }
+        if(y)
+        {
+                diff_y = y - size.y();
+        }
 
+        resize(diff_x, diff_y);
 }
