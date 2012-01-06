@@ -260,6 +260,7 @@ void GroupManager::restoreFromFile(std::string filename)
         double color[4];
         double contourColor[4];
         double size_x, size_y;
+	double rotationAngle;
 
 
 
@@ -271,8 +272,8 @@ void GroupManager::restoreFromFile(std::string filename)
                               >> size_x >> size_y
                               >> contourWidth
                               >> color[0] >> color[1] >> color[2] >> color[3]
-                              >> contourColor[0] >> contourColor[1] >> contourColor[2] >> contourColor[3];
-                        std::cout << "Shape color:" <<color[0] << color[1] << color[2] << "\n";
+                              >> contourColor[0] >> contourColor[1] >> contourColor[2] >> contourColor[3]
+                              >> rotationAngle;
                         switch(shapeType) {
                             case QUAD:
                                 shape = new Quad(pos_x, pos_y);
@@ -284,6 +285,7 @@ void GroupManager::restoreFromFile(std::string filename)
                         shape->setContourColor(QColor(contourColor[0], contourColor[1], contourColor[2]));
                         shape->setContourColorOpacity(contourColor[3]);
                         shape->resize(size_x, size_y);
+			shape->rotate(rotationAngle);
                         m_shapes.push_back(shape);
                 }
         }
