@@ -74,6 +74,10 @@ public:
         virtual void getBoundingBox4dv(QVector3D* b);
         virtual void drawBoundingBox(QVector3D* b);
         virtual QVector2D getSize();
+	
+	virtual QVector2D getCenter();
+	
+	virtual void rotateAround(double angle, QVector2D point);
 
         int getIndex();
         void setIndex(int index);

@@ -86,29 +86,23 @@ std::string Quad::toString()
 
         serialized << QUAD << " " << Shape::toString() << "\n";
 
-        return serialized.str();
+	return serialized.str();
+}
+
+QVector2D Quad::getCenter()
+{
+	QVector3D bb[2];
+	getBoundingBox4dv(bb);
+	QVector2D center;
+	double* m_mat_data = m_mat.data();
+	
+	center.setX((bb[1].x() - bb[0].x())/2 + m_mat_data[12]);
+        center.setY((bb[1].y() - bb[0].y())/2 + m_mat_data[13]);
+	
+	return center;
 }
 
 void Quad::rotate(double angle)
 {
-        QVector3D bb[2];
-        double* m_mat_data = m_mat.data();
-        getBoundingBox4dv(bb);
-        double w = (bb[1].x() - bb[0].x())/2 + m_mat_data[12];
-        double h = (bb[1].y() - bb[0].y())/2 + m_mat_data[13];
-        QMatrix4x4 mat;
-        double* m = mat.data();
-        double radians = (m_rotationAngle - angle) * DEG2RAD ;
-
-        m[0] = cos(radians);
-        m[1] = -sin(radians);
-        m[4] = sin(radians);
-        m[5] = cos(radians);
-        m_mat_data[12] -= w;
-        m_mat_data[13] -= h;
-
-        m_mat = mat * m_mat;
-        m_mat_data[12] +=w;
-        m_mat_data[13] +=h;
-        m_rotationAngle = angle;
+      rotateAround(angle, getCenter());
 }

@@ -102,6 +102,7 @@ void Group::getBoundingBox4dv(QVector3D* bounds)
 
 void Group::draw(bool skipColor = false)
 {
+	double *mat = m_mat.data();
         glPushMatrix();
         glMultMatrixd(m_mat.constData());
         if(m_shapes.size())
@@ -111,12 +112,34 @@ void Group::draw(bool skipColor = false)
                 {
                         (*sit)->draw(skipColor);
                         sit++;
+			QVector2D center = rotationCenter;
+			glPointSize(13);
+			glBegin(GL_POINTS);
+			glVertex2d(center.x(), center.y());
+			glEnd();
                 }
 
-
         }
-        glPopMatrix();
+	glPopMatrix();
+	
+}
 
+void Group::translate(double x, double y)
+{
+	Shape::translate(x, y);
+}
+
+void Group::rotate(double angle)
+{
+	QVector2D center = getCenter();	
+        QLinkedList<Shape*>::iterator sit = m_shapes.begin();
+        while( sit != m_shapes.end())
+        {
+		(*sit)->rotateAround(angle, center);
+		
+                sit++;
+        }
+	m_rotationAngle = angle;
 }
 
 void Group::setFillColorOpacity(double alpha)
@@ -195,10 +218,19 @@ void Group::recalculateCenter()
         center.setX((bounds[1].x() - bounds[0].x())/2);
         center.setY((bounds[1].y() - bounds[0].y())/2);
 
+	
         translate(center.x() - m[12], center.y() - m[13]);
         m[12] -= center.x();
 	m[13] -= center.y();
 	
+	rotationCenter.setX((bounds[1].x() - bounds[0].x())/2 + bounds[0].x());
+	rotationCenter.setY((bounds[1].y() - bounds[0].y())/2 + bounds[0].y());
+	
+}
+
+QVector2D Group::getCenter()
+{
+	return rotationCenter;
 }
 
 std::string Group::toString()
