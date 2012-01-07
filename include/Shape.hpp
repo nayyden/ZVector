@@ -76,7 +76,6 @@ public:
         virtual double getRotationAngle();
         virtual void getBoundingBox4dv(QVector3D* b);
         virtual void drawBoundingBox(QVector3D* b);
-        virtual QVector2D getSize();
 	
 	virtual QVector2D getCenter();
 	
