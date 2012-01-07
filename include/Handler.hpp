@@ -29,14 +29,13 @@ class Handler : public Shape
 {
 public:
     Handler();
-    void setShape(Shape* shape){m_shape = shape;}
-    virtual void draw(bool skipColor);
-    virtual void resize(double, double){}
-    virtual void translate(double x, double y);
-
+    void setShape(Shape* shape);
     void setSize(double size);
 
-private:
+    virtual void draw(bool skipColor) = 0;
+    virtual void translate(double, double) = 0;
+
+protected:
     Shape* m_shape;
     double m_size;
 };

@@ -39,7 +39,9 @@ SOURCES += \
     src/Tools/CreateTriangleTool.cpp \
     src/SelectionGroup.cpp \
     src/Utils.cpp \
-    src/Handler.cpp
+    src/Handler.cpp \
+    src/RotateHandler.cpp \
+    src/MoveHandler.cpp
 
 HEADERS  += \
     include/qdrawmainwindow.h \
@@ -60,7 +62,9 @@ HEADERS  += \
     include/Tools/CreateEllipseTool.hpp \
 	include/Tools/CreateTriangleTool.hpp \
     include/SelectionGroup.hpp \
-    include/Handler.hpp
+    include/Handler.hpp \
+    include/RotateHandler.hpp \
+    include/MoveHandler.hpp
 
 FORMS    += src/qdrawmainwindow.ui
 

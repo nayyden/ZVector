@@ -31,8 +31,8 @@
 GroupManager::GroupManager()
 {
         m_shapes.append(new Group());
-        m_shapes.append(new Handler());
-        m_handler = (Handler*)m_shapes[1];
+        m_shapes.append(m_rotHandler = new RotateHandler());
+        m_shapes.append(m_moveHandler = new MoveHandler());
         m_currentShape = 0;
         m_zoomFactor = 1;
 }
@@ -60,7 +60,7 @@ void GroupManager::setCurrentShape(int index)
         {
                 if(index == 1)
                 {
-                        m_handler->setShape(m_shapes[m_currentShape]);
+                        m_moveHandler->setShape(m_shapes[m_currentShape]);
                 }
                 m_currentShape = index;
                 if(!m_selectionGroup.contains(index))
@@ -139,8 +139,8 @@ void GroupManager::draw()
         {
                 QVector3D bb[2];
                 m_shapes[m_currentShape]->getBoundingBox4dv(bb);
-                m_handler->setPosition(bb[1].x(), bb[1].y());
-                m_handler->draw(false);
+                m_moveHandler->setPosition(bb[1].x(), bb[1].y());
+                m_moveHandler->draw(false);
         }
         m_selectionGroup.draw(false);
 }

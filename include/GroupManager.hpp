@@ -28,7 +28,8 @@
 
 #include "Shape.hpp"
 #include "SelectionGroup.hpp"
-#include "Handler.hpp"
+#include "RotateHandler.hpp"
+#include "MoveHandler.hpp"
 
 class GroupManager
 {
@@ -78,7 +79,8 @@ private:
         int m_currentShape;
         SelectionGroup m_selectionGroup;
         float m_zoomFactor;
-        Handler* m_handler;
+        RotateHandler* m_rotHandler;
+        MoveHandler* m_moveHandler;
 };
 
 #endif // GROUPMANAGER_HPP
