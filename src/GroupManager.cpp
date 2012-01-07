@@ -58,10 +58,8 @@ void GroupManager::setCurrentShape(int index)
         }
         else
         {
-                if(index == 1)
-                {
-                        m_moveHandler->setShape(m_shapes[m_currentShape]);
-                }
+                m_moveHandler->setShape(m_shapes[m_currentShape]);
+                m_rotHandler->setShape(m_shapes[m_currentShape]);
                 m_currentShape = index;
                 if(!m_selectionGroup.contains(index))
                 {
@@ -141,6 +139,8 @@ void GroupManager::draw()
                 m_shapes[m_currentShape]->getBoundingBox4dv(bb);
                 m_moveHandler->setPosition(bb[1].x(), bb[1].y());
                 m_moveHandler->draw(false);
+                m_rotHandler->setPosition(bb[1].x(), bb[1].y());
+                m_rotHandler->draw(false);
         }
         m_selectionGroup.draw(false);
 }

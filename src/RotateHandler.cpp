@@ -1,4 +1,5 @@
 #include "RotateHandler.hpp"
+#include "math.h"
 
 RotateHandler::RotateHandler()
 {
@@ -14,9 +15,9 @@ void RotateHandler::draw(bool skipColor)
         }
         glBegin(GL_TRIANGLES);
         {
-                glVertex2d(5,5);
-                glVertex2d(-5,-5);
-                glVertex2d(10,-10);
+                glVertex2d(20,20);
+                glVertex2d(-25,-25);
+                glVertex2d(15,-15);
         }
         glEnd();
         glPopMatrix();
@@ -25,5 +26,12 @@ void RotateHandler::draw(bool skipColor)
 void RotateHandler::translate(double x, double y)
 {
         Shape::translate(x,y);
-        m_shape->resize(x,y);
+        double* mat = m_mat.data();
+        QVector2D pos(mat[12],mat[13]);
+        QVector2D vec1 = pos - m_shape->getCenter();
+        double angle = QVector2D::dotProduct(vec1.normalized(),QVector2D(1,0));
+        angle = acos(angle);
+        if(pos.y()<m_shape->getCenter().y())
+                angle = M_PI*2-angle;
+        m_shape->rotate(angle/DEG2RAD);
 }
