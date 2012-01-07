@@ -300,3 +300,36 @@ void Shape::setSize(double x, double y)
 
         resize(diff_x, diff_y);
 }
+
+QVector2D Shape::getCenter()
+{	
+	
+	QVector2D center;
+	double* m_mat_data = m_mat.data();
+	
+	center.setX(m_mat_data[12]);
+        center.setY(m_mat_data[13]);
+	
+	return center;
+}
+
+void Shape::rotateAround(double angle, QVector2D point)
+{
+	      QMatrix4x4 mat;
+	      double* m_mat_data = m_mat.data();
+        double* m = mat.data();
+        double radians = (m_rotationAngle - angle) * DEG2RAD ;
+
+        m[0] = cos(radians);
+        m[1] = -sin(radians);
+        m[4] = sin(radians);
+        m[5] = cos(radians);
+        m_mat_data[12] -= point.x();
+        m_mat_data[13] -= point.y();
+
+        m_mat = mat * m_mat;
+        m_mat_data[12] += point.x();
+        m_mat_data[13] += point.y();
+        m_rotationAngle = angle;
+
+}

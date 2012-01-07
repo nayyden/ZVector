@@ -35,7 +35,7 @@ public:
         void rotate(double angle);
 	void resize(double x, double y);
         std::string toString();
-
+	QVector2D getCenter();
 private:
 
 };
